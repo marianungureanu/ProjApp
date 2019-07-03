@@ -2,11 +2,11 @@
 
 set GF_DIR=D:\practicaDeVara\glassfish4.1.2
 
-set FRONT_DOMAIN=scoder_front
+set FRONT_DOMAIN=projapp_front
 set /a FRONT_PORTBASE=1000
 set /a FRONT_ADMINPORT=%FRONT_PORTBASE% + 48
 
-set BACK_DOMAIN=scoder_back
+set BACK_DOMAIN=projapp_back
 set /a BACK_PORTBASE=2000
 set /a BACK_ADMINPORT=%BACK_PORTBASE% + 48
 set MYSQL_USER=projapp

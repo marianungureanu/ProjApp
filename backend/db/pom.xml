@@ -6,7 +6,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>scoder-db</artifactId>
+    <artifactId>projapp-db</artifactId>
     <packaging>ejb</packaging>
     <name>ProjApp DB</name>
     <build>
@@ -20,7 +20,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>scoder-db</finalName>
+        <finalName>projapp-db</finalName>
     </build>
     <dependencies>
         <dependency>
