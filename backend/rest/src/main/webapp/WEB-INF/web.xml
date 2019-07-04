@@ -9,19 +9,16 @@
         </session-timeout>
     </session-config>
     <servlet>
-        <servlet-name>projapp Rest services</servlet-name>
+        <servlet-name>Projapp Rest services</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-		<!--
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
-            <param-value>com.nttdata.practicadevara.projapp.rest.services.projappRestApplication</param-value>
+            <param-value>com.nttdata.practicadevara.projapp.rest.services.ProjappRestApplication</param-value>
         </init-param>
-		-->
-        <!--        
         <init-param>
              <param-name>com.sun.jersey.config.property.packages</param-name>
              <param-value>com.nttdata.practicadevara.projapp.rest.services</param-value>
-        </init-param>-->
+        </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
             <param-value>true</param-value>
@@ -30,7 +27,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ProjApp Rest services</servlet-name>
-        <url-pattern>/projappServices/*</url-pattern>
+        <url-pattern>/projappservices/*</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
