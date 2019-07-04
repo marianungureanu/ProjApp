@@ -8,7 +8,7 @@
  * Created: Jul 3, 2019
  */
 
-CREATE TABLE IF NOT EXISTS `Tehnologies` (
+CREATE TABLE IF NOT EXISTS `Technologies` (
   `ID` INT AUTO_INCREMENT,
   `Name` VARCHAR(120) NULL,
   PRIMARY KEY (`ID`))
