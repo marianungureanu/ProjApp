@@ -2,40 +2,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:f="http://java.sun.com/jsf/core"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       >
-<h:head>
-        <title>#{indexBean.message}</title>
+    <h:head>
+        <title>ProjApp: A Project - Developer matching site</title>
     </h:head>
     <h:body>
-        <f:view>
-        <h:form>
-            <h:panelGrid columns="2">
-               <h:outputText value="Principle" />
-               <h:inputText id="p1" value="#{indexBean.principle}" validatorMessage="Input value must be greater than 0">
-                    <f:validateDoubleRange minimum="1"/>
-                </h:inputText>
-                
-                <h:outputText value="no. of Years"/>
-                <h:inputText id="p2" value="#{indexBean.years}" validatorMessage="Input value must be greater than 0">
-                     <f:validateDoubleRange minimum="1"/>
-                </h:inputText>
-                
-                <h:outputText value="interest"/>
-                <h:inputText id="p3" value="#{indexBean.interest}" validatorMessage="Input value must be greater than 0">
-                     <f:validateDoubleRange minimum="1"/>
-                </h:inputText>
-                
-                <h:outputText value=""/>
-                <h:commandButton value="Calculate" type="submit" action="#{indexBean.calculateSI}" />
-                
-            </h:panelGrid>
-            <br/><br/>
-            <h:outputText value="The calculated Simple Interest is : #{indexBean.simpleInterest}"/>
-             <br/><br/>
-             <h:messages/>
-        </h:form>  
-       </f:view>
+        <ui:include src="/header.xhtml"/>
+        <br/>
+        <f:view id="masterindex">
+            <h:form id="masterForm">
+                <h:commandButton value="Admin employees" action="/admin/employee/index" type="submit"/>
+            </h:form>
+        </f:view>
+        
     </h:body>
 </html>
 

@@ -14,15 +14,22 @@ set MYSQL_PASS=projappPass
 set MYSQL_DB=projappdb
 
 rem https://bugs.eclipse.org/bugs/show_bug.cgi?id=463169
-copy org.eclipse.persistence.moxy-2.6.1.jar %GF_DIR%\glassfish\modules\
+copy .\org.eclipse.persistence.moxy-2.6.1.jar %GF_DIR%\glassfish\modules\
 if not exist %GF_DIR%\glassfish\modules\org.eclipse.persistence.moxy-2.6.1.jar (
     echo "   Error. Cannot copy eclipse moxy jar. Eclipse moxy has to be copied to %GF_DIR%\glassfish\modules\"
 	pause
 	exit /b
 )
 
+del %GF_DIR%\glassfish\modules\org.eclipse.persistence.moxy.jar
+if exist %GF_DIR%\glassfish\modules\org.eclipse.persistence.moxy.jar (
+    echo "   Error. org.eclipse.persistence.moxy.jar needs to be deleted from %GF_DIR%\glassfish\modules\"
+	pause
+	exit /b
+)
 
 
+@call %GF_DIR%\bin\asadmin.bat delete-domain %FRONT_DOMAIN%
 
 echo Creating %FRONT_DOMAIN%
 @call %GF_DIR%\bin\asadmin.bat create-domain --portbase %FRONT_PORTBASE% %FRONT_DOMAIN%
@@ -35,6 +42,7 @@ if not exist %GF_DIR%\glassfish\domains\%BACK_DOMAIN%\lib\ext\mysql-connector-ja
 	exit /b
 )
 
+@call %GF_DIR%\bin\asadmin.bat delete-domain %BACK_DOMAIN%
 @call %GF_DIR%\bin\asadmin.bat start-domain %BACK_DOMAIN%
 @call %GF_DIR%\bin\asadmin.bat --port %BACK_ADMINPORT% --user admin create-jdbc-connection-pool ^
 --datasourceclassname com.mysql.cj.jdbc.MysqlDataSource ^
@@ -50,7 +58,7 @@ if not exist %GF_DIR%\glassfish\domains\%BACK_DOMAIN%\lib\ext\mysql-connector-ja
 --validationmethod auto-commit  ^
 --failconnection=true  ^
 --description projappConnectionPool  ^
---property user=%MYSQL_USER%:password=%MYSQL_PASS%:URL=jdbc\:mysql\://localhost\:3306/%MYSQL_DB%:useSSL=true:serverTimezone=UTC ^
+--property user=%MYSQL_USER%:password=%MYSQL_PASS%:URL=jdbc\:mysql\://localhost\:3306/%MYSQL_DB%:useSSL=false:serverTimezone=UTC ^
 projappJdbcPool 
 
 @call %GF_DIR%\bin\asadmin.bat --port %BACK_ADMINPORT% --user admin  create-jdbc-resource  ^
