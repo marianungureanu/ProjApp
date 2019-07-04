@@ -1,6 +1,6 @@
 @echo off
 
-set GF_DIR=D:\practicaDeVara2019\glassfish4.1.2
+set GF_DIR=C:\glassfish4
 
 set FRONT_DOMAIN=projapp_front
 set /a FRONT_PORTBASE=5000
@@ -14,25 +14,21 @@ set MYSQL_PASS=projappPass
 set MYSQL_DB=projappdb
 
 rem https://bugs.eclipse.org/bugs/show_bug.cgi?id=463169
-xcopy org.eclipse.persistence.moxy-2.6.1.jar %GF_DIR%\glassfish\modules\
+copy org.eclipse.persistence.moxy-2.6.1.jar %GF_DIR%\glassfish\modules\
 if not exist %GF_DIR%\glassfish\modules\org.eclipse.persistence.moxy-2.6.1.jar (
     echo "   Error. Cannot copy eclipse moxy jar. Eclipse moxy has to be copied to %GF_DIR%\glassfish\modules\"
 	pause
 	exit /b
 )
 
-rm %GF_DIR%\glassfish\modules\org.eclipse.persistence.moxy.jar
-if exist %GF_DIR%\glassfish\modules\org.eclipse.persistence.moxy.jar (
-    echo "   Error. org.eclipse.persistence.moxy.jar needs to be deleted from %GF_DIR%\glassfish\modules\"
-	pause
-	exit /b
-)
+
+
 
 echo Creating %FRONT_DOMAIN%
 @call %GF_DIR%\bin\asadmin.bat create-domain --portbase %FRONT_PORTBASE% %FRONT_DOMAIN%
 echo Creating %BACK_DOMAIN%
 @call %GF_DIR%\bin\asadmin.bat create-domain --portbase %BACK_PORTBASE% %BACK_DOMAIN%
-xcopy mysql-connector-java-8.0.11.jar  %GF_DIR%\glassfish\domains\%BACK_DOMAIN%\lib\ext\
+copy mysql-connector-java-8.0.11.jar  %GF_DIR%\glassfish\domains\%BACK_DOMAIN%\lib\ext\
 if not exist %GF_DIR%\glassfish\domains\%BACK_DOMAIN%\lib\ext\mysql-connector-java*.jar (
     echo "   Error. Cannot find mysqlconnector. Mysql connector has to be copied to %BACK_DOMAIN%\lib\ext\"
 	pause
