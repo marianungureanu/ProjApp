@@ -6,6 +6,8 @@
 package com.nttdata.practicadevara.projapp.db;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -22,11 +25,11 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "Technology", schema = TechnologyEntity.SCHEMA_NAME)
 @NamedQueries({
-    @NamedQuery(name = TechnologyEntity.FIND_ALL, query = "SELECT t FROM TechnologyEntity t")
+    @NamedQuery(name = TechnologyEntity.FIND_ALL, query = "SELECT e FROM TechnologyEntity t")
 })
 public class TechnologyEntity implements Serializable{
     public static final String SCHEMA_NAME = "projappdb";
-    public static final String FIND_ALL = "Technology_findAllQuery";
+    public static final String FIND_ALL = "findAllQuery";
 
     @Id
     @Column(name = "id", unique = true)
@@ -35,6 +38,9 @@ public class TechnologyEntity implements Serializable{
 
     @Column(name = "name")
     private String name;
+
+    
+    
 
     public int getId() {
         return id;
@@ -51,5 +57,10 @@ public class TechnologyEntity implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
+    
+    @OneToMany
+     private List<EmployeetechnologyEntity> employeeTechnologyObject;
+   
+     private List<ApplicationrolestechnologiesEntity> appRolesTechnology;
     
 }

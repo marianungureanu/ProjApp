@@ -1,6 +1,7 @@
 package com.nttdata.practicadevara.projapp.db;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -46,5 +48,9 @@ public class EmployeeEntity implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+    
+     @OneToMany
+     private List<EmployeetechnologyEntity> employeeTechnology;
+     private List<SubscriptionEntity> subscription;
 
 }
