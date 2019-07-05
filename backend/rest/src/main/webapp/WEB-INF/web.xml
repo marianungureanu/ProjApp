@@ -4,20 +4,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <session-config>
-        <session-timeout>
-            30
+        <session-timeout> 
+           30
         </session-timeout>
     </session-config>
     <servlet>
-        <servlet-name>Projapp Rest services</servlet-name>
+        <servlet-name>ProjappRestServices</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>com.nttdata.practicadevara.projapp.rest.services.ProjappRestApplication</param-value>
-        </init-param>
-        <init-param>
-             <param-name>com.sun.jersey.config.property.packages</param-name>
-             <param-value>com.nttdata.practicadevara.projapp.rest.services</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
@@ -26,7 +22,7 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ProjApp Rest services</servlet-name>
+        <servlet-name>ProjappRestServices</servlet-name>
         <url-pattern>/projappservices/*</url-pattern>
     </servlet-mapping>
     <welcome-file-list>

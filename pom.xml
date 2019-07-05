@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	
     <groupId>com.nttdata.practicadevara</groupId>
-    <artifactId>root</artifactId>
+    <artifactId>ProjAppRoot</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 	
