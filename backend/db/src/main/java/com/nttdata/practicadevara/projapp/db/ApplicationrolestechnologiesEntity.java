@@ -19,14 +19,14 @@ import javax.persistence.Table;
 
 /**
  *
- * @author emanuel.butoi
+ * @author sebastian.stoica
  */
 @Entity
-@Table(name = "subscription", schema = SubscriptionEntity.SCHEMA_NAME)
+@Table(name = "applicationrolestechnologies", schema = ApplicationrolestechnologiesEntity.SCHEMA_NAME)
 @NamedQueries({
-    @NamedQuery(name = SubscriptionEntity.FIND_ALL, query = "SELECT s FROM SubscriptionEntity s")
+    @NamedQuery(name = ApplicationrolestechnologiesEntity.FIND_ALL, query = "SELECT ar FROM ApplicationrolestechnologiesEntity ar")
 })
-class SubscriptionEntity implements Serializable {
+class ApplicationrolestechnologiesEntity implements Serializable {
 
     public static final String SCHEMA_NAME = "projappdb";
     public static final String FIND_ALL = "findAllQuery";
@@ -37,21 +37,22 @@ class SubscriptionEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "status")
-    private String name;
+    @JoinColumn(name = "idApplicationRole", referencedColumnName = "id")
+      @ManyToOne(optional = false)
+    private ApplicationroleEntity idApplicationRole;
 
-   @JoinColumn(name = "idemployee", referencedColumnName = "id")
+   @JoinColumn(name = "idTechnology", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private EmployeeEntity idemployee;
+    private TechnologyEntity idTechnology;
    
-    @JoinColumn(name = "idapprole", referencedColumnName = "id")
+    @JoinColumn(name = "idLevelMin", referencedColumnName = "id")
     @ManyToOne(optional = false)
-     private ApplicationroleEntity idapprole;
+     private LevelEntity idLevelMin;
     
-     public SubscriptionEntity() {
+     public ApplicationrolestechnologiesEntity() {
     }
 
-    public SubscriptionEntity(Integer id) {
+    public ApplicationrolestechnologiesEntity(Integer id) {
         this.id = id;
     }
 
@@ -63,29 +64,31 @@ class SubscriptionEntity implements Serializable {
         this.id = id;
     }
     
-    public String getName() {
-        return name;
+  
+     public ApplicationroleEntity getIdApplicationRole() {
+        return idApplicationRole;
     }
     
-    public void setName(String name) {
-        this.name = name;
-    }
-
-     public EmployeeEntity getIdemployee() {
-        return idemployee;
-    }
-    
-     public void setIdemplpoyee(EmployeeEntity idemployee) {
-        this.idemployee = idemployee;
+     public void setApplicationRole(ApplicationroleEntity idApplicationRole) {
+        this.idApplicationRole = idApplicationRole;
     }
      
      
-    public ApplicationroleEntity getIdapprole() {
-        return idapprole;
+    public TechnologyEntity getIdtechnology() {
+        return idTechnology;
     }
+    
 
-    public void setIdapprole(ApplicationroleEntity idapprole) {
-        this.idapprole = idapprole;
+    public void setIdtechnology (TechnologyEntity idTechnology) {
+        this.idTechnology = idTechnology;
+    }
+    
+    public LevelEntity getidLevelMin(){
+        return idLevelMin;
+    }
+    
+    public void  setIdlevelMin(LevelEntity idLevelMin){
+            this.idLevelMin = idLevelMin;
     }
     
      @Override
@@ -98,10 +101,10 @@ class SubscriptionEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SubscriptionEntity)) {
+        if (!(object instanceof ApplicationrolestechnologiesEntity)) {
             return false;
         }
-        SubscriptionEntity other = (SubscriptionEntity) object;
+        ApplicationrolestechnologiesEntity other = (ApplicationrolestechnologiesEntity) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -110,7 +113,7 @@ class SubscriptionEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.nttdata.practicadevara.projapp.db.SubcriptionEntity[ id=" + id + " ]";
+        return "com.nttdata.practicadevara.projapp.db.ApplicationrolestechnologiesEntity[ id=" + id + " ]";
     }
     
 }
