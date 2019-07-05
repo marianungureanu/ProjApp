@@ -94,3 +94,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   CONSTRAINT `subs_idemployee` FOREIGN KEY (`idemployee`) REFERENCES `employee` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO `technology` (`name`) VALUES ("JavaSE"), ("JavaEE"), ("C#"), (".NET"), ("ASM"), ("Spring");
+INSERT INTO `employee`(`name`) VALUES ("John Doe"), ("Mary Poppins");
+INSERT INTO `level` (`name`) VALUES ("Level 1"), ("Level 2"), ("Level 3"), ("Level 4"), ("Level 5"), ("Level 6");
+insert into `role`(`name`) values ('manager'), ('team leader'), ('baby developer'), ('senior developer');
