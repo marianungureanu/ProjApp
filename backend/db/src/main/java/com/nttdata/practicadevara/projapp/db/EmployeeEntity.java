@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "Employee", schema = EmployeeEntity.SCHEMA_NAME)
+@Table(name = "Employee", schema = EmployeeEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = EmployeeEntity.FIND_ALL, query = "SELECT e FROM EmployeeEntity e")
 })
@@ -22,13 +22,12 @@ public class EmployeeEntity implements Serializable {
     private static final long serialVersionUID = 117223295272084434L;
 
     public static final String SCHEMA_NAME = "projappdb";
-    public static final String FIND_ALL = "Employee_findAllQuery";
+    public static final String FIND_ALL = "employee_findAllQuery";
 
     @Id
     @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
 
     @Column(name = "name")
     private String name;
@@ -48,9 +47,8 @@ public class EmployeeEntity implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
-     @OneToMany
-     private List<EmployeetechnologyEntity> employeeTechnology;
-     private List<SubscriptionEntity> subscription;
 
+    @OneToMany
+    private List<EmployeetechnologyEntity> employeeTechnology;
+    private List<SubscriptionEntity> subscription;
 }

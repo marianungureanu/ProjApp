@@ -16,24 +16,21 @@ import javax.persistence.Table;
  *
  * @author ovidiu.hulea
  */
-
 @Entity
-@Table (name = "Level", schema = EmployeeEntity.SCHEMA_NAME)
+@Table(name = "Level", schema = EmployeeEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = LevelEntity.FIND_ALL, query = "SELECT l FROM LevelEntity l")
 })
 public class LevelEntity implements Serializable {
 
     //private static final long serialVersionUID = 117223295272084434L;
-
     public static final String SCHEMA_NAME = "projappdb";
-    public static final String FIND_ALL = "Level_findAllQuery";
+    public static final String FIND_ALL = "level_findAllQuery";
 
     @Id
     @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
 
     @Column(name = "name")
     private String name;
@@ -53,10 +50,8 @@ public class LevelEntity implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
-      @OneToMany
-     private List<EmployeetechnologyEntity> employeeTechnology;
-     private List<ApplicationrolestechnologiesEntity> appRolesTechnology;
 
+    @OneToMany
+    private List<EmployeetechnologyEntity> employeeTechnology;
+    private List<ApplicationrolestechnologiesEntity> appRolesTechnology;
 }
-

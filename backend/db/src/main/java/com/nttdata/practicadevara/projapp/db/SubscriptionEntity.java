@@ -29,7 +29,7 @@ import javax.persistence.Table;
 class SubscriptionEntity implements Serializable {
 
     public static final String SCHEMA_NAME = "projappdb";
-    public static final String FIND_ALL = "findAllQuery";
+    public static final String FIND_ALL = "subscription_findAllQuery";
 
     //id, status, id Employee, id Application Role
     @Id
@@ -40,15 +40,15 @@ class SubscriptionEntity implements Serializable {
     @Column(name = "status")
     private String name;
 
-   @JoinColumn(name = "idemployee", referencedColumnName = "id")
+    @JoinColumn(name = "idemployee", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private EmployeeEntity idemployee;
-   
+
     @JoinColumn(name = "idapprole", referencedColumnName = "id")
     @ManyToOne(optional = false)
-     private ApplicationroleEntity idapprole;
-    
-     public SubscriptionEntity() {
+    private ApplicationroleEntity idapprole;
+
+    public SubscriptionEntity() {
     }
 
     public SubscriptionEntity(Integer id) {
@@ -62,24 +62,23 @@ class SubscriptionEntity implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
 
-     public EmployeeEntity getIdemployee() {
+    public EmployeeEntity getIdemployee() {
         return idemployee;
     }
-    
-     public void setIdemplpoyee(EmployeeEntity idemployee) {
+
+    public void setIdemplpoyee(EmployeeEntity idemployee) {
         this.idemployee = idemployee;
     }
-     
-     
+
     public ApplicationroleEntity getIdapprole() {
         return idapprole;
     }
@@ -87,8 +86,8 @@ class SubscriptionEntity implements Serializable {
     public void setIdapprole(ApplicationroleEntity idapprole) {
         this.idapprole = idapprole;
     }
-    
-     @Override
+
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
@@ -112,5 +111,4 @@ class SubscriptionEntity implements Serializable {
     public String toString() {
         return "com.nttdata.practicadevara.projapp.db.SubcriptionEntity[ id=" + id + " ]";
     }
-    
 }

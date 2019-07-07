@@ -28,21 +28,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "applicationrole")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ApplicationroleEntity.findAll", query = "SELECT a FROM ApplicationroleEntity a")
-    , @NamedQuery(name = "ApplicationroleEntity.findById", query = "SELECT a FROM ApplicationroleEntity a WHERE a.id = :id")})
+    @NamedQuery(name = ApplicationroleEntity.FIND_ALL, query = "SELECT a FROM ApplicationroleEntity a")
+    , @NamedQuery(name = ApplicationroleEntity.FIND_BY_ID, query = "SELECT a FROM ApplicationroleEntity a WHERE a.id = :id")})
 public class ApplicationroleEntity implements Serializable {
-    
+
     public static final String SCHEMA_NAME = "projappdb";
-    public static final String FIND_ALL = "findAllQuery";
+    public static final String FIND_ALL = "application_role_findAllQuery";
+    public static final String FIND_BY_ID = "application_role_findById";
     private static final long serialVersionUID = 1L;
+
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Integer id;
+
     @JoinColumn(name = "idapp", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ApplicationEntity idapp;
+
     @JoinColumn(name = "idrole", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private RoleEntity idrole;
@@ -102,10 +106,8 @@ public class ApplicationroleEntity implements Serializable {
     public String toString() {
         return "com.nttdata.practicadevara.projapp.db.ApplicationroleEntity[ id=" + id + " ]";
     }
-    
-   
-    
-       @OneToMany
-     private List<SubscriptionEntity> subscription;
-     private List<ApplicationrolestechnologiesEntity> appRolesTechnology;
+
+    @OneToMany
+    private List<SubscriptionEntity> subscription;
+    private List<ApplicationrolestechnologiesEntity> appRolesTechnology;
 }

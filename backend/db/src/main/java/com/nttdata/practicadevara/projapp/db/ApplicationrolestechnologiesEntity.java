@@ -29,7 +29,7 @@ import javax.persistence.Table;
 class ApplicationrolestechnologiesEntity implements Serializable {
 
     public static final String SCHEMA_NAME = "projappdb";
-    public static final String FIND_ALL = "findAllQuery";
+    public static final String FIND_ALL = "application_roles_technologies_findAllQuery";
 
     //id, status, id Employee, id Application Role
     @Id
@@ -38,18 +38,18 @@ class ApplicationrolestechnologiesEntity implements Serializable {
     private Integer id;
 
     @JoinColumn(name = "idApplicationRole", referencedColumnName = "id")
-      @ManyToOne(optional = false)
+    @ManyToOne(optional = false)
     private ApplicationroleEntity idApplicationRole;
 
-   @JoinColumn(name = "idTechnology", referencedColumnName = "id")
+    @JoinColumn(name = "idTechnology", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private TechnologyEntity idTechnology;
-   
+
     @JoinColumn(name = "idLevelMin", referencedColumnName = "id")
     @ManyToOne(optional = false)
-     private LevelEntity idLevelMin;
-    
-     public ApplicationrolestechnologiesEntity() {
+    private LevelEntity idLevelMin;
+
+    public ApplicationrolestechnologiesEntity() {
     }
 
     public ApplicationrolestechnologiesEntity(Integer id) {
@@ -63,35 +63,32 @@ class ApplicationrolestechnologiesEntity implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    
-  
-     public ApplicationroleEntity getIdApplicationRole() {
+
+    public ApplicationroleEntity getIdApplicationRole() {
         return idApplicationRole;
     }
-    
-     public void setApplicationRole(ApplicationroleEntity idApplicationRole) {
+
+    public void setApplicationRole(ApplicationroleEntity idApplicationRole) {
         this.idApplicationRole = idApplicationRole;
     }
-     
-     
+
     public TechnologyEntity getIdtechnology() {
         return idTechnology;
     }
-    
 
-    public void setIdtechnology (TechnologyEntity idTechnology) {
+    public void setIdtechnology(TechnologyEntity idTechnology) {
         this.idTechnology = idTechnology;
     }
-    
-    public LevelEntity getidLevelMin(){
+
+    public LevelEntity getidLevelMin() {
         return idLevelMin;
     }
-    
-    public void  setIdlevelMin(LevelEntity idLevelMin){
-            this.idLevelMin = idLevelMin;
+
+    public void setIdlevelMin(LevelEntity idLevelMin) {
+        this.idLevelMin = idLevelMin;
     }
-    
-     @Override
+
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
@@ -115,5 +112,4 @@ class ApplicationrolestechnologiesEntity implements Serializable {
     public String toString() {
         return "com.nttdata.practicadevara.projapp.db.ApplicationrolestechnologiesEntity[ id=" + id + " ]";
     }
-    
 }

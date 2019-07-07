@@ -22,22 +22,20 @@ import javax.persistence.Table;
  * @author ovidiu.hulea
  */
 @Entity
-@Table (name = "Role", schema = EmployeeEntity.SCHEMA_NAME)
+@Table(name = "Role", schema = EmployeeEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = RoleEntity.FIND_ALL, query = "SELECT l FROM RoleEntity l")
 })
 public class RoleEntity implements Serializable {
 
     //private static final long serialVersionUID = 117223295272084434L;
-
     public static final String SCHEMA_NAME = "projappdb";
-    public static final String FIND_ALL = "findAllQuery";
+    public static final String FIND_ALL = "role_findAllQuery";
 
     @Id
     @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
 
     @Column(name = "name")
     private String name;
@@ -57,8 +55,7 @@ public class RoleEntity implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
-       @OneToMany
-     private List<ApplicationroleEntity> applicationrole;
 
+    @OneToMany
+    private List<ApplicationroleEntity> applicationrole;
 }

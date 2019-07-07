@@ -17,27 +17,25 @@ import javax.persistence.Table;
  * @author ovidiu.hulea
  */
 @Entity
-@Table (name = "Application", schema = EmployeeEntity.SCHEMA_NAME)
+@Table(name = "Application", schema = EmployeeEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = ApplicationEntity.FIND_ALL, query = "SELECT e FROM ApplicationEntity e")
 })
 public class ApplicationEntity implements Serializable {
 
     //private static final long serialVersionUID = 117223295272084434L;
-
     public static final String SCHEMA_NAME = "projappdb";
-    public static final String FIND_ALL = "Application_findAllQuery";
+    public static final String FIND_ALL = "application_findAllQuery";
 
     @Id
     @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
     @Column(name = "name")
     private String name;
-    
-    @Column(name="descr")
+
+    @Column(name = "descr")
     private String descr;
 
     public int getId() {
@@ -63,13 +61,8 @@ public class ApplicationEntity implements Serializable {
     public void setDescr(String descr) {
         this.descr = descr;
     }
-    
-    
 
-       @OneToMany
-     private List<ApplicationroleEntity> applicationrole;
-     private List<ApplicationrolestechnologiesEntity> appRolesTechnology;
-    
-    
+    @OneToMany
+    private List<ApplicationroleEntity> applicationrole;
+    private List<ApplicationrolestechnologiesEntity> appRolesTechnology;
 }
-

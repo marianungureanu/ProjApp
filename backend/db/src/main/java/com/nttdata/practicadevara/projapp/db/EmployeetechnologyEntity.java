@@ -27,24 +27,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "employeetechnology")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "EmployeetechnologyEntity.findAll", query = "SELECT e FROM EmployeetechnologyEntity e")
-    , @NamedQuery(name = "EmployeetechnologyEntity.findById", query = "SELECT e FROM EmployeetechnologyEntity e WHERE e.id = :id")})
+    @NamedQuery(name = EmployeetechnologyEntity.FIND_ALL, query = "SELECT e FROM EmployeetechnologyEntity e")
+    , @NamedQuery(name = EmployeetechnologyEntity.FIND_BY_ID, query = "SELECT e FROM EmployeetechnologyEntity e WHERE e.id = :id")})
 public class EmployeetechnologyEntity implements Serializable {
-    
+
     public static final String SCHEMA_NAME = "projappdb";
-    public static final String FIND_ALL = "findAllQuery";
+    public static final String FIND_ALL = "employee_technology_findAllQuery";
+    public static final String FIND_BY_ID = "employee_technology_findByIdQuery";
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+
     @JoinColumn(name = "idemployee", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private EmployeeEntity idemployee;
+
     @JoinColumn(name = "idlevel", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private LevelEntity idlevel;
+
     @JoinColumn(name = "idtechnology", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private TechnologyEntity idtechnology;
@@ -112,5 +117,4 @@ public class EmployeetechnologyEntity implements Serializable {
     public String toString() {
         return "com.nttdata.practicadevara.projapp.db.EmployeetechnologyEntity[ id=" + id + " ]";
     }
-    
 }
