@@ -21,11 +21,11 @@ public class TechnologyBean {
     @PersistenceContext(unitName = "projapp-persistenceunit") //see main/resources/META-INF/peristence.xml
     protected EntityManager manager;
 
-    public List<EmployeeEntity> findAll() {
+    public List<TechnologyEntity> findAll() {
         return manager.createNamedQuery(findAllNamedQuery()).getResultList();
     }
 
     public String findAllNamedQuery() {
-        return EmployeeEntity.FIND_ALL;
+        return TechnologyEntity.FIND_ALL;
     }
 }
