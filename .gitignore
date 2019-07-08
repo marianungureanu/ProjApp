@@ -25,3 +25,16 @@ hs_err_pid*
 **/target/
 
 **/nb-configuration.xml
+
+# Eclipse
+**/.classpath
+**/.project
+**/.settings/*
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Intellij
+**/.idea/
+*.iml
+*.iws
