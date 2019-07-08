@@ -5,6 +5,7 @@
  */
 package com.nttdata.practicadevara.projapp.ejb;
 
+import com.nttdata.practicadevara.projapp.db.TechnologyEntity;
 import com.nttdata.practicadevara.projapp.db.TechnologyBean;
 import com.nttdata.practicadevara.projapp.db.TechnologyEntity;
 import com.nttdata.practicadevara.projapp.shared.dto.TechnologyDto;
@@ -29,6 +30,11 @@ public class TechnologyEjb {
     public List<TechnologyDto> list() {
         List<TechnologyEntity> entities = technologyDbBean.findAll();
         return toDto(entities);
+    }
+    
+     public TechnologyDto findById(int id) {
+        TechnologyEntity entity = technologyDbBean.findById(id);
+        return toDto(entity);
     }
     
     private List<TechnologyDto> toDto(List<TechnologyEntity> list) {

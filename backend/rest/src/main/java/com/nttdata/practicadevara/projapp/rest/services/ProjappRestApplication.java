@@ -12,6 +12,8 @@ public class ProjappRestApplication extends Application {
         final Set<Class<?>> classes = new HashSet<>();
         // register root resource
         classes.add(ServicesEmployee.class);
+        classes.add(ServicesTechnology.class);
+        
         
         return classes;
     }
