@@ -17,7 +17,7 @@ import javax.ejb.LocalBean;
 
 /**
  *
- * @author ovidiu.hulea
+ * @author liviu.dima
  */
 @Stateless
 @LocalBean
