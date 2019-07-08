@@ -23,11 +23,19 @@ public class ApplicationRoleManagedBean implements Serializable {
     private static final long serialVersionUID = 10001;
 
     private static final String APPLICATIONROLE_XHTML = "/admin/applicationrole/index";
-    private static final String CREATE_OR_EDIT_XHTML = "/admin/applicationrole/createOrEditAplicationRole";
-
+    private static final String CREATE_OR_EDIT_XHTML = "/admin/applicationrole/createOrEditApplicationRole";
+    private boolean isCreate;
+    private boolean isEdit;
+    private ApplicationRoleDto selected;
+    
     @EJB
     private ApplicationRoleRest applicationrolerest;
     private List<ApplicationRoleDto> applicationroleList;
+
+    
+     public void reload() {
+        applicationroleList = null;
+    }
 
     public ApplicationRoleManagedBean() {
 
@@ -43,4 +51,52 @@ public class ApplicationRoleManagedBean implements Serializable {
         }
         return applicationroleList;
     }    
+    
+    public boolean isIsCreate() {
+        return isCreate;
+    }
+
+    public boolean isIsEdit() {
+        return isEdit;
+    }
+    
+     public String startEdit() {
+        isEdit = true;
+        isCreate = false;
+        return CREATE_OR_EDIT_XHTML;
+    }
+     
+      public String startCreate() {
+        isEdit = true;
+        isCreate = false;
+        return CREATE_OR_EDIT_XHTML;
+    }
+     
+     public ApplicationRoleDto getSelected() {
+        return selected;
+    }
+     
+    public String edit() {
+        applicationrolerest.update(selected);
+        selected = null;
+        reload();
+        isEdit = false;
+        return APPLICATIONROLE_XHTML;
+    }
+
+    public String create() {
+        applicationrolerest.create(selected);
+        selected = null;
+        reload();
+        isCreate = false;
+        return APPLICATIONROLE_XHTML;
+    } 
+     
+    public void setSelected(ApplicationRoleDto selectApplication) {
+        this.selected = selectApplication;
+    }
+    
+    public String toApplicationRoleIndex() {
+        return APPLICATIONROLE_XHTML;
+    }
 }

@@ -1,49 +1,48 @@
-<?xml version="1.0" encoding="windows-1252"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <head>
-        <title>Vacant Positions</title>
-    </head>
-    <body>
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title> Vacant Position </title>
+    </h:head>
+    <h:body>
         <ui:include src="/header.xhtml"/>
-        <h3>Application list</h3>
+        <h3>Vacant Position List</h3>
         <br/>
-      
+
         <f:view>
             <h:messages style="color:red;margin:8px;" showDetail="true" />
 
-            <h:form id="applicationroleList">
-                <h:dataTable value="#{ApplicationRoleMBean.application}"  var="application">
+            <h:form id="employeeForm">
+                <h:dataTable value="#{ApplicationRoleMBean.applicationRoles}"  var="applicationRole">
                     <h:column>
-                        <f:facet name="header">Id</f:facet>
-                        <h:outputText value="#{applicationrole.id}"/>
+                        <f:facet name="header">Application</f:facet>
+                        <h:outputText value="#{applicationRole.id}"/>
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Name</f:facet>
-                        <h:outputText value="#{applicationrole.idapp}"/>
+                        <f:facet name="header">Application name</f:facet>
+                        <h:outputText value="#{
+                                      applicationRole.idapp}"/>
                     </h:column>
-                    
+                    <h:column>
+                        <f:facet name="header">Role</f:facet>
+                        <h:outputText value="#{
+                                      applicationRole.idrole}"/>
+                    </h:column>
                     <h:column>
                         <f:facet name="header">Action</f:facet>
-                        <h:commandButton value="Edit" action="#{applicationrole.startEdit}">
-                            <f:setPropertyActionListener value="#{applicationrole}" target="#{applicationrole.selected}"/>
+                        <h:commandButton value="Edit" action="#{ApplicationRoleMBean.startEdit}">
+                            <f:setPropertyActionListener value="#{applicationrole}" target="#{ApplicationRoleMBean.selected}"/>
                         </h:commandButton>
                     </h:column>
-                    
-               </h:dataTable>
-             
-               <h:commandButton value="Create new employee" action="#{applicationroleMBean.startCreate}"/>
-              
-          </h:form>
+                </h:dataTable>
+
+                <h:commandButton value="Create new vacant position" action="#{ApplicationRoleMBean.startCreate}"/>
+            </h:form>
         </f:view> 
         <ui:include src="/goBack.xhtml"/>
-    </body>
+    </h:body>
 </html>
+

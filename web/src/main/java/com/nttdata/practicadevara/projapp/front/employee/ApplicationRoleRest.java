@@ -31,4 +31,13 @@ public class ApplicationRoleRest {
     public List<ApplicationRoleDto> listApplicationRole() {
         return tempList;
     }
+    public ApplicationRoleDto update(ApplicationRoleDto entry) {
+        return entry;
+    }
+
+    public ApplicationRoleDto create(ApplicationRoleDto entry) {
+        entry.setId(tempIndex++);
+        tempList.add(entry);
+        return entry;
+    }
 }
