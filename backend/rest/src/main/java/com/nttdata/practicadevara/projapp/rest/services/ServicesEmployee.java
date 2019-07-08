@@ -47,15 +47,14 @@ public class ServicesEmployee {
         return Response.ok(employees).build();
     }
     
-//    @GET
-//    @Path("/{id}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response getById(@PathParam("id") Long id,
-//            @Context HttpServletRequest servletRequest) {
-//        EmployeeDto employee = employeeEjb.findById(id);
-//        return Response.ok(employee).build();
-//    }
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getById(@PathParam("id") int id,
+            @Context HttpServletRequest servletRequest) {
+        EmployeeDto employee = employeeEjb.findById(id);
+        return Response.ok(employee).build();
+    }
 
 //    @PUT
 //    @Produces(MediaType.APPLICATION_JSON)

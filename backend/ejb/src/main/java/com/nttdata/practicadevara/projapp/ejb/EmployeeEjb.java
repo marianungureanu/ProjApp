@@ -22,11 +22,11 @@ public class EmployeeEjb {
         List<EmployeeEntity> entities = employeeDbBean.findAll();
         return toDto(entities);
     }
-
-//    public EmployeeDto findById(Long id) {
-//        EmployeeEntity entity = employeeDbBean.findById(id);
-//        return toDto(entity);
-//    }
+    
+    public EmployeeDto findById(int id) {
+        EmployeeEntity entity = employeeDbBean.findById(id);
+        return toDto(entity);
+    }
 
 //    public EmployeeEntity create(EmployeeEntity dto) {
 //        EmployeeEntity e = fromDto(dto);
