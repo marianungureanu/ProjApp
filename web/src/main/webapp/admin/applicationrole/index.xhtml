@@ -5,39 +5,42 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
     <head>
         <title>Vacant Positions</title>
     </head>
     <body>
         <ui:include src="/header.xhtml"/>
-        <h3>Vacant Position list</h3>
+        <h3>Application list</h3>
         <br/>
       
         <f:view>
             <h:messages style="color:red;margin:8px;" showDetail="true" />
 
-            <h:form id="employeeForm">
-                <h:dataTable value="#{employeeMBean.employees}"  var="employee">
+            <h:form id="applicationroleList">
+                <h:dataTable value="#{ApplicationRoleMBean.application}"  var="application">
                     <h:column>
                         <f:facet name="header">Id</f:facet>
-                        <h:outputText value="#{employee.id}"/>
+                        <h:outputText value="#{applicationrole.id}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Name</f:facet>
-                        <h:outputText value="#{employee.name}"/>
+                        <h:outputText value="#{applicationrole.idapp}"/>
                     </h:column>
                     
                     <h:column>
                         <f:facet name="header">Action</f:facet>
-                        <h:commandButton value="Edit" action="#{employeeMBean.startEdit}">
-                            <f:setPropertyActionListener value="#{employee}" target="#{employeeMBean.selected}"/>
+                        <h:commandButton value="Edit" action="#{applicationrole.startEdit}">
+                            <f:setPropertyActionListener value="#{applicationrole}" target="#{applicationrole.selected}"/>
                         </h:commandButton>
                     </h:column>
                     
                </h:dataTable>
              
-               <h:commandButton value="Create new employee" action="#{employeeMBean.startCreate}"/>
+               <h:commandButton value="Create new employee" action="#{applicationroleMBean.startCreate}"/>
               
           </h:form>
         </f:view> 
