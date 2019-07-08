@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Vacant Positions</title>
+    </head>
+    <body>
+        <ui:include src="/header.xhtml"/>
+        <h3>Vacant Position list</h3>
+        <br/>
+      
+        <f:view>
+            <h:messages style="color:red;margin:8px;" showDetail="true" />
+
+            <h:form id="employeeForm">
+                <h:dataTable value="#{employeeMBean.employees}"  var="employee">
+                    <h:column>
+                        <f:facet name="header">Id</f:facet>
+                        <h:outputText value="#{employee.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        <h:outputText value="#{employee.name}"/>
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+                        <h:commandButton value="Edit" action="#{employeeMBean.startEdit}">
+                            <f:setPropertyActionListener value="#{employee}" target="#{employeeMBean.selected}"/>
+                        </h:commandButton>
+                    </h:column>
+                    
+               </h:dataTable>
+             
+               <h:commandButton value="Create new employee" action="#{employeeMBean.startCreate}"/>
+              
+          </h:form>
+        </f:view> 
+        <ui:include src="/goBack.xhtml"/>
+    </body>
+</html>
