@@ -106,7 +106,6 @@ public class ApplicationroleEntity implements Serializable {
     public String toString() {
         return "com.nttdata.practicadevara.projapp.db.ApplicationroleEntity[ id=" + id + " ]";
     }
-
     @OneToMany
     private List<SubscriptionEntity> subscription;
     private List<ApplicationrolestechnologiesEntity> appRolesTechnology;

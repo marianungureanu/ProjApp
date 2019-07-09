@@ -31,7 +31,6 @@ public class RoleEntity implements Serializable {
     //private static final long serialVersionUID = 117223295272084434L;
     public static final String SCHEMA_NAME = "projappdb";
     public static final String FIND_ALL = "role_findAllQuery";
-
     @Id
     @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

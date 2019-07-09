@@ -23,16 +23,13 @@ import javax.persistence.Table;
  * @author ovidiu.hulea
  */
 @Entity
-@Table(name = "technology", schema =TechnologyEntity.SCHEMA_NAME)
+@Table (name = "technology", schema = TechnologyEntity.SCHEMA_NAME)
 @NamedQueries({
-    @NamedQuery(name = TechnologyEntity.FIND_ALL, query = "SELECT t FROM TechnologyEntity t"),
-    @NamedQuery( name=TechnologyEntity.FIND_ONE, query="SELECT t FROM TechnologyEntity t WHERE t.id= :id")
+    @NamedQuery(name = TechnologyEntity.FIND_ALL, query = "SELECT t FROM TechnologyEntity t")
 })
-public class TechnologyEntity implements Serializable {
-
+public class TechnologyEntity implements Serializable{
     public static final String SCHEMA_NAME = "projappdb";
     public static final String FIND_ALL = "technology_findAllQuery";
-    public static final String FIND_ONE ="technology_findOneQuery";
 
     @Id
     @Column(name = "id", unique = true)
@@ -41,6 +38,9 @@ public class TechnologyEntity implements Serializable {
 
     @Column(name = "name")
     private String name;
+
+    
+    
 
     public int getId() {
         return id;
@@ -57,9 +57,10 @@ public class TechnologyEntity implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
+    
     @OneToMany
-    private List<EmployeetechnologyEntity> employeeTechnologyObject;
-
-    private List<ApplicationrolestechnologiesEntity> appRolesTechnology;
+     private List<EmployeetechnologyEntity> employeeTechnologyObject;
+   
+     private List<ApplicationrolestechnologiesEntity> appRolesTechnology;
+    
 }

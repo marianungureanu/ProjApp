@@ -30,7 +30,6 @@ class ApplicationrolestechnologiesEntity implements Serializable {
 
     public static final String SCHEMA_NAME = "projappdb";
     public static final String FIND_ALL = "application_roles_technologies_findAllQuery";
-
     //id, status, id Employee, id Application Role
     @Id
     @Column(name = "id", unique = true)
