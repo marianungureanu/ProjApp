@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Subscription Config</title>
+    </h:head>
+    <h:body>
+        <ui:include src="/header.xhtml"/>
+        <h3>
+        Subscription   <h:outputText value="accept" rendered="#{subscriptionMBean.isAccept}"/>
+                    <h:outputText value="reject" rendered="#{subscriptionMBean.isReject}"/>
+        </h3>
+		
+        <br/>
+		
+        <f:view>
+            <h:form id="subscriptionRejectOrAcceptForm">
+                Name:<h:inputText  value="#{subscriptionMBean.selected.name}"/>
+                <br/>
+                <h:commandButton value="Accept"   action="#{subscriptionMBean.accept}"   rendered="#{subscriptionMBean.isAccept}"/>
+                <h:commandButton value="Reject" action="#{subscriptionMBean.reject}" rendered="#{subscriptionMBean.isReject}"/>
+            </h:form>
+        </f:view> 
+		
+        <ui:include src="/goBack.xhtml"/>
+    </h:body>
+</html>
