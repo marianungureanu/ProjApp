@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title> Vacant Apps / Positions </title>
+    </h:head>
+    <h:body>
+        <ui:include src="/header.xhtml"/>
+        <h3>App List</h3>
+        <br/>
+
+        <f:view>
+            <h:messages style="color:red;margin:8px;" showDetail="true" />
+
+            <h:form id="employeeForm">
+                <h:dataTable value="#{applicationMBean.applications}"  var="app" columnClasses="shortclass,middleclass,middleclass">
+                    <h:column>
+                        <f:facet name="header">Application</f:facet>
+                        <h:outputText value="#{app.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Description</f:facet>
+                        <h:outputText value="#{app.description}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Roles</f:facet>
+                        <ui:repeat value="#{app.roles}"  var="arole">
+                            <table style="border: 0">
+                                <tr><td class="noborder">
+                                        <b><h:outputText value="#{arole.role.name}"/></b>
+                                    </td>
+                                    <td class="noborder">
+                                        <ui:repeat value="#{arole.technologies}"  var="atech">
+                                            #{atech.technology.name}: #{atech.minLevel.name};
+                                        </ui:repeat>
+                                   </td></tr></table>
+                        </ui:repeat>
+                    </h:column>
+                     <h:column>
+                        <f:facet name="header">Action</f:facet>
+                        <h:commandButton value="Edit" action="#{applicationMBean.startEdit}">
+                            <f:setPropertyActionListener target="#{applicationMBean.selected}" value="#{app}"/>
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+                <h:commandButton value="New Application" action="#{applicationMBean.startCreate}"/>
+            </h:form>
+        </f:view> 
+        <ui:include src="/goBack.xhtml"/>
+    </h:body>
+</html>
+

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nttdata.practicadevara.projapp.shared.dto;
 
 /**
@@ -10,20 +5,30 @@ package com.nttdata.practicadevara.projapp.shared.dto;
  * @author liviu.dima
  */
 public class EmployeeTechnologyDto {
-    private static final long serialVersionUID = 10001;
+    private static final long serialVersionUID = 10005;
+    
+    /**
+     * The id for db operations
+     */
     private int id;
-    private int idemp;
-    private int idtech;
-    private int idlvl;
+    
+    /**
+     * The technology current skill refers to.
+     */
+    private TechnologyDto technology;
+    
+    /**
+     * The level the employee masters bound technology
+     */
+    private LevelDto level;
     
     public EmployeeTechnologyDto(){
         
     }
-    public EmployeeTechnologyDto(int id, int idemp, int idtech, int idlvl){
+    public EmployeeTechnologyDto(int id, TechnologyDto technology, LevelDto level){
         this.id=id;
-        this.idemp=idemp;
-        this.idtech=idtech;
-        this.idlvl=idlvl;
+        this.technology = technology;
+        this.level = level;
     }
     
     public int getId(){
@@ -33,28 +38,22 @@ public class EmployeeTechnologyDto {
     public void setId(int id){
         this.id=id;
     }
-    
-    public int getIdemp(){
-        return idemp;
+
+    public TechnologyDto getTechnology() {
+        return technology;
+    }
+
+    public void setTechnology(TechnologyDto technology) {
+        this.technology = technology;
+    }
+
+    public LevelDto getLevel() {
+        return level;
+    }
+
+    public void setLevel(LevelDto level) {
+        this.level = level;
     }
     
-    public void setIdemp(int idemp){
-        this.idemp=idemp;
-    }
-    
-    public int getIdtech(){
-        return idtech;
-    }
-    
-    public void setIdtech(int idtech){
-        this.idtech=idtech;
-    }
-    
-    public int getIdlvl(){
-        return idlvl;
-    }
-    
-    public void setIdlvl(){
-        this.idlvl=idlvl;
-    }
+   
 }

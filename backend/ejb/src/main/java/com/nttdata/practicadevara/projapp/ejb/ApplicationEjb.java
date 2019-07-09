@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nttdata.practicadevara.projapp.ejb;
 
 import com.nttdata.practicadevara.projapp.db.ApplicationBean;
@@ -50,7 +45,7 @@ public class ApplicationEjb {
         ApplicationEntity e = new ApplicationEntity();
         e.setId(dto.getId());
         e.setName(dto.getName());
-        e.setDescr(dto.getDescr());
+        e.setDescr(dto.getDescription());
         return e;
     }
 }

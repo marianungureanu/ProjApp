@@ -97,8 +97,8 @@ public class EmployeeManagedBean implements Serializable {
     }
 
     public String deleteTechnologyForSelected() {
-        if (null != selected.getEmployeeTechnologies() && selectedTechnology != null) {
-            selected.getEmployeeTechnologies().remove(selectedTechnology);
+        if (null != selected.getSkills() && selectedTechnology != null) {
+            selected.getSkills().remove(selectedTechnology);
         }
         return "";
     }

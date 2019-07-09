@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Vacant Position Config</title>
+    </h:head>
+    <h:body>
+        <ui:include src="/header.xhtml"/>
+        <h3>
+            Employee   <h:outputText value="edit" rendered="#{applicationMBean.isEdit}"/>
+            <h:outputText value="create" rendered="#{applicationMBean.isCreate}"/>
+        </h3>
+
+        <br/>
+
+        <f:view>
+            <h:form id="applicationRoleCreateOrEdit">
+                Name:<h:inputText  value="#{applicationMBean.selected.name}"/>
+                <br/>
+                Description:<h:inputTextarea value="#{applicationMBean.selected.description}" rows="7" cols="60"/>
+                <br/>
+                <ui:repeat value="#{applicationMBean.selected.roles}" var="arole">
+                    <table style="border: 0">
+                        <tr><td class="noborder">
+                                Role: <h:inputText value="#{arole.role.name}"/>
+                            </td>
+                            <td class="noborder">
+                                Technologies/ Skills:
+                                <ui:repeat value="#{arole.technologies}"  var="atech">
+                                    <br/>
+                                    <h:inputText value="#{atech.technology.name}" />
+                                    <h:selectOneMenu value="#{atech.technology.id}">
+                                        <f:selectItems value="#{technologyMBean.technologies}" var="tehchnologyDto" itemLabel="#{tehchnologyDto.name}" itemValue="#{tehchnologyDto.id}" />
+                                    </h:selectOneMenu>
+                                    
+                                    <!-- aici trebuie introdus selectOneMenu cu lista de nivele din viitorul levelMBean -->
+                                    : #{atech.minLevel.name}
+                                </ui:repeat>
+                            </td></tr></table>
+                </ui:repeat>
+                <br/>
+                Oracle:  <h:commandButton value="Delete"   action="#{applicationMBean.reload}"/>
+                <h:selectOneMenu>
+                    <f:selectItem itemValue="1"/>
+                    <f:selectItem itemValue="2"/>
+                    <f:selectItem itemValue="3"/>
+                    <f:selectItem itemValue="4"/>
+                    <f:selectItem itemValue="5"/>
+                </h:selectOneMenu>
+                <br/>
+                HTML:  <h:commandButton value="Delete"   action="#{applicationMBean.reload}"/>
+                <h:selectOneMenu>
+                    <f:selectItem itemValue="1"/>
+                    <f:selectItem itemValue="2"/>
+                    <f:selectItem itemValue="3"/>
+                    <f:selectItem itemValue="4"/>
+                    <f:selectItem itemValue="5"/>
+                </h:selectOneMenu>
+
+                <br/>
+                <h:commandButton value="Edit"   action="#{applicationMBean.edit}"   rendered="#{applicationMBean.isEdit}"/>
+                <h:commandButton value="Create" action="#{applicationMBean.create}" rendered="#{applicationMBean.isCreate}"/>
+                <f:view id="goBack">
+                    <h:form id="goBackForm">
+                        <h:commandButton value="Go Back" action="index" type="submit"/>
+                    </h:form>
+                    <div class="separator"> </div>
+                </f:view>
+            </h:form>
+        </f:view> 
+
+        <ui:include src="/goBack.xhtml"/>
+    </h:body>
+</html>

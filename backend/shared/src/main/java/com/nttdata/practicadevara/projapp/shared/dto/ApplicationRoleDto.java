@@ -1,27 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nttdata.practicadevara.projapp.shared.dto;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author liviu.dima
  */
 public class ApplicationRoleDto {
-    private static final long serialVersionUID = 10001;
+    private static final long serialVersionUID = 10002;
+    
+    /**
+     * The id of ApplicationRole entity 
+     */
     private int id;
-    private int idapp;
-    private int idrole;
+    
+    /**
+     * The role for current vacant position
+     */
+    private RoleDto role;
+    
+    /**
+     * The technologies needed for current position/role
+     */
+    private List<ApplicationRoleTechnologyDto> technologies;
+    
     public ApplicationRoleDto(){
-        
     }
     
-    public ApplicationRoleDto(int id, int idapp, int role){
+    public ApplicationRoleDto(int id, RoleDto role){
         this.id=id;
-        this.idapp=idapp;
-        this.idrole=idrole;
+        this.role = role;
     }
     
     public int getId(){
@@ -31,20 +40,23 @@ public class ApplicationRoleDto {
     public void setId(int id){
         this.id=id;
     }
-    
-    public int getIdapp(){
-       return idapp; 
+
+    public RoleDto getRole() {
+        return role;
     }
-    
-    public void setIdapp(int idapp){
-        this.idapp=idapp;
+
+    public void setRole(RoleDto role) {
+        this.role = role;
     }
-    
-    public int getIdrole(){
-        return idrole;
+
+    public List<ApplicationRoleTechnologyDto> getTechnologies() {
+        if(technologies == null) {
+            technologies = new ArrayList<ApplicationRoleTechnologyDto>();
+        }
+        return technologies;
     }
-    
-    public void setIdrole(int idrole){
-        this.idrole=idrole;
+
+    public void setTechnologies(List<ApplicationRoleTechnologyDto> technologies) {
+        this.technologies = technologies;
     }
 }

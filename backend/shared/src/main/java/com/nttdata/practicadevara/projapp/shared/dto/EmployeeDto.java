@@ -1,13 +1,15 @@
 package com.nttdata.practicadevara.projapp.shared.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class EmployeeDto implements Serializable {
-    private static final long serialVersionUID = 10001;
+    private static final long serialVersionUID = 10004;
     
     private int id;
     private String name;
-
+      private List<EmployeeTechnologyDto> skills;
+    
     public EmployeeDto() {
     }
 
@@ -30,5 +32,13 @@ public class EmployeeDto implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<EmployeeTechnologyDto> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<EmployeeTechnologyDto> skills) {
+        this.skills = skills;
     }
 }

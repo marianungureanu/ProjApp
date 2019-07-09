@@ -1,31 +1,40 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nttdata.practicadevara.projapp.shared.dto;
 
 /**
- *
- * @author liviu.dima
+ * Class holding subscription for a given employee and a applicationRole
  */
 public class SubscriptionDto {
     
-    private static final long serialVersionUID=10001;
+    private static final long serialVersionUID = 10008;
+    
+    /**
+     * The id of the given entity
+     */
     private int id;
+    
+    /**
+     * Current status: null, new, accepted, rejected
+     */
     private String status;
-    private int idemp;
-    private int idapprl;
+    
+    /**
+     * Employee that made a subscription
+     */
+    private EmployeeDto employee;
+    
+    /**
+     * The role/position for which the subscription has been made.
+     */
+    private ApplicationRoleDto role;
     
     public SubscriptionDto(){
-        
     }
     
-    public SubscriptionDto(int id, String status, int idemp, int idapprl){
+    public SubscriptionDto(int id, String status, EmployeeDto employee, ApplicationRoleDto role){
         this.id=id;
         this.status=status;
-        this.idemp=idemp;
-        this.idapprl=idapprl;
+        this.employee = employee;
+        this.role = role;
     }
     
     public int getId(){
@@ -43,20 +52,22 @@ public class SubscriptionDto {
     public void setStatus(String status){
         this.status=status;
     }
-    
-    public int getIdemp(){
-        return idemp;
+
+    public EmployeeDto getEmployee() {
+        return employee;
     }
-    
-    public void setIdemp(int idemp){
-        this.idemp=idemp;
+
+    public void setEmployee(EmployeeDto employee) {
+        this.employee = employee;
     }
-    
-    public int getIdapprl(){
-        return idapprl;
+
+    public ApplicationRoleDto getRole() {
+        return role;
     }
-    
-    public void setIdapprl(int idapprl){
-        this.idapprl=idapprl;
+
+    public void setRole(ApplicationRoleDto role) {
+        this.role = role;
     }
+   
+    
 }

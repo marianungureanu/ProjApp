@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nttdata.practicadevara.projapp.shared.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,8 +11,25 @@ import java.io.Serializable;
 public class ApplicationDto implements Serializable{
     private static final long serialVersionUID = 10001;
     
+    /**
+     * The id in database for the Application
+     */
     private int id;
-    private String name,descr;
+    
+    /**
+     * The application name
+     */
+    private String name;
+    
+    /**
+     * The application's description
+     */
+    private String description;
+    
+    /**
+     * The list of available positions (roles)
+     */
+    private List<ApplicationRoleDto> roles;
 
     public ApplicationDto() {
     }
@@ -23,7 +37,7 @@ public class ApplicationDto implements Serializable{
     public ApplicationDto(int id, String name, String descr) {
         this.id = id;
         this.name = name;
-        this.descr=descr;
+        this.description = descr;
     }
     
     public int getId() {
@@ -42,13 +56,22 @@ public class ApplicationDto implements Serializable{
         this.name = name;
     }
 
-    public String getDescr() {
-        return descr;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescr(String descr) {
-        this.descr = descr;
+    public void setDescription(String description) {
+        this.description = description;
     }
-    
-    
+
+    public List<ApplicationRoleDto> getRoles() {
+        if(roles == null) {
+            roles = new ArrayList<ApplicationRoleDto>();
+        }
+        return roles;
+    }
+
+    public void setRoles(List<ApplicationRoleDto> roles) {
+        this.roles = roles;
+    }
 }
