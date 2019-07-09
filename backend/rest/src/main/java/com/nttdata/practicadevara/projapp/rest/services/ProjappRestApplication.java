@@ -13,6 +13,7 @@ public class ProjappRestApplication extends Application {
         // register root resource
         classes.add(ServicesEmployee.class);
         classes.add(ServicesTechnology.class);
+        classes.add(ServicesRole.class);
         
         
         return classes;
