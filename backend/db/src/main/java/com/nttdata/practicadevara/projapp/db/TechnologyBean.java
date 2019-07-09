@@ -39,6 +39,6 @@ public class TechnologyBean {
     }
     
      public String findOneNamedQuery(){
-        return TechnologyEntity.FIND_ONE;
+        return TechnologyEntity.FIND_ALL;
     }
 }
