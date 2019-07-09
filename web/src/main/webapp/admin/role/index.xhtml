@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title> Roles </title>
+    </h:head>
+    <h:body>
+        <ui:include src="/header.xhtml"/>
+        <h3>Role list</h3>
+        <br/>
+      
+        <f:view>
+            <h:messages style="color:red;margin:8px;" showDetail="true" />
+
+            <h:form id="roleForm">
+                <h:dataTable value="#{roleMBean.roles}"  var="role">
+                    <h:column>
+                        <f:facet name="header">Id</f:facet>
+                        <h:outputText value="#{role.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        <h:outputText value="#{role.name}"/>
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+                        <h:commandButton value="Edit" action="#{roleMBean.startEdit}">
+                            <f:setPropertyActionListener value="#{role}" target="#{roleMBean.selected}"/>
+                        </h:commandButton>
+                    </h:column>
+                    
+               </h:dataTable>
+             
+             <h:commandButton value="Create new role" action="#{roleMBean.startCreate}"/>
+              
+          </h:form>
+        </f:view> 
+        <ui:include src="/goBack.xhtml"/>
+    </h:body>
+</html>
+
