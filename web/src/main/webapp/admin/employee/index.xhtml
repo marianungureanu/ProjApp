@@ -31,6 +31,9 @@
                         <h:commandButton value="Edit" action="#{employeeMBean.startEdit}">
                             <f:setPropertyActionListener value="#{employee}" target="#{employeeMBean.selected}"/>
                         </h:commandButton>
+                        <h:commandButton value="Delete" action="#{employeeMBean.startEdit()}">
+                            <f:setPropertyActionListener value="#{employee}" target="#{employeeMBean.selected}"/>
+                        </h:commandButton>
                     </h:column>
                     
                </h:dataTable>

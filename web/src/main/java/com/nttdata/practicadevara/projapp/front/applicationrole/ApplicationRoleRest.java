@@ -1,4 +1,4 @@
-package com.nttdata.practicadevara.projapp.front.employee;
+package com.nttdata.practicadevara.projapp.front.applicationrole;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
