@@ -28,7 +28,10 @@
                     
                     <h:column>
                         <f:facet name="header">Action</f:facet>
-                        <h:commandButton value="Edit" action="#{technlogyMBean.startEdit}">
+                        <h:commandButton value="Edit" action="#{technologyMBean.startEdit}">
+                            <f:setPropertyActionListener value="#{technology}" target="#{technologyMBean.selected}"/>
+                        </h:commandButton>
+                        <h:commandButton value="Delete" action="#{technologyMBean.startEdit()}">
                             <f:setPropertyActionListener value="#{technology}" target="#{technologyMBean.selected}"/>
                         </h:commandButton>
                     </h:column>
