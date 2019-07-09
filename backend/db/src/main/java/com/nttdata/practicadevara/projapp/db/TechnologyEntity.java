@@ -23,7 +23,7 @@ import javax.persistence.Table;
  * @author ovidiu.hulea
  */
 @Entity
-@Table(name = "Technology", schema = TechnologyEntity.SCHEMA_NAME)
+@Table(name = "technology", schema =TechnologyEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = TechnologyEntity.FIND_ALL, query = "SELECT t FROM TechnologyEntity t"),
     @NamedQuery( name=TechnologyEntity.FIND_ONE, query="SELECT t FROM TechnologyEntity t WHERE t.id= :id")
