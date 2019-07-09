@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nttdata.practicadevara.projapp.front.employee;
+package com.nttdata.practicadevara.projapp.front.applicationrole;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationRoleDto;
 import java.io.Serializable;
 import java.util.List;

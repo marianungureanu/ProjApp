@@ -23,23 +23,12 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Application name</f:facet>
-                        <h:outputText value="#{
-                                      applicationRole.idapp}"/>
+                        <h:outputText value="#{applicationRole.idapp}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Role</f:facet>
-                        <h:outputText value="#{
-                                      applicationRole.idrole}"/>
+                        <h:outputText value="#{applicationRole.idrole}"/>
                     </h:column>
-                    <h:column>
-                        <f:facet name="header">Action</f:facet>
-                        <h:commandButton value="Edit" action="#{ApplicationRoleMBean.startEdit}">
-                            <f:setPropertyActionListener value="#{applicationrole}" target="#{ApplicationRoleMBean.selected}"/>
-                        </h:commandButton>
-                    </h:column>
-                </h:dataTable>
-
-                <h:commandButton value="Create new vacant position" action="#{ApplicationRoleMBean.startCreate}"/>
             </h:form>
         </f:view> 
         <ui:include src="/goBack.xhtml"/>
