@@ -2,6 +2,8 @@ package com.nttdata.practicadevara.projapp.front.employee;
 
 import com.nttdata.practicadevara.projapp.shared.dto.EmployeeDto;
 import com.nttdata.practicadevara.projapp.shared.dto.EmployeeTechnologyDto;
+import com.nttdata.practicadevara.projapp.shared.dto.LevelDto;
+import com.nttdata.practicadevara.projapp.shared.dto.TechnologyDto;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -33,7 +35,7 @@ public class EmployeeManagedBean implements Serializable {
     }
 
     public void init() {
-        employeeList = employeeRest.listEmployees();
+        employeeList = employeeRest.listEmployees(); 
     }
 
     public List<EmployeeDto> getEmployees() {
@@ -106,8 +108,10 @@ public class EmployeeManagedBean implements Serializable {
     public void setSelectedTechnology(EmployeeTechnologyDto v) {
         this.selectedTechnology = v;
     }
-    
+
     public String addTechnologyForSelected() {
-      return "add_technology_page";
+        EmployeeTechnologyDto newTechnology = new EmployeeTechnologyDto(0, new TechnologyDto(0, ""), new LevelDto(0, ""));
+        selected.getSkills().add(newTechnology);
+        return "";
     }
 }
