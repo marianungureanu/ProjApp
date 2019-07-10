@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class ApplicationroleBean {
+public class ApplicationRoleBean {
 
     private static final long serialVersionUID = 117223295272084434L;
 
@@ -15,11 +15,8 @@ public class ApplicationroleBean {
     @PersistenceContext(unitName = "projapp-persistenceunit") //see main/resources/META-INF/peristence.xml
     protected EntityManager manager;
 
-    public List<ApplicationroleEntity> findAll() {
-        return manager.createNamedQuery(findAllNamedQuery()).getResultList();
+    public List<ApplicationRoleEntity> findAll() {
+        return manager.createQuery("SELECT a.id, a.app, a.role FROM ApplicationRoleEntity a", ApplicationRoleEntity.class).getResultList();
     }
 
-    public String findAllNamedQuery() {
-        return ApplicationroleEntity.FIND_ALL;
-    }
 }

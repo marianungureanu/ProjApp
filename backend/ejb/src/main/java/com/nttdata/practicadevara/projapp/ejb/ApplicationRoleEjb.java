@@ -7,7 +7,7 @@ package com.nttdata.practicadevara.projapp.ejb;
 
 import com.nttdata.practicadevara.projapp.db.ApplicationEntity;
 import com.nttdata.practicadevara.projapp.db.ApplicationRoleEntity;
-import com.nttdata.practicadevara.projapp.db.ApplicationroleBean;
+import com.nttdata.practicadevara.projapp.db.ApplicationRoleBean;
 import com.nttdata.practicadevara.projapp.db.RoleEntity;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationDto;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationRoleDto;
@@ -28,7 +28,7 @@ import javax.ejb.Stateless;
 public class ApplicationRoleEjb {
 
     @EJB
-    private ApplicationroleBean applicationRoleDbBean;
+    private ApplicationRoleBean applicationRoleDbBean;
 
     public List<ApplicationRoleDto> list() {
         List<ApplicationRoleEntity> entities = applicationRoleDbBean.findAll();
