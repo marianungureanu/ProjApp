@@ -1,6 +1,6 @@
 @echo off
 
-set GF_DIR=C:\servers\glassfish4
+set GF_DIR=C:\glassfish4
 
 set FRONT_DOMAIN=projapp_front
 set /a FRONT_PORTBASE=5000

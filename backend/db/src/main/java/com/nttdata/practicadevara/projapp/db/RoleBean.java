@@ -9,11 +9,10 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
-/**
- *
- * @author ovidiu.hulea
- */
+
 @Stateless
 public class RoleBean {
     //private static final long serialVersionUID = 117223295272084434L;
@@ -27,6 +26,7 @@ public class RoleBean {
         return manager.createNamedQuery(findAllNamedQuery()).getResultList();
     }
 
+    
     public String findAllNamedQuery() {
         return RoleEntity.FIND_ALL;
     }

@@ -15,10 +15,8 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 
-/**
- *
- * @author ovidiu.hulea
- */
+
+
 @Stateless
 @LocalBean
 public class RoleEjb {
@@ -30,6 +28,7 @@ public class RoleEjb {
         List<RoleEntity> entities = roleDbBean.findAll();
         return toDto(entities);
     }
+    
     
     private List<RoleDto> toDto(List<RoleEntity> list) {
         if (list != null) {

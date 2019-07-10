@@ -22,7 +22,7 @@ import javax.persistence.Table;
  * @author ovidiu.hulea
  */
 @Entity
-@Table(name = "Role", schema = EmployeeEntity.SCHEMA_NAME)
+@Table(name = "Role", schema = RoleEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = RoleEntity.FIND_ALL, query = "SELECT l FROM RoleEntity l")
 })
