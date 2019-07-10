@@ -63,6 +63,6 @@ public class ApplicationEntity implements Serializable {
     }
 
     @OneToMany
-    private List<ApplicationroleEntity> applicationrole;
+    private List<ApplicationRoleEntity> applicationrole;
     private List<ApplicationrolestechnologiesEntity> appRolesTechnology;
 }

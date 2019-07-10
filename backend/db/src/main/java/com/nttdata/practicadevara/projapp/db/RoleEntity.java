@@ -56,5 +56,5 @@ public class RoleEntity implements Serializable {
     }
 
     @OneToMany
-    private List<ApplicationroleEntity> applicationrole;
+    private List<ApplicationRoleEntity> applicationrole;
 }

@@ -46,7 +46,7 @@ class SubscriptionEntity implements Serializable {
    
     @JoinColumn(name = "idapprole", referencedColumnName = "id")
     @ManyToOne(optional = false)
-     private ApplicationroleEntity idapprole;
+     private ApplicationRoleEntity idapprole;
     
      public SubscriptionEntity() {
     }
@@ -80,11 +80,11 @@ class SubscriptionEntity implements Serializable {
     }
      
      
-    public ApplicationroleEntity getIdapprole() {
+    public ApplicationRoleEntity getIdapprole() {
         return idapprole;
     }
 
-    public void setIdapprole(ApplicationroleEntity idapprole) {
+    public void setIdapprole(ApplicationRoleEntity idapprole) {
         this.idapprole = idapprole;
     }
     

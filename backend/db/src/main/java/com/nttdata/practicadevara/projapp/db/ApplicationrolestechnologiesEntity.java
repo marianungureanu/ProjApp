@@ -38,7 +38,7 @@ class ApplicationrolestechnologiesEntity implements Serializable {
 
     @JoinColumn(name = "idApplicationRole", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ApplicationroleEntity idApplicationRole;
+    private ApplicationRoleEntity idApplicationRole;
 
     @JoinColumn(name = "idTechnology", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -63,11 +63,11 @@ class ApplicationrolestechnologiesEntity implements Serializable {
         this.id = id;
     }
 
-    public ApplicationroleEntity getIdApplicationRole() {
+    public ApplicationRoleEntity getIdApplicationRole() {
         return idApplicationRole;
     }
 
-    public void setApplicationRole(ApplicationroleEntity idApplicationRole) {
+    public void setApplicationRole(ApplicationRoleEntity idApplicationRole) {
         this.idApplicationRole = idApplicationRole;
     }
 
