@@ -26,7 +26,7 @@
                     <tr>
                         <th>Technologies</th>
                         <td colspan="3">
-                            <h:dataTable value="#{employeeMBean.selected.employeeTechnologies}" var="t">
+                            <h:dataTable value="#{employeeMBean.selected.skills}" var="t">
                                 <h:column>#{t.technology.name}</h:column>
                                 <h:column>#{t.level.name}</h:column>
                                 <h:column>
@@ -39,7 +39,23 @@
                     </tr>
 
                     <tr>
-                        <td> </td>
+                        <td>
+                            <table style="border: 0">
+                                <tr>
+                                    <td class="noborder">
+             
+                                        <ui:repeat value="#{employeeMBean.selected.skills}"  var="atech">
+                                            <br/>
+                                            <h:inputText value="#{atech.technology.name}" />
+                                            <h:selectOneMenu value="#{atech.technology.id}">
+                                                <f:selectItems value="#{technologyMBean.technologies}" var="tehchnologyDto" itemLabel="#{tehchnologyDto.name}" itemValue="#{tehchnologyDto.id}" />
+                                            </h:selectOneMenu>
+
+                                            <!-- aici trebuie introdus selectOneMenu cu lista de nivele din viitorul levelMBean -->
+                                            : #{atech.level.name}
+                                        </ui:repeat>
+                                    </td></tr></table>
+                        </td>
                         <td> <h:commandButton value="Add Technology"  action="#{employeeMBean.addTechnologyForSelected}"/>
                         </td>
                     </tr>
