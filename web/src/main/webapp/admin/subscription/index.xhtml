@@ -26,12 +26,12 @@
                         <h:outputText value="#{subscription.status}"/>
                     </h:column>
                      <h:column>
-                        <f:facet name="header">idEmployee</f:facet>
-                        <h:outputText value="#{subscription.idemp}"/>
+                        <f:facet name="header">Employee</f:facet>
+                        <h:outputText value="#{subscription.employee.name}"/>
                     </h:column>
                      <h:column>
-                        <f:facet name="header">idApplicationRole</f:facet>
-                        <h:outputText value="#{subscription.idapprl}"/>
+                        <f:facet name="header">Role</f:facet>
+                        <h:outputText value="#{subscription.appRole.role.name}"/>
                     </h:column>
                     
                     <h:column>

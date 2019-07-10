@@ -25,16 +25,16 @@ public class SubscriptionDto {
     /**
      * The role/position for which the subscription has been made.
      */
-    private ApplicationRoleDto role;
+    private ApplicationRoleDto appRole;
     
     public SubscriptionDto(){
     }
     
-    public SubscriptionDto(int id, String status, EmployeeDto employee, ApplicationRoleDto role){
+    public SubscriptionDto(int id, String status, EmployeeDto employee, ApplicationRoleDto roleApp){
         this.id=id;
         this.status=status;
         this.employee = employee;
-        this.role = role;
+        this.appRole = roleApp;
     }
     
     public int getId(){
@@ -61,13 +61,13 @@ public class SubscriptionDto {
         this.employee = employee;
     }
 
-    public ApplicationRoleDto getRole() {
-        return role;
+    public ApplicationRoleDto getAppRole() {
+        return appRole;
     }
 
-    public void setRole(ApplicationRoleDto role) {
-        this.role = role;
+    public void setAppRole(ApplicationRoleDto appRole) {
+        this.appRole = appRole;
     }
-   
+
     
 }
