@@ -5,7 +5,6 @@
  */
 package com.nttdata.practicadevara.projapp.ejb;
 
-import com.nttdata.practicadevara.projapp.db.TechnologyEntity;
 import com.nttdata.practicadevara.projapp.db.TechnologyBean;
 import com.nttdata.practicadevara.projapp.db.TechnologyEntity;
 import com.nttdata.practicadevara.projapp.shared.dto.TechnologyDto;

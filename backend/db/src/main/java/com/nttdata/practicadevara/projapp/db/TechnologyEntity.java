@@ -25,11 +25,13 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "technology", schema = TechnologyEntity.SCHEMA_NAME)
 @NamedQueries({
-    @NamedQuery(name = TechnologyEntity.FIND_ALL, query = "SELECT t FROM TechnologyEntity t")
+    @NamedQuery(name = TechnologyEntity.FIND_ALL, query = "SELECT t FROM TechnologyEntity t"),
+    @NamedQuery(name = TechnologyEntity.FIND_ONE, query = "SELECT t FROM TechnologyEntity t WHERE t.id = :id")
 })
 public class TechnologyEntity implements Serializable{
     public static final String SCHEMA_NAME = "projappdb";
     public static final String FIND_ALL = "technology_findAllQuery";
+    public static final String FIND_ONE = "technology_findOneQuery";
 
     @Id
     @Column(name = "id", unique = true)

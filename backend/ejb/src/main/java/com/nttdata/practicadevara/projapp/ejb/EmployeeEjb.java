@@ -28,13 +28,6 @@ public class EmployeeEjb {
         return toDto(entity);
     }
 
-//    public EmployeeEntity create(EmployeeEntity dto) {
-//        EmployeeEntity e = fromDto(dto);
-//        EmployeeEntity entity = employeeDbBean.create(e);
-//        return toDto(entity);
-//    }
-
-
     private List<EmployeeDto> toDto(List<EmployeeEntity> list) {
         if (list != null) {
             return list.stream().map(e -> toDto(e)).collect(Collectors.toList());

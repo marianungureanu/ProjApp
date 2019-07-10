@@ -55,24 +55,4 @@ public class ServicesEmployee {
         EmployeeDto employee = employeeEjb.findById(id);
         return Response.ok(employee).build();
     }
-
-//    @PUT
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response newEmployee(EmployeeDto e) {
-//        EmployeeDto res = employeeEjb.create(e);
-//        return Response.ok(res).build();
-//    }
-//
-//    @POST
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public EmployeeDto updateUser(EmployeeDto e) throws BackendException {
-//        try {
-//            return employeeEjb.update(e);
-//        } catch (DBException ex) {
-//            throw new BackendException(ex.getMessage());
-//        }
-//    }
-    
 }

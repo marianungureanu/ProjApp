@@ -6,7 +6,6 @@
 package com.nttdata.practicadevara.projapp.rest.services;
 
 import com.nttdata.practicadevara.projapp.ejb.TechnologyEjb;
-import com.nttdata.practicadevara.projapp.shared.dto.TechnologyDto;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -55,11 +54,10 @@ public class ServicesTechnology {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getUserValues() {
         List<TechnologyDto> technology = technologyEjb.list();
-        return Response.ok(technology).build();
-        
+        return Response.ok(technology).build();        
     }
 
- @GET
+    @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") int id,
