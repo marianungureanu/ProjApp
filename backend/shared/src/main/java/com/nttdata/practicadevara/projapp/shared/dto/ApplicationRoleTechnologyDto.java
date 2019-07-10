@@ -1,9 +1,5 @@
 package com.nttdata.practicadevara.projapp.shared.dto;
 
-/**
- *
- * @author liviu.dima
- */
 public class ApplicationRoleTechnologyDto {
 
     public static final long serialVersionUID = 10003;
@@ -24,7 +20,6 @@ public class ApplicationRoleTechnologyDto {
     private LevelDto minLevel;
 
     public ApplicationRoleTechnologyDto() {
-
     }
 
     public ApplicationRoleTechnologyDto(int id, TechnologyDto tech, LevelDto minLevel) {
@@ -56,6 +51,4 @@ public class ApplicationRoleTechnologyDto {
     public void setMinLevel(LevelDto minLevel) {
         this.minLevel = minLevel;
     }
-
-    
 }

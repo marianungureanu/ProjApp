@@ -15,7 +15,7 @@ public class SubscriptionDto {
     /**
      * Current status: null, new, accepted, rejected
      */
-    private String status;
+    private SubscriptionStatusEnumDto status;
     
     /**
      * Employee that made a subscription
@@ -30,7 +30,7 @@ public class SubscriptionDto {
     public SubscriptionDto(){
     }
     
-    public SubscriptionDto(int id, String status, EmployeeDto employee, ApplicationRoleDto roleApp){
+    public SubscriptionDto(int id, SubscriptionStatusEnumDto status, EmployeeDto employee, ApplicationRoleDto roleApp){
         this.id=id;
         this.status=status;
         this.employee = employee;
@@ -45,11 +45,11 @@ public class SubscriptionDto {
         this.id=id;
     }
     
-    public String getStatus(){
+    public SubscriptionStatusEnumDto getStatus(){
         return status;
     }
     
-    public void setStatus(String status){
+    public void setStatus(SubscriptionStatusEnumDto status){
         this.status=status;
     }
 

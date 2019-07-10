@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nttdata.practicadevara.projapp.db;
 
 import java.util.List;
@@ -16,6 +11,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class ApplicationBean {
+
     private static final long serialVersionUID = 117223295272084434L;
 
     public static final String SCHEMA_NAME = "projappdb";
@@ -29,5 +25,43 @@ public class ApplicationBean {
 
     public String findAllNamedQuery() {
         return ApplicationEntity.FIND_ALL;
+    }
+
+    public String findByIdNamedQuery() {
+        return ApplicationEntity.FIND_BY_ID;
+    }
+
+    public ApplicationEntity findById(int id) {
+        return (ApplicationEntity) manager
+                .createNamedQuery(findByIdNamedQuery())
+                .setParameter(ApplicationEntity.ID_PARAM, id)
+                .getSingleResult();
+    }
+
+    public ApplicationEntity create(ApplicationEntity entity) {
+        manager.persist(entity);
+        manager.flush();
+        return entity;
+    }
+
+    public ApplicationEntity update(ApplicationEntity entity) {
+        checkExistance(entity);
+        return updateWithoutExistanceCheck(entity);
+    }
+
+    private ApplicationEntity updateWithoutExistanceCheck(ApplicationEntity entity) {
+        entity = manager.merge(entity);
+        return entity;
+    }
+
+    private ApplicationEntity checkExistance(ApplicationEntity entity) {
+        ApplicationEntity object = null;
+        if (entity != null) {
+            object = findById(entity.getId());
+            if (object == null) {
+                //throw new DBException("Entity not found");
+            }
+        }
+        return object;
     }
 }

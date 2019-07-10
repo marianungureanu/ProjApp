@@ -31,7 +31,6 @@
                                 Technologies/ Skills:
                                 <ui:repeat value="#{arole.technologies}"  var="atech">
                                     <br/>
-                                    <h:inputText value="#{atech.technology.name}" />
                                     <h:selectOneMenu value="#{atech.technology.id}">
                                         <f:selectItems value="#{technologyMBean.technologies}" var="tehchnologyDto" itemLabel="#{tehchnologyDto.name}" itemValue="#{tehchnologyDto.id}" />
                                     </h:selectOneMenu>

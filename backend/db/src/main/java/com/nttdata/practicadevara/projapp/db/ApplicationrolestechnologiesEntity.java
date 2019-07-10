@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nttdata.practicadevara.projapp.db;
 
 import java.io.Serializable;
@@ -22,31 +17,31 @@ import javax.persistence.Table;
  * @author sebastian.stoica
  */
 @Entity
-@Table(name = "applicationrolestechnologies", schema = ApplicationrolestechnologiesEntity.SCHEMA_NAME)
+@Table(name = "applicationroletechnology", schema = ApplicationrolestechnologiesEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = ApplicationrolestechnologiesEntity.FIND_ALL, query = "SELECT ar FROM ApplicationrolestechnologiesEntity ar")
 })
-class ApplicationrolestechnologiesEntity implements Serializable {
+public class ApplicationrolestechnologiesEntity implements Serializable {
 
     public static final String SCHEMA_NAME = "projappdb";
     public static final String FIND_ALL = "application_roles_technologies_findAllQuery";
-    //id, status, id Employee, id Application Role
+    
     @Id
     @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JoinColumn(name = "idApplicationRole", referencedColumnName = "id")
+    @JoinColumn(name = "idapplicationrole", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ApplicationRoleEntity idApplicationRole;
+    private ApplicationRoleEntity applicationRole;
 
-    @JoinColumn(name = "idTechnology", referencedColumnName = "id")
+    @JoinColumn(name = "idtechnology", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private TechnologyEntity idTechnology;
+    private TechnologyEntity technology;
 
-    @JoinColumn(name = "idLevelMin", referencedColumnName = "id")
+    @JoinColumn(name = "idlevel", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private LevelEntity idLevelMin;
+    private LevelEntity levelMin;
 
     public ApplicationrolestechnologiesEntity() {
     }
@@ -64,27 +59,27 @@ class ApplicationrolestechnologiesEntity implements Serializable {
     }
 
     public ApplicationRoleEntity getIdApplicationRole() {
-        return idApplicationRole;
+        return applicationRole;
     }
 
     public void setApplicationRole(ApplicationRoleEntity idApplicationRole) {
-        this.idApplicationRole = idApplicationRole;
+        this.applicationRole = idApplicationRole;
     }
 
-    public TechnologyEntity getIdtechnology() {
-        return idTechnology;
+    public TechnologyEntity getTechnology() {
+        return technology;
     }
 
-    public void setIdtechnology(TechnologyEntity idTechnology) {
-        this.idTechnology = idTechnology;
+    public void setTechnology(TechnologyEntity idTechnology) {
+        this.technology = idTechnology;
     }
 
-    public LevelEntity getidLevelMin() {
-        return idLevelMin;
+    public LevelEntity getLevelMin() {
+        return levelMin;
     }
 
-    public void setIdlevelMin(LevelEntity idLevelMin) {
-        this.idLevelMin = idLevelMin;
+    public void setLevelMin(LevelEntity idLevelMin) {
+        this.levelMin = idLevelMin;
     }
 
     @Override

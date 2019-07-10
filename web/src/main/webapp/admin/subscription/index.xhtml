@@ -11,7 +11,7 @@
         <ui:include src="/header.xhtml"/>
         <h3>Subscription list</h3>
         <br/>
-      
+
         <f:view>
             <h:messages style="color:red;margin:8px;" showDetail="true" />
 
@@ -25,40 +25,32 @@
                         <f:facet name="header">Status</f:facet>
                         <h:outputText value="#{subscription.status}"/>
                     </h:column>
-                     <h:column>
+                    <h:column>
                         <f:facet name="header">Employee</f:facet>
                         <h:outputText value="#{subscription.employee.name}"/>
                     </h:column>
-                     <h:column>
+                    <h:column>
                         <f:facet name="header">Role</f:facet>
                         <h:outputText value="#{subscription.appRole.role.name}"/>
                     </h:column>
-                    
+
                     <h:column>
-                        
-                        
                         <f:facet name="header">Action</f:facet>
                         
-                          <h:commandButton value="Accept" action="#{subscriptionMBean.startAccept}">
-                            <f:setPropertyActionListener value="#{subscription}" target="#{subscriptionMBean.selected}"/>
-                         </h:commandButton>
-                    
-                        <h:commandButton value="Reject" action="#{subscriptionMBean.startReject}">
+                        <h:commandButton value="Accept" action="#{subscriptionMBean.accept}">
                             <f:setPropertyActionListener value="#{subscription}" target="#{subscriptionMBean.selected}"/>
                         </h:commandButton>
-                        
-                        <h:commandButton value="Delete" action="#{subscriptionMBean.startAccept}">
+
+                        <h:commandButton value="Reject" action="#{subscriptionMBean.reject}">
                             <f:setPropertyActionListener value="#{subscription}" target="#{subscriptionMBean.selected}"/>
                         </h:commandButton>
-                        
-                        
+
+                        <h:commandButton value="Delete" action="#{subscriptionMBean.delete}">
+                            <f:setPropertyActionListener value="#{subscription}" target="#{subscriptionMBean.selected}"/>
+                        </h:commandButton>
                     </h:column>
-                    
-               </h:dataTable>
-             
-            
-              
-          </h:form>
+                </h:dataTable>
+            </h:form>
         </f:view> 
         <ui:include src="/goBack.xhtml"/>
     </h:body>

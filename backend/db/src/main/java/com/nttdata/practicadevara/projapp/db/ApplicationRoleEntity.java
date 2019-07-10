@@ -1,20 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nttdata.practicadevara.projapp.db;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.REFRESH;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -45,6 +42,9 @@ public class ApplicationRoleEntity implements Serializable {
     @JoinColumn(name = "idrole", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private RoleEntity role;
+    
+    @OneToMany(mappedBy = "applicationRole", cascade = {PERSIST, MERGE, REFRESH}) 
+    private List<ApplicationrolestechnologiesEntity> technologies = new ArrayList<ApplicationrolestechnologiesEntity>();
 
     public ApplicationRoleEntity() {
     }
@@ -77,6 +77,17 @@ public class ApplicationRoleEntity implements Serializable {
         this.role = role;
     }
 
+    public List<ApplicationrolestechnologiesEntity> getTechnologies() {
+        if(technologies == null) {
+           technologies = new ArrayList<ApplicationrolestechnologiesEntity>();
+        }
+        return technologies;
+    }
+
+    public void setTechnologies(List<ApplicationrolestechnologiesEntity> technologies) {
+        this.technologies = technologies;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

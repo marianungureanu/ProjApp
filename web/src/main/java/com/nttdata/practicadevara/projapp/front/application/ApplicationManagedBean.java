@@ -1,17 +1,12 @@
 package com.nttdata.practicadevara.projapp.front.application;
 
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationDto;
-import com.nttdata.practicadevara.projapp.shared.dto.ApplicationRoleDto;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.ejb.EJB;
 import javax.inject.Named;
 
-/**
- *
- * @author liviu.dima
- */
 @SessionScoped
 @Named("applicationMBean")
 public class ApplicationManagedBean implements Serializable {
@@ -74,7 +69,6 @@ public class ApplicationManagedBean implements Serializable {
 
     public void setSelected(ApplicationDto selectApplication) {
         this.selected = selectApplication;
-        System.out.println("Selected Applciation "+selectApplication.getName());
     }
     
     public String edit() {

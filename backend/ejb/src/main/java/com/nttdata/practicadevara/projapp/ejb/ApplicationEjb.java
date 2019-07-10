@@ -1,11 +1,11 @@
 package com.nttdata.practicadevara.projapp.ejb;
 
+import static com.nttdata.practicadevara.projapp.ejb.DtoUtility.*;
+
 import com.nttdata.practicadevara.projapp.db.ApplicationBean;
 import com.nttdata.practicadevara.projapp.db.ApplicationEntity;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationDto;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -20,32 +20,20 @@ public class ApplicationEjb {
 
     @EJB
     private ApplicationBean applicationDbBean;
-    
-    public List<ApplicationDto> list() {
+
+    public List<ApplicationDto> list() { 
         List<ApplicationEntity> entities = applicationDbBean.findAll();
-        return toDto(entities);
+        return toDtoAppList(entities);
     }
-    
-    private List<ApplicationDto> toDto(List<ApplicationEntity> list) {
-        if (list != null) {
-            return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
-        }
-        return Collections.EMPTY_LIST;
-    }
-     
-    private ApplicationDto toDto(ApplicationEntity e) {
-        ApplicationDto applDto = null;
-        if (e != null) {
-            applDto = new ApplicationDto(e.getId(), e.getName(),e.getDescr());
-        }
-        return applDto;
+    public ApplicationDto create(ApplicationDto dto) {
+        ApplicationEntity e = fromDto(dto);
+        ApplicationEntity entity = applicationDbBean.create(e);
+        return toDto(entity);
     }
 
-    private ApplicationEntity fromDto(ApplicationDto dto) {
-        ApplicationEntity e = new ApplicationEntity();
-        e.setId(dto.getId());
-        e.setName(dto.getName());
-        e.setDescr(dto.getDescription());
-        return e;
+    public ApplicationDto update(ApplicationDto dto) {
+        ApplicationEntity e = fromDto(dto);
+        ApplicationEntity entity = applicationDbBean.update(e);
+        return toDto(entity);
     }
 }
