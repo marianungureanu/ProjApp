@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>ProjApp: A Project - Developer matching site</title>
+    </h:head>
+    <h:body>
+        <h2>Welcome to Project - Application matching system</h2>
+        <h:form>
+            <h:commandButton value="Admin" action="admin/index.html"/>
+            <br/><br/><br/>
+            <table>
+                <tr>
+                    <td colspan="2">
+                        <h:dataTable value="#{employeeMBean.employees}" var="employee">
+                            <h:column> #{employee.name} </h:column>
+                            <h:column>
+                                <h:commandButton value="My page" action="user_pagina_personala.xhtml">
+                                    <f:setPropertyActionListener value="#{employee}" target="#{employeeMBean.selected}"/>
+                                </h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                    </td>
+                </tr>            
+            </table>
+        </h:form>
+    </h:body>
+</html>
+
