@@ -2,7 +2,7 @@ package com.nttdata.practicadevara.projapp.ejb;
 
 import com.nttdata.practicadevara.projapp.db.ApplicationEntity;
 import com.nttdata.practicadevara.projapp.db.ApplicationRoleEntity;
-import com.nttdata.practicadevara.projapp.db.ApplicationrolestechnologiesEntity;
+import com.nttdata.practicadevara.projapp.db.ApplicationRolesTechnologiesEntity;
 import com.nttdata.practicadevara.projapp.db.LevelEntity;
 import com.nttdata.practicadevara.projapp.db.RoleEntity;
 import com.nttdata.practicadevara.projapp.db.TechnologyEntity;
@@ -32,7 +32,7 @@ public class DtoUtility {
             List<ApplicationRoleEntity> appRoles = e.getAppRoles();
             for (ApplicationRoleEntity appRole : appRoles) {
                 ApplicationRoleDto roleDto = new ApplicationRoleDto(appRole.getId(), toDto(appRole.getRole()));
-                for (ApplicationrolestechnologiesEntity arTechEntity : appRole.getTechnologies()) {
+                for (ApplicationRolesTechnologiesEntity arTechEntity : appRole.getTechnologies()) {
                     roleDto.getTechnologies().add(toDto(arTechEntity));
                 }
                 dto.getRoles().add(roleDto);
@@ -47,7 +47,7 @@ public class DtoUtility {
         return new RoleDto(e.getId(), e.getName());
     }
 
-    static ApplicationRoleTechnologyDto toDto(ApplicationrolestechnologiesEntity e) {
+    static ApplicationRoleTechnologyDto toDto(ApplicationRolesTechnologiesEntity e) {
         return new ApplicationRoleTechnologyDto(e.getId(), toDto(e.getTechnology()), toDto(e.getLevelMin()));
     }
 
@@ -92,8 +92,8 @@ public class DtoUtility {
         return ret;
     }
 
-    static ApplicationrolestechnologiesEntity fromDto(ApplicationRoleTechnologyDto dto) {
-        ApplicationrolestechnologiesEntity ret = new ApplicationrolestechnologiesEntity();
+    static ApplicationRolesTechnologiesEntity fromDto(ApplicationRoleTechnologyDto dto) {
+        ApplicationRolesTechnologiesEntity ret = new ApplicationRolesTechnologiesEntity();
         if (dto != null) {
             ret.setId(dto.getId());
             ret.setTechnology(fromDto(dto.getTechnology()));

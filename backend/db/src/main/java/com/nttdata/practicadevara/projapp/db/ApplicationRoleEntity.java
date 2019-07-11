@@ -44,7 +44,7 @@ public class ApplicationRoleEntity implements Serializable {
     private RoleEntity role;
     
     @OneToMany(mappedBy = "applicationRole", cascade = {PERSIST, MERGE, REFRESH}) 
-    private List<ApplicationrolestechnologiesEntity> technologies = new ArrayList<ApplicationrolestechnologiesEntity>();
+    private List<ApplicationRolesTechnologiesEntity> technologies = new ArrayList<ApplicationRolesTechnologiesEntity>();
 
     public ApplicationRoleEntity() {
     }
@@ -77,14 +77,14 @@ public class ApplicationRoleEntity implements Serializable {
         this.role = role;
     }
 
-    public List<ApplicationrolestechnologiesEntity> getTechnologies() {
+    public List<ApplicationRolesTechnologiesEntity> getTechnologies() {
         if(technologies == null) {
-           technologies = new ArrayList<ApplicationrolestechnologiesEntity>();
+           technologies = new ArrayList<ApplicationRolesTechnologiesEntity>();
         }
         return technologies;
     }
 
-    public void setTechnologies(List<ApplicationrolestechnologiesEntity> technologies) {
+    public void setTechnologies(List<ApplicationRolesTechnologiesEntity> technologies) {
         this.technologies = technologies;
     }
     

@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.nttdata.practicadevara.projapp.rest.services.ServicesEmployee.class);
         resources.add(com.nttdata.practicadevara.projapp.rest.services.ServicesRole.class);
         resources.add(com.nttdata.practicadevara.projapp.rest.services.ServicesTechnology.class);
+        resources.add(com.nttdata.practicadevara.projapp.rest.services.ServicesAppRolesTechnologies.class);
     }
 
 }
