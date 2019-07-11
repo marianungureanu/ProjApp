@@ -17,7 +17,7 @@
                         <h:dataTable value="#{employeeMBean.employees}" var="employee">
                             <h:column> #{employee.name} </h:column>
                             <h:column>
-                                <h:commandButton value="My page" action="user_pagina_personala.xhtml">
+                                <h:commandButton value="My page" action="user/user_pagina_personala.xhtml">
                                     <f:setPropertyActionListener value="#{employee}" target="#{employeeMBean.selected}"/>
                                 </h:commandButton>
                             </h:column>
