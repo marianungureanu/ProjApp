@@ -28,6 +28,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.nttdata.practicadevara.projapp.rest.services.ServicesApplication.class);
+        resources.add(com.nttdata.practicadevara.projapp.rest.services.ServicesEmpTech.class);
         resources.add(com.nttdata.practicadevara.projapp.rest.services.ServicesEmployee.class);
         resources.add(com.nttdata.practicadevara.projapp.rest.services.ServicesRole.class);
         resources.add(com.nttdata.practicadevara.projapp.rest.services.ServicesTechnology.class);

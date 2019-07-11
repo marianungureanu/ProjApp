@@ -13,9 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -23,17 +23,19 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author sebastian.stoica
  */
+
+
 @Entity
 @Table(name = "employeetechnology")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = EmployeetechnologyEntity.FIND_ALL, query = "SELECT e FROM EmployeetechnologyEntity e")
-    , @NamedQuery(name = EmployeetechnologyEntity.FIND_BY_ID, query = "SELECT e FROM EmployeetechnologyEntity e WHERE e.id = :id")})
+   @NamedQuery(name = EmployeetechnologyEntity.FIND_REQUEST , query = "SELECT emp FROM EmployeetechnologyEntity emp"),
+     })
 public class EmployeetechnologyEntity implements Serializable {
 
     public static final String SCHEMA_NAME = "projappdb";
-    public static final String FIND_ALL = "employee_technology_findAllQuery";
-    public static final String FIND_BY_ID = "employee_technology_findByIdQuery";
+    public static final String FIND_REQUEST = "employee_technology_findRequestQuery";
+    
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -43,16 +45,16 @@ public class EmployeetechnologyEntity implements Serializable {
     private Integer id;
 
     @JoinColumn(name = "idemployee", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private EmployeeEntity idemployee;
+    @OneToOne(optional = false)
+    private EmployeeEntity employee;
 
     @JoinColumn(name = "idlevel", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private LevelEntity idlevel;
+    @OneToOne(optional = false)
+    private LevelEntity level;
 
     @JoinColumn(name = "idtechnology", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private TechnologyEntity idtechnology;
+    @OneToOne(optional = false)
+    private TechnologyEntity technology;
 
     public EmployeetechnologyEntity() {
     }
@@ -69,29 +71,31 @@ public class EmployeetechnologyEntity implements Serializable {
         this.id = id;
     }
 
-    public EmployeeEntity getIdemployee() {
-        return idemployee;
+    public EmployeeEntity getEmployee() {
+        return employee;
     }
 
-    public void setIdemployee(EmployeeEntity idemployee) {
-        this.idemployee = idemployee;
+    public void setEmployee(EmployeeEntity employee) {
+        this.employee = employee;
     }
 
-    public LevelEntity getIdlevel() {
-        return idlevel;
+    public LevelEntity getLevel() {
+        return level;
     }
 
-    public void setIdlevel(LevelEntity idlevel) {
-        this.idlevel = idlevel;
+    public void setLevel(LevelEntity level) {
+        this.level = level;
     }
 
-    public TechnologyEntity getIdtechnology() {
-        return idtechnology;
+    public TechnologyEntity getTechnology() {
+        return technology;
     }
 
-    public void setIdtechnology(TechnologyEntity idtechnology) {
-        this.idtechnology = idtechnology;
+    public void setTechnology(TechnologyEntity technology) {
+        this.technology = technology;
     }
+
+    
 
     @Override
     public int hashCode() {
