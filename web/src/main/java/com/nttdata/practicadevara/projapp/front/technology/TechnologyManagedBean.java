@@ -59,12 +59,7 @@ public class TechnologyManagedBean implements Serializable {
         return CREATE_OR_EDIT_XHTML;
     }
 
-    public String startCreate() {
-        isEdit = false;
-        isCreate = true;
-        selected = new TechnologyDto();
-        return CREATE_OR_EDIT_XHTML;
-    }
+   
 
     public boolean isIsCreate() {
         return isCreate;
@@ -97,4 +92,19 @@ public class TechnologyManagedBean implements Serializable {
     public String toTechnologyIndex() {
         return TECHNOLOGY_XHTML;
     }
+    
+     public String startCreate() {
+        isEdit = false;
+        isCreate = true;
+        selected = new TechnologyDto();
+        return CREATE_OR_EDIT_XHTML;
+    }
+     
+     public String delete() {
+        technologyRest.delete(selected);
+        selected = null;
+        reload();
+        return TECHNOLOGY_XHTML;
+    }
+     
 }
