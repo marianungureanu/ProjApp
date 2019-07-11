@@ -25,5 +25,10 @@ public class LevelEjb {
         List<LevelEntity> entities = levelDbBean.findAll();
         return toDtoLevelList(entities);
     }
-
+    
+    public LevelDto create(LevelDto dto) {
+       LevelEntity lvl = fromDto(dto);
+       levelDbBean.create(lvl);
+       return toDto(lvl);
+    }
 }
