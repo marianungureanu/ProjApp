@@ -23,8 +23,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author sebastian.stoica
  */
-
-
 @Entity
 @Table(name = "employeetechnology")
 @XmlRootElement

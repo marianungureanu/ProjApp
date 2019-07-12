@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -22,7 +21,7 @@ import javax.persistence.Table;
  * @author ovidiu.hulea
  */
 @Entity
-@Table(name = "Role", schema = RoleEntity.SCHEMA_NAME)
+@Table(name = "role", schema = RoleEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = RoleEntity.FIND_ALL, query = "SELECT l FROM RoleEntity l")
 })

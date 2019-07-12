@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author ovidiu.hulea
  */
 @Entity
-@Table(name = "Application", schema = EmployeeEntity.SCHEMA_NAME)
+@Table(name = "application", schema = EmployeeEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = ApplicationEntity.FIND_ALL, query = "SELECT e FROM ApplicationEntity e"),
     @NamedQuery(name = ApplicationEntity.FIND_BY_ID, query = "SELECT e FROM ApplicationEntity e WHERE e.id = :" + ApplicationEntity.ID_PARAM)
