@@ -6,6 +6,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
@@ -17,6 +18,7 @@ import com.nttdata.practicadevara.projapp.shared.dto.EmployeeDto;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 
 /**
@@ -46,7 +48,7 @@ public class ServicesEmployee {
         List<EmployeeDto> employees = employeeEjb.list();
         return Response.ok(employees).build();
     }
-    
+
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -54,5 +56,13 @@ public class ServicesEmployee {
             @Context HttpServletRequest servletRequest) {
         EmployeeDto employee = employeeEjb.findById(id);
         return Response.ok(employee).build();
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response newEmployee(EmployeeDto employee) {
+        EmployeeDto res = employeeEjb.create(employee);
+        return Response.ok(res).build();
     }
 }

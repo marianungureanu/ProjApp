@@ -19,8 +19,8 @@ public class EmployeeBean {
     public List<EmployeeEntity> findAll() {
         return manager.createNamedQuery(findAllNamedQuery()).getResultList();
     }
-    
-    public EmployeeEntity findById(int id){
+
+    public EmployeeEntity findById(int id) {
         TypedQuery<EmployeeEntity> q = manager.createNamedQuery(findOneNamedQuery(), EmployeeEntity.class);
         q.setParameter("id", id);
         EmployeeEntity emplEntity = q.getSingleResult();
@@ -30,8 +30,14 @@ public class EmployeeBean {
     public String findAllNamedQuery() {
         return EmployeeEntity.FIND_ALL;
     }
-    
-    public String findOneNamedQuery(){
+
+    public String findOneNamedQuery() {
         return EmployeeEntity.FIND_ONE;
     }
+
+    public EmployeeEntity create(EmployeeEntity emp) {
+        manager.persist(emp);
+        return emp;
+    }
+
 }
