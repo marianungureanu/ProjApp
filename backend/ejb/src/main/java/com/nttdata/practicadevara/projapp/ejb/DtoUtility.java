@@ -51,11 +51,6 @@ public class DtoUtility {
         return new ApplicationRoleTechnologyDto(e.getId(), toDto(e.getTechnology()), toDto(e.getLevelMin()));
     }
 
-    
-     static EmployeeTechnologyDto toDto(EmployeetechnologyEntity e) {
-        return new EmployeeTechnologyDto(e.getId(), toDto(e.getTechnology()), toDto(e.getLevel()));
-    }
-
     static TechnologyDto toDto(TechnologyEntity t) {
         return new TechnologyDto(t.getId(), t.getName());
     }
@@ -66,7 +61,7 @@ public class DtoUtility {
         }
         return new LevelDto();
     }
-
+    
     static ApplicationEntity fromDto(ApplicationDto dto) {
         ApplicationEntity e = new ApplicationEntity();
         e.setId(dto.getId());
@@ -140,6 +135,13 @@ public class DtoUtility {
     }
     
     static List<TechnologyDto> toDtoTechnologiesList(List<TechnologyEntity> list) {
+        if (list != null) {
+            return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
+        }
+        return Collections.EMPTY_LIST;
+    }
+    
+    static List<ApplicationRoleTechnologyDto> toDtoApplicationRolesTechnologiesList(List<ApplicationRolesTechnologiesEntity> list) {
         if (list != null) {
             return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
         }
