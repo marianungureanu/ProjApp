@@ -3,14 +3,19 @@ package com.nttdata.practicadevara.projapp.ejb;
 import com.nttdata.practicadevara.projapp.db.ApplicationEntity;
 import com.nttdata.practicadevara.projapp.db.ApplicationRoleEntity;
 import com.nttdata.practicadevara.projapp.db.ApplicationrolestechnologiesEntity;
+import com.nttdata.practicadevara.projapp.db.EmployeeEntity;
 import com.nttdata.practicadevara.projapp.db.LevelEntity;
 import com.nttdata.practicadevara.projapp.db.RoleEntity;
+import com.nttdata.practicadevara.projapp.db.SubscriptionEntity;
 import com.nttdata.practicadevara.projapp.db.TechnologyEntity;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationDto;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationRoleDto;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationRoleTechnologyDto;
+import com.nttdata.practicadevara.projapp.shared.dto.EmployeeDto;
 import com.nttdata.practicadevara.projapp.shared.dto.LevelDto;
 import com.nttdata.practicadevara.projapp.shared.dto.RoleDto;
+import com.nttdata.practicadevara.projapp.shared.dto.SubscriptionDto;
+import com.nttdata.practicadevara.projapp.shared.dto.SubscriptionStatusEnumDto;
 import com.nttdata.practicadevara.projapp.shared.dto.TechnologyDto;
 import java.util.Collections;
 import java.util.List;
@@ -31,11 +36,7 @@ public class DtoUtility {
             dto = new ApplicationDto(e.getId(), e.getName(), e.getDescr());
             List<ApplicationRoleEntity> appRoles = e.getAppRoles();
             for (ApplicationRoleEntity appRole : appRoles) {
-                ApplicationRoleDto roleDto = new ApplicationRoleDto(appRole.getId(), toDto(appRole.getRole()));
-                for (ApplicationrolestechnologiesEntity arTechEntity : appRole.getTechnologies()) {
-                    roleDto.getTechnologies().add(toDto(arTechEntity));
-                }
-                dto.getRoles().add(roleDto);
+                dto.getRoles().add(toDto(appRole));
             }
         } else {
             dto = new ApplicationDto();
@@ -60,6 +61,30 @@ public class DtoUtility {
             return new LevelDto(lvl.getId(), lvl.getName());
         }
         return new LevelDto();
+    }
+
+    static SubscriptionDto toDto(SubscriptionEntity e) {
+        SubscriptionDto dto = null;
+        if (e != null) {
+            SubscriptionStatusEnumDto status = SubscriptionStatusEnumDto.from(e.getName());
+            EmployeeDto emp = toDto(e.getIdemployee());
+            ApplicationRoleDto ar = toDto(e.getIdapprole());
+            dto = new SubscriptionDto(e.getId(), status, emp, ar);
+        }
+        return dto;
+    }
+    static EmployeeDto toDto(EmployeeEntity e) {
+        return new EmployeeDto(e.getId(), e.getName());
+    }
+
+    static ApplicationRoleDto toDto(ApplicationRoleEntity appRole) {
+        ApplicationRoleDto roleDto = new ApplicationRoleDto(appRole.getId(), toDto(appRole.getRole()));
+        if (appRole.getTechnologies() != null) {
+            for (ApplicationrolestechnologiesEntity arTechEntity : appRole.getTechnologies()) {
+                roleDto.getTechnologies().add(toDto(arTechEntity));
+            }
+        }
+        return roleDto;
     }
 
     static ApplicationEntity fromDto(ApplicationDto dto) {
@@ -133,8 +158,15 @@ public class DtoUtility {
         }
         return Collections.EMPTY_LIST;
     }
-    
+
     static List<TechnologyDto> toDtoTechnologiesList(List<TechnologyEntity> list) {
+        if (list != null) {
+            return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
+        }
+        return Collections.EMPTY_LIST;
+    }
+
+    static List<SubscriptionDto> toDtoSubscriptionList(List<SubscriptionEntity> list) {
         if (list != null) {
             return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
         }

@@ -19,17 +19,19 @@ import javax.persistence.Table;
 
 /**
  *
- * @author emanuel.butoi
+ * @author eduard.ioo
  */
 @Entity
 @Table(name = "subscription", schema = SubscriptionEntity.SCHEMA_NAME)
 @NamedQueries({
-    @NamedQuery(name = SubscriptionEntity.FIND_ALL, query = "SELECT s FROM SubscriptionEntity s")
+    @NamedQuery(name = SubscriptionEntity.FIND_ALL, query = "SELECT s FROM SubscriptionEntity s where s.idapprole.id = :id"),
+    @NamedQuery(name = SubscriptionEntity.FIND_ALL_BY_EMPLOYEE, query = "SELECT s FROM SubscriptionEntity s where s.idapprole.id = :idapprole and s.idemployee.id = :idemp")
 })
-class SubscriptionEntity implements Serializable {
+public class SubscriptionEntity implements Serializable {
 
     public static final String SCHEMA_NAME = "projappdb";
     public static final String FIND_ALL = "subscription_findAllQuery";
+    public static final String FIND_ALL_BY_EMPLOYEE = "subscription_findAllQuery_by_employee";
 
     //id, status, id Employee, id Application Role
     @Id

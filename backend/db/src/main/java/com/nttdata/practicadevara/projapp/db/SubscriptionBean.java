@@ -6,25 +6,38 @@
 package com.nttdata.practicadevara.projapp.db;
 
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author emanuel.butoi
+ * @author eduard.ioo
  */
+@Stateless
 public class SubscriptionBean {
-    
+
     public static final String SCHEMA_NAME = "projappdb";
 
     @PersistenceContext(unitName = "projapp-persistenceunit") //see main/resources/META-INF/peristence.xml
     protected EntityManager manager;
 
-    public List<RoleEntity> findAll() {
-        return manager.createNamedQuery(findAllNamedQuery()).getResultList();
+    public List<SubscriptionEntity> findAll(int appRoleId, int employeeId) {
+        if (employeeId > 0) {
+            return findAllByEmployee(appRoleId, employeeId);
+        }
+        return manager.createNamedQuery(findAllNamedQuery()).setParameter("id", appRoleId).getResultList();
+    }
+
+    public List<SubscriptionEntity> findAllByEmployee(int appRoleId, int empId) {
+        return manager
+                .createNamedQuery(SubscriptionEntity.FIND_ALL_BY_EMPLOYEE)
+                .setParameter("idapprole", appRoleId)
+                .setParameter("idemp", empId)
+                .getResultList();
     }
 
     public String findAllNamedQuery() {
-        return RoleEntity.FIND_ALL;
+        return SubscriptionEntity.FIND_ALL;
     }
 }
