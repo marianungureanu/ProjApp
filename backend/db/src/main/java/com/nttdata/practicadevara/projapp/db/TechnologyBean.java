@@ -28,7 +28,6 @@ public class TechnologyBean {
     }
     
      public TechnologyEntity findById(int id){
-         System.out.println("Looking for technology "+id);
         TypedQuery<TechnologyEntity> q = manager.createNamedQuery(findOneNamedQuery(), TechnologyEntity.class);
         q.setParameter("id", id);
         TechnologyEntity techEntity = q.getSingleResult();
