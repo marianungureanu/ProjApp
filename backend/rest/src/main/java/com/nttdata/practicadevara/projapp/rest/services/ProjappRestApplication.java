@@ -17,7 +17,7 @@ public class ProjappRestApplication extends Application {
         classes.add(ServicesApplication.class);
         classes.add(ServicesEmpTech.class);
         classes.add(ServicesLevel.class);
-        
+        classes.add(ServicesAppRolesTechnologies.class);
         return classes;
     }
    
