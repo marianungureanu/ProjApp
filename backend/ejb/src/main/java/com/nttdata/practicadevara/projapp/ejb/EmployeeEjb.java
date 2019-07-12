@@ -1,15 +1,14 @@
 package com.nttdata.practicadevara.projapp.ejb;
-
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import java.util.List;
-
 import com.nttdata.practicadevara.projapp.db.EmployeeEntity;
 import com.nttdata.practicadevara.projapp.db.EmployeeBean;
 import com.nttdata.practicadevara.projapp.shared.dto.EmployeeDto;
 import java.util.Collections;
 import java.util.stream.Collectors;
 import javax.ejb.EJB;
+
 
 @Stateless
 @LocalBean
@@ -49,4 +48,5 @@ public class EmployeeEjb {
         e.setName(dto.getName());
         return e;
     }
+    
 }

@@ -40,4 +40,8 @@ public class TechnologyRest extends RestClient {
         tempList.add(entry);
         return entry;
     }
+    
+       public void delete(TechnologyDto entry) {
+        tempList.remove(entry);
+    }
 }

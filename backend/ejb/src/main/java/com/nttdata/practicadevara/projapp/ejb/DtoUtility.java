@@ -51,6 +51,11 @@ public class DtoUtility {
         return new ApplicationRoleTechnologyDto(e.getId(), toDto(e.getTechnology()), toDto(e.getLevelMin()));
     }
 
+    
+     static EmployeeTechnologyDto toDto(EmployeetechnologyEntity e) {
+        return new EmployeeTechnologyDto(e.getId(), toDto(e.getTechnology()), toDto(e.getLevel()));
+    }
+
     static TechnologyDto toDto(TechnologyEntity t) {
         return new TechnologyDto(t.getId(), t.getName());
     }

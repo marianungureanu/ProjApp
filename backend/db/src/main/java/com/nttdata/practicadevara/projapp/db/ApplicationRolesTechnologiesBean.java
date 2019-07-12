@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 
+@Stateless
 public class ApplicationRolesTechnologiesBean {
     
     public static final String SCHEMA_NAME = "projappdb";

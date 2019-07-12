@@ -30,4 +30,9 @@ public class LevelBean {
     public String findAllNamedQuery() {
         return LevelEntity.FIND_ALL;
     }
+    
+    public LevelEntity create(LevelEntity lvl) {
+        manager.persist(lvl);
+        return lvl;
+    }
 }

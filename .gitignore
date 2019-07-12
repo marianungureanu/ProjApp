@@ -39,5 +39,3 @@ hs_err_pid*
 **/.idea/
 *.iml
 *.iws
-/web/src/main/webapp/WEB-INF/glassfish-web.xml
-/backend/db/nbproject/
