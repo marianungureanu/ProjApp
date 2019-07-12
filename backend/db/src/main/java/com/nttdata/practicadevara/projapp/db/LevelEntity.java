@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * @author ovidiu.hulea
  */
 @Entity
-@Table(name = "Level", schema = EmployeeEntity.SCHEMA_NAME)
+@Table(name = "level", schema = EmployeeEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = LevelEntity.FIND_ALL, query = "SELECT l FROM LevelEntity l")
 })

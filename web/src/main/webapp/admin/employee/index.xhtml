@@ -2,16 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title> Employees </title>
     </h:head>
     <h:body>
-        <ui:include src="/header.xhtml"/>
         <h3>Employee list</h3>
         <br/>
-      
+
         <f:view>
             <h:messages style="color:red;margin:8px;" showDetail="true" />
 
@@ -25,7 +23,7 @@
                         <f:facet name="header">Name</f:facet>
                         <h:outputText value="#{employee.name}"/>
                     </h:column>
-                    
+
                     <h:column>
                         <f:facet name="header">Action</f:facet>
                         <h:commandButton value="Edit" action="#{employeeMBean.startEdit}">
@@ -35,14 +33,13 @@
                             <f:setPropertyActionListener value="#{employee}" target="#{employeeMBean.selected}"/>
                         </h:commandButton>
                     </h:column>
-                    
-               </h:dataTable>
-             
-               <h:commandButton value="Create new employee" action="#{employeeMBean.startCreate}"/>
-              
-          </h:form>
+
+                </h:dataTable>
+
+                <h:commandButton value="Create new employee" action="#{employeeMBean.startCreate}"/>
+
+            </h:form>
         </f:view> 
-        <ui:include src="/goBack.xhtml"/>
     </h:body>
 </html>
 

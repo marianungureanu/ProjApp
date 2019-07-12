@@ -6,32 +6,46 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       >
-   <h:head>
+    <h:head>
+        <script name="jquery/jquery.js" library="primefaces"></script>
         <title>ProjApp: A Project - Developer matching site</title>
     </h:head>
     <h:body>
         <ui:include src="/header.xhtml"/>
         <br/>
-        <p:tabMenu activeIndex="#{param.i}">
-            <p:menuitem value="Levels" outcome="/admin/levels/index">
-                <f:param name="i" value="0" />
-            </p:menuitem>
-            <p:menuitem value="Roles" outcome="/admin/role/index">
-                <f:param name="i" value="1" />
-            </p:menuitem>
-            <p:menuitem value="Technologies" outcome="/admin/technology/index">
-                <f:param name="i" value="2" />
-            </p:menuitem>
-            <p:menuitem value="Employees" outcome="/admin/employee/index">
-                <f:param name="i" value="3" />
-            </p:menuitem>
-            <p:menuitem value="Vacant positions" outcome="/admin/application/index">
-                <f:param name="i" value="4" />
-            </p:menuitem>
-            <p:menuitem value="Subscriptions" outcome="/admin/subscription/index">
-                <f:param name="i" value="5" />
-            </p:menuitem>
-        </p:tabMenu>        
+        <p:growl id="message"></p:growl>
+        <p:tabView activeIndex="#{tabViewManagedBean.index}">
+            <p:tab title="Levels" id="level_tab">
+                <p:outputLabel>
+                    <ui:include src="levels/index.xhtml"/>
+                </p:outputLabel>
+            </p:tab>
+            <p:tab title="Roles" id="roles_tab">
+                <p:outputLabel>
+                    <ui:include src="role/index.xhtml"/>
+                </p:outputLabel>
+            </p:tab>
+            <p:tab title="Technologies" id="tech_id">
+                <p:outputLabel>
+                    <ui:include src="technology/index.xhtml"/>
+                </p:outputLabel>
+            </p:tab>
+            <p:tab title="Employees" id="emp_id">
+                <p:outputLabel>
+                    <ui:include src="employee/index.xhtml"/>
+                </p:outputLabel>
+            </p:tab>
+            <p:tab title="Vacant positions" id="app_tab">
+                <p:outputLabel>
+                    <ui:include src="application/index.xhtml"/>
+                </p:outputLabel>
+            </p:tab>
+            <p:tab title="Subscriptions" id="sub_tab">
+                <p:outputLabel>
+                    <ui:include src="subscription/index.xhtml"/>
+                </p:outputLabel>
+            </p:tab>
+        </p:tabView>
     </h:body>
 </html>
 
