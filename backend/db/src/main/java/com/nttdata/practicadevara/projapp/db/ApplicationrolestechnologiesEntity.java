@@ -17,11 +17,11 @@ import javax.persistence.Table;
  * @author sebastian.stoica
  */
 @Entity
-@Table(name = "applicationroletechnology", schema = ApplicationrolestechnologiesEntity.SCHEMA_NAME)
+@Table(name = "applicationrolestechnologies", schema = ApplicationRolesTechnologiesEntity.SCHEMA_NAME)
 @NamedQueries({
-    @NamedQuery(name = ApplicationrolestechnologiesEntity.FIND_ALL, query = "SELECT ar FROM ApplicationrolestechnologiesEntity ar")
+    @NamedQuery(name = ApplicationRolesTechnologiesEntity.FIND_ALL, query = "SELECT ar FROM ApplicationRolesTechnologiesEntity ar")
 })
-public class ApplicationrolestechnologiesEntity implements Serializable {
+public class ApplicationRolesTechnologiesEntity implements Serializable {
 
     public static final String SCHEMA_NAME = "projappdb";
     public static final String FIND_ALL = "application_roles_technologies_findAllQuery";
@@ -31,22 +31,22 @@ public class ApplicationrolestechnologiesEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JoinColumn(name = "idapplicationrole", referencedColumnName = "id")
+    @JoinColumn(name = "idApplicationRole", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ApplicationRoleEntity applicationRole;
 
-    @JoinColumn(name = "idtechnology", referencedColumnName = "id")
+    @JoinColumn(name = "idTechnology", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private TechnologyEntity technology;
 
-    @JoinColumn(name = "idlevel", referencedColumnName = "id")
+    @JoinColumn(name = "idLevelMin", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private LevelEntity levelMin;
 
-    public ApplicationrolestechnologiesEntity() {
+    public ApplicationRolesTechnologiesEntity() {
     }
 
-    public ApplicationrolestechnologiesEntity(Integer id) {
+    public ApplicationRolesTechnologiesEntity(Integer id) {
         this.id = id;
     }
 
@@ -92,10 +92,10 @@ public class ApplicationrolestechnologiesEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ApplicationrolestechnologiesEntity)) {
+        if (!(object instanceof ApplicationRolesTechnologiesEntity)) {
             return false;
         }
-        ApplicationrolestechnologiesEntity other = (ApplicationrolestechnologiesEntity) object;
+        ApplicationRolesTechnologiesEntity other = (ApplicationRolesTechnologiesEntity) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -104,6 +104,6 @@ public class ApplicationrolestechnologiesEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.nttdata.practicadevara.projapp.db.ApplicationrolestechnologiesEntity[ id=" + id + " ]";
+        return "com.nttdata.practicadevara.projapp.db.ApplicationRolesTechnologiesEntity[ id=" + id + " ]";
     }
 }

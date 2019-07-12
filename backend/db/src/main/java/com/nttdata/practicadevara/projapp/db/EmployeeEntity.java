@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "employee", schema = EmployeeEntity.SCHEMA_NAME)
+@Table(name = "Employee", schema = EmployeeEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = EmployeeEntity.FIND_ALL, query = "SELECT e FROM EmployeeEntity e"),
     @NamedQuery(name = EmployeeEntity.FIND_ONE, query = "SELECT e FROM EmployeeEntity e WHERE e.id = :id")

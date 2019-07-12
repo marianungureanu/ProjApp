@@ -5,10 +5,8 @@
  */
 package com.nttdata.practicadevara.projapp.rest.services;
 
-
-import com.nttdata.practicadevara.projapp.db.EmployeetechnologyEntity;
-import com.nttdata.practicadevara.projapp.ejb.EmployeeTechnologyEjb;
-import com.nttdata.practicadevara.projapp.shared.dto.EmployeeTechnologyDto;
+import com.nttdata.practicadevara.projapp.db.ApplicationRolesTechnologiesEntity;
+import com.nttdata.practicadevara.projapp.ejb.ApplicationRolesTechnologiesEjb;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -21,28 +19,26 @@ import javax.ejb.EJB;
 import java.util.List;
 import javax.ws.rs.core.Response;
 
-
+import com.nttdata.practicadevara.projapp.shared.dto.ApplicationRoleTechnologyDto;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.PathParam;
-
-
 /**
  *
- * @author sebastian.stoica
+ * @author iulia.rinea
  */
 
 /**
  * REST Web Service for user
  */
-@Path("/Employeetechnology")
+@Path("/applicationrolestechnologies")
 @Stateless
 @LocalBean
-public class ServicesEmpTech {
+public class ServicesAppRolesTechnologies {
     
-    @EJB
-    private EmployeeTechnologyEjb EmployeeTechnologyEjb;
+     @EJB
+    private ApplicationRolesTechnologiesEjb appRolesTechEjb;
 
     @Context
     private UriInfo context;
@@ -50,26 +46,19 @@ public class ServicesEmpTech {
     /**
      * Creates a new instance of WebServices
      */
-    public ServicesEmpTech() {
+    public ServicesAppRolesTechnologies() {
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getUserValues() {
-        List<EmployeeTechnologyDto> EmpTech = EmployeeTechnologyEjb.listRequest();
-        return Response.ok(EmpTech).build();
+        List<ApplicationRoleTechnologyDto> employees = appRolesTechEjb.list();
+        return Response.ok(employees).build();
     }
     
-    @GET
-    @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getById(@PathParam("id") int id,
-        @Context HttpServletRequest servletRequest) {
-        List<EmployeetechnologyEntity> employee = EmployeeTechnologyEjb.findById(id);
-        return Response.ok(employee).build();
-    }
-
-  
-
+    
+    
+    
+    
 }

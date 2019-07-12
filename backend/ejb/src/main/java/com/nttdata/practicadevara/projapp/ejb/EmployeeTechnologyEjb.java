@@ -5,10 +5,12 @@
  */
 package com.nttdata.practicadevara.projapp.ejb;
 
-
+import static com.nttdata.practicadevara.projapp.ejb.DtoUtility.*;
 
 import com.nttdata.practicadevara.projapp.db.EmployeetechnologyBean;
 import com.nttdata.practicadevara.projapp.db.EmployeetechnologyEntity;
+import static com.nttdata.practicadevara.projapp.ejb.DtoUtility.toDtoApplicationRolesTechnologiesList;
+import com.nttdata.practicadevara.projapp.shared.dto.EmployeeTechnologyDto;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -35,9 +37,9 @@ public class EmployeeTechnologyEjb {
     }
 
  
-    public List<EmployeetechnologyEntity> listRequest(){
+    public List<EmployeeTechnologyDto> listRequest(){
         List<EmployeetechnologyEntity> reqEntities =  employeeTechnologyDbBean.EmpTechTable();
-       return reqEntities;
+       return toDtoEmployeeTechnologiesList(reqEntities);
     }
     
     
