@@ -53,7 +53,7 @@ public class SubscriptionManagedBean implements Serializable {
     }
 
     public void reload() {
-        subscriptionList = null;
+        subscriptionList = null;    
     }
 
     public String accept() {

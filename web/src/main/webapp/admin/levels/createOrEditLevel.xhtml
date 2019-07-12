@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Level Config</title>
+    </h:head>
+    <h:body>
+        <ui:include src="/header.xhtml"/>
+        <h3>
+        Level   <h:outputText value="edit" rendered="#{levelMBean.isEdit}"/>
+                <h:outputText value="create" rendered="#{levelMBean.isCreate}"/>
+        </h3>
+		
+        <br/>
+		
+        <f:view>
+            <h:form id="levelCreateOrEditForm">
+                Name:<h:inputText  value="#{levelMBean.selected.name}"/>
+                <br/>
+                <h:commandButton value="Edit"   action="#{levelMBean.edit}"   rendered="#{levelMBean.isEdit}"/>
+                <h:commandButton value="Create" action="#{levelMBean.create}" rendered="#{levelMBean.isCreate}"/>
+            </h:form>
+        </f:view> 
+		
+        <ui:include src="/goBack.xhtml"/>
+    </h:body>
+</html>
+
