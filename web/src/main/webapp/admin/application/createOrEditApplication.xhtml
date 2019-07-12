@@ -17,10 +17,11 @@
         <br/>
 
         <f:view>
-            <h:form id="applicationRoleCreateOrEdit">
-                Name:<h:inputText  value="#{applicationMBean.selected.name}"/>
+            <h:form id="applicationRoleCreateOrEdit" class="appform">
+                Name:<h:inputText  value="#{applicationMBean.selected.name}" class="inputn"/>
                 <br/>
-                Description:<h:inputTextarea value="#{applicationMBean.selected.description}" rows="7" cols="60"/>
+                Description:<h:inputTextarea value="#{applicationMBean.selected.description}" rows="7" cols="60" 
+                                             class="inputd"/>
                 <br/>
                 <ui:repeat value="#{applicationMBean.selected.roles}" var="arole">
                     <table style="border: 0">
@@ -41,7 +42,7 @@
                             </td></tr></table>
                 </ui:repeat>
                 <br/>
-                Oracle:  <h:commandButton value="Delete"   action="#{applicationMBean.reload}"/>
+                Oracle:  <h:commandButton value="Delete"   action="#{applicationMBean.reload}" class="tbutton"/>
                 <h:selectOneMenu>
                     <f:selectItem itemValue="1"/>
                     <f:selectItem itemValue="2"/>
@@ -50,7 +51,7 @@
                     <f:selectItem itemValue="5"/>
                 </h:selectOneMenu>
                 <br/>
-                HTML:  <h:commandButton value="Delete"   action="#{applicationMBean.reload}"/>
+                HTML:  <h:commandButton value="Delete"   action="#{applicationMBean.reload}" class="tbutton"/>
                 <h:selectOneMenu>
                     <f:selectItem itemValue="1"/>
                     <f:selectItem itemValue="2"/>
@@ -60,8 +61,8 @@
                 </h:selectOneMenu>
 
                 <br/>
-                <h:commandButton value="Edit"   action="#{applicationMBean.edit}"   rendered="#{applicationMBean.isEdit}"/>
-                <h:commandButton value="Create" action="#{applicationMBean.create}" rendered="#{applicationMBean.isCreate}"/>
+                <h:commandButton value="Edit"   action="#{applicationMBean.edit}"   rendered="#{applicationMBean.isEdit}" class="cbutton"/>
+                <h:commandButton value="Create" action="#{applicationMBean.create}" rendered="#{applicationMBean.isCreate}" class="cbutton"/>
                 <f:view id="goBack">
                     <h:form id="goBackForm">
                         <h:commandButton value="Go Back" action="index" type="submit"/>

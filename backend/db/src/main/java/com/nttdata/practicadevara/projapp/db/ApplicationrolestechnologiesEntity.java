@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @author sebastian.stoica
  */
 @Entity
-@Table(name = "applicationroletechnology", schema = ApplicationrolestechnologiesEntity.SCHEMA_NAME)
+@Table(name = "applicationrolestechnologies", schema = ApplicationrolestechnologiesEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = ApplicationrolestechnologiesEntity.FIND_ALL, query = "SELECT ar FROM ApplicationrolestechnologiesEntity ar")
 })
@@ -39,7 +39,7 @@ public class ApplicationrolestechnologiesEntity implements Serializable {
     @ManyToOne(optional = false)
     private TechnologyEntity technology;
 
-    @JoinColumn(name = "idlevel", referencedColumnName = "id")
+    @JoinColumn(name = "idlevelmin", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private LevelEntity levelMin;
 

@@ -43,6 +43,9 @@
                         <h:commandButton value="Edit" action="#{applicationMBean.startEdit}">
                             <f:setPropertyActionListener target="#{applicationMBean.selected}" value="#{app}"/>
                         </h:commandButton>
+                        <h:commandButton value="Delete" action="#{applicationMBean.delete(entry)}">
+                            <f:setPropertyActionListener target="#{applicationMBean.selected}" value="#{app}"/>
+                        </h:commandButton>
                     </h:column>
                 </h:dataTable>
                 <h:commandButton value="New Application" action="#{applicationMBean.startCreate}"/>

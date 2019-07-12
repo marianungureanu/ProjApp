@@ -86,6 +86,11 @@ public class ApplicationManagedBean implements Serializable {
         isCreate = false;
         return APPLICATIONROLE_XHTML;
     }
+    
+    public void delete(ApplicationDto entry) {
+        applicationList.remove(entry);
+        init();
+    }
 
 
     public String toApplicationRoleIndex() {

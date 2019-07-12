@@ -36,4 +36,10 @@ public class ApplicationEjb {
         ApplicationEntity entity = applicationDbBean.update(e);
         return toDto(entity);
     }
+    
+    public ApplicationDto delete(ApplicationDto dto){
+        ApplicationEntity e = fromDto(dto);
+        ApplicationEntity entity = applicationDbBean.delete(e);
+        return toDto(entity);
+    }
 }

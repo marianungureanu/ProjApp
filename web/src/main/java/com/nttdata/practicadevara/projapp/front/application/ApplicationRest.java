@@ -10,9 +10,9 @@ import javax.ws.rs.core.Response;
 
 @Stateless
 public class ApplicationRest extends RestClient {
-
+ 
     private static final String PATH_APPLICATION = "application";
-
+ 
     public List<ApplicationDto> listApplications() throws javax.ws.rs.ClientErrorException {
         Response resp = super.path(PATH_APPLICATION).request(MediaType.APPLICATION_JSON).get(Response.class);
         List<ApplicationDto> ret = resp.readEntity(new GenericType<List<ApplicationDto>>() {
@@ -30,5 +30,10 @@ public class ApplicationRest extends RestClient {
         Response resp = super.path(PATH_APPLICATION).request(MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(entry, MediaType.APPLICATION_JSON), Response.class);
         ApplicationDto ret = resp.readEntity(ApplicationDto.class);
         return ret;
+    }
+
+    public Response delete(ApplicationDto entry) {
+        Response resp = super.path(PATH_APPLICATION + "/" + entry.getId()).request(MediaType.APPLICATION_JSON).delete();
+        return resp;
     }
 }

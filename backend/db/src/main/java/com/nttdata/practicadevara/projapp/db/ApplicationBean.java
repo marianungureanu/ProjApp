@@ -4,6 +4,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -21,6 +22,9 @@ public class ApplicationBean {
 
     public List<ApplicationEntity> findAll() {
         return manager.createNamedQuery(findAllNamedQuery()).getResultList();
+//        TypedQuery<ApplicationEntity> query = manager.createQuery("SELECT emp FROM EmployeetechnologyEntity emp", ApplicationEntity.class);
+//          List<ApplicationEntity> resultList = query.getResultList();
+//       return resultList;
     }
 
     public String findAllNamedQuery() {
@@ -47,6 +51,10 @@ public class ApplicationBean {
     public ApplicationEntity update(ApplicationEntity entity) {
         checkExistance(entity);
         return updateWithoutExistanceCheck(entity);
+    }
+    
+    public ApplicationEntity delete(ApplicationEntity entity){
+       return entity;
     }
 
     private ApplicationEntity updateWithoutExistanceCheck(ApplicationEntity entity) {

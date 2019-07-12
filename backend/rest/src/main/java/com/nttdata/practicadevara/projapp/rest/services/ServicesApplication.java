@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -55,5 +56,12 @@ public class ServicesApplication {
     @Consumes(MediaType.APPLICATION_JSON)
     public ApplicationDto update(ApplicationDto app) {
         return applicationEjb.update(app);
+    }
+    
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public ApplicationDto delete(ApplicationDto app) {
+        return applicationEjb.delete(app);
     }
 }
