@@ -1,10 +1,17 @@
 package com.nttdata.practicadevara.projapp.front.application;
 
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationDto;
+import com.nttdata.practicadevara.projapp.shared.dto.ApplicationRoleDto;
+import com.nttdata.practicadevara.projapp.shared.dto.ApplicationRoleTechnologyDto;
+import com.nttdata.practicadevara.projapp.shared.dto.LevelDto;
+import com.nttdata.practicadevara.projapp.shared.dto.RoleDto;
+import com.nttdata.practicadevara.projapp.shared.dto.TechnologyDto;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 @SessionScoped
@@ -50,17 +57,27 @@ public class ApplicationManagedBean implements Serializable {
         return isEdit;
     }
 
+    public boolean isIsIndex() {
+        return !isCreate && !isEdit;
+    }
+
     public String startEdit() {
         isEdit = true;
         isCreate = false;
-        return CREATE_OR_EDIT_XHTML;
+        return "";
     }
 
     public String startCreate() {
         isEdit = false;
         isCreate = true;
         selected = new ApplicationDto();
-        return CREATE_OR_EDIT_XHTML;
+        return "";
+    }
+
+    public String startIndex() {
+        isEdit = false;
+        isCreate = false;
+        return "";
     }
 
     public ApplicationDto getSelected() {
@@ -70,28 +87,51 @@ public class ApplicationManagedBean implements Serializable {
     public void setSelected(ApplicationDto selectApplication) {
         this.selected = selectApplication;
     }
-    
+
     public String edit() {
-        restClient.update(selected);
-        selected = null;
-        reload();
-        isEdit = false;
-        return APPLICATIONROLE_XHTML;
+        try {
+            restClient.update(selected);
+            selected = null;
+            reload();
+            isEdit = false;
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot update application: "+e.getMessage()));
+        }
+        return "";
     }
 
     public String create() {
-        restClient.create(selected);
-        selected = null;
-        reload();
-        isCreate = false;
-        return APPLICATIONROLE_XHTML;
-    }
-    
-    public void delete(ApplicationDto entry) {
-        applicationList.remove(entry);
-        init();
+        try {
+            restClient.create(selected);
+            selected = null;
+            reload();
+            isCreate = false;
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot create application: "+e.getMessage()));
+        }
+
+        return "";
     }
 
+    public void delete(ApplicationDto entry) {
+        try {
+            applicationList.remove(entry);
+            init();
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot delete application "+e.getMessage()));
+        }
+
+    }
+
+    public void newRole() {
+        ApplicationRoleDto newRole = new ApplicationRoleDto();
+        newRole.setRole(new RoleDto());
+        ApplicationRoleTechnologyDto appRoleTech = new ApplicationRoleTechnologyDto();
+        appRoleTech.setMinLevel(new LevelDto());
+        appRoleTech.setTechnology(new TechnologyDto());
+        newRole.getTechnologies().add(appRoleTech);
+        selected.getRoles().add(newRole);
+    }
 
     public String toApplicationRoleIndex() {
         return APPLICATIONROLE_XHTML;

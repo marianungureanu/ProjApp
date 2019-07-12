@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nttdata.practicadevara.projapp.db;
 
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
 
 @Stateless
 public class RoleBean {
@@ -26,8 +18,23 @@ public class RoleBean {
         return manager.createNamedQuery(findAllNamedQuery()).getResultList();
     }
 
-    
+    public RoleEntity findById(int id) throws DbException {
+        RoleEntity entity = (RoleEntity) manager
+                .createNamedQuery(findByIdNamedQuery())
+                .setParameter(ApplicationEntity.ID_PARAM, id)
+                .getSingleResult();
+        if (entity == null) {
+            System.out.println("Role "+id +" not found thrown ex");
+            throw new DbException("NOT FOUND RoleEntity " + id);
+        }
+        return entity;
+    }
+
     public String findAllNamedQuery() {
         return RoleEntity.FIND_ALL;
+    }
+
+    public String findByIdNamedQuery() {
+        return RoleEntity.FIND_BY_ID;
     }
 }

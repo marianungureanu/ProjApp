@@ -17,13 +17,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "level", schema = EmployeeEntity.SCHEMA_NAME)
 @NamedQueries({
-    @NamedQuery(name = LevelEntity.FIND_ALL, query = "SELECT l FROM LevelEntity l")
+    @NamedQuery(name = LevelEntity.FIND_ALL, query = "SELECT l FROM LevelEntity l"),
+    @NamedQuery(name = LevelEntity.FIND_BY_ID, query = "SELECT l FROM LevelEntity l where l.id = :id")
 })
 public class LevelEntity implements Serializable {
 
     //private static final long serialVersionUID = 117223295272084434L;
     public static final String SCHEMA_NAME = "projappdb";
     public static final String FIND_ALL = "level_findAllQuery";
+    public static final String FIND_BY_ID = "level_findByIdQuery";
 
     @Id
     @Column(name = "id", unique = true)
