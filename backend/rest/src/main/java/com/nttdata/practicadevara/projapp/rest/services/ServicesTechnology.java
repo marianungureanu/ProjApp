@@ -22,6 +22,7 @@ import com.nttdata.practicadevara.projapp.shared.dto.TechnologyDto;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 
 /**
@@ -65,4 +66,12 @@ public class ServicesTechnology {
         TechnologyDto technology = technologyEjb.findById(id);
         return Response.ok(technology).build();
     }
-}
+    
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response postnewTechnology(TechnologyDto e) {
+        TechnologyDto technology = technologyEjb.create(e);
+        return Response.ok(technology).build();
+    }
+ }

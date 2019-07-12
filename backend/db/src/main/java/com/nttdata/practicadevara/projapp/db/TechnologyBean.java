@@ -33,7 +33,12 @@ public class TechnologyBean {
         TechnologyEntity techEntity = q.getSingleResult();
         return techEntity;
     }
-
+     
+    public TechnologyEntity create(TechnologyEntity entity) {
+        manager.persist(entity);
+        return entity;
+    }
+     
     public String findAllNamedQuery() {
         return TechnologyEntity.FIND_ALL;
     }
