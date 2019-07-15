@@ -41,3 +41,5 @@ hs_err_pid*
 *.iws
 **/nbactions.xml
 
+/web/nbactions.xml
+/backend/ear/nb-configuration.xml
