@@ -16,6 +16,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -26,6 +27,7 @@ import javax.ws.rs.core.UriInfo;
 @Stateless
 @LocalBean
 public class ServicesApplication {
+
     @EJB
     private ApplicationEjb applicationEjb;
 
@@ -45,8 +47,8 @@ public class ServicesApplication {
         List<ApplicationDto> apps = applicationEjb.list();
         return Response.ok(apps).build();
     }
-    
-    @PUT
+
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(ApplicationDto app) {
@@ -54,7 +56,7 @@ public class ServicesApplication {
         return Response.ok(res).build();
     }
 
-    @POST
+    @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public ApplicationDto update(ApplicationDto app) throws BackendException {
@@ -65,15 +67,12 @@ public class ServicesApplication {
             throw new BackendException(ex.getMessage());
         }
     }
-    
+
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void delete(ApplicationDto app) throws BackendException {
-        try {
-            applicationEjb.delete(app);
-        } catch (DbException ex) {
-            Logger.getLogger(ServicesApplication.class.getName()).log(Level.SEVERE, null, ex);
-            throw new BackendException(ex.getMessage());
-        }
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") int id) {
+        applicationEjb.delete(id);
+        return Response.ok().build();
     }
 }

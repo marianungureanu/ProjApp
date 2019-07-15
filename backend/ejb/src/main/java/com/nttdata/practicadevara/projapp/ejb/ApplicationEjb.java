@@ -59,11 +59,10 @@ public class ApplicationEjb {
         return toDto(e);
     }
 
-    public void delete(ApplicationDto dto) throws DbException {
-        ApplicationEntity fromDb = applicationDbBean.findById(dto.getId());
-        applicationDbBean.delete(fromDb);
+    public void delete(int id) {
+        applicationDbBean.delete(id);
     }
-
+ 
     private void copyInto(ApplicationDto dto, ApplicationEntity e) throws DbException {
         e.setName(dto.getName());
         e.setDescr(dto.getDescription());
