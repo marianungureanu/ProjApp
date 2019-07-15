@@ -34,6 +34,7 @@ public class LevelRest extends RestClient {
         
         Response resp = super.path("level").request(MediaType.APPLICATION_JSON).get(Response.class);
         tempList.addAll(resp.readEntity(new GenericType<List<LevelDto>>(){}));
+        
     }
 
     public List<LevelDto> listLevel() {
@@ -48,5 +49,12 @@ public class LevelRest extends RestClient {
         entry.setId(tempIndex++);
         tempList.add(entry);
         return entry;
+    }
+    
+    public LevelDto delete(LevelDto entry){
+        entry.setId(tempIndex++);
+        tempList.add(entry);
+        return entry;
+        
     }
 }

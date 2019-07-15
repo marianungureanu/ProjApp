@@ -27,7 +27,6 @@ public class LevelManagedBean implements Serializable {
 
     @EJB
     private LevelRest levelRest;
-
     private LevelDto selected;
     private List<LevelDto> levelList;
     private boolean isCreate;
@@ -71,6 +70,20 @@ public class LevelManagedBean implements Serializable {
         return CREATE_OR_EDIT_XHTML;
     }
 
+    public String create() {
+        levelRest.create(selected);
+        selected = null;
+        reload();
+        isCreate = false;
+        return LEVEL_XHTML;
+    }
+    public String delete(){
+        levelRest.delete(selected);
+        selected=null;
+        reload();
+        isCreate=false;
+        return LEVEL_XHTML;
+    }
     public boolean isIsCreate() {
         return isCreate;
     }
