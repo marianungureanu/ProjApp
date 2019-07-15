@@ -33,35 +33,38 @@ public class ApplicationEjb {
     private ApplicationBean applicationDbBean;
 
     @EJB
-    private RoleBean roleDbBean;
+    private TechnologyBean technologyBean;
 
     @EJB
-    private TechnologyBean technologyDbBean;
+    private LevelBean levelBean;
 
     @EJB
-    private LevelBean levelDbBean;
+    private RoleBean roleBean;
 
     public List<ApplicationDto> list() {
         List<ApplicationEntity> entities = applicationDbBean.findAll();
         return toDtoAppList(entities);
     }
 
+    public ApplicationDto findById(int id) throws DbException  {
+        ApplicationEntity entity = applicationDbBean.findById(id);
+        return DtoUtility.toDto(entity);
+    }
+
     public ApplicationDto create(ApplicationDto dto) {
         ApplicationEntity e = fromDto(dto);
-        ApplicationEntity entity = applicationDbBean.create(e);
+        applicationDbBean.create(e);
+        return DtoUtility.toDto(e);
+    }
+
+    public void delete(int id) {
+        applicationDbBean.delete(id);
+    }
+
+    public ApplicationDto update(ApplicationDto dto) {
+        ApplicationEntity e = fromDto(dto);
+        ApplicationEntity entity = applicationDbBean.update(e);
         return toDto(entity);
-    }
-
-    public ApplicationDto update(ApplicationDto dto) throws DbException {
-        ApplicationEntity entity = applicationDbBean.findById(dto.getId());
-        copyInto(dto, entity);
-        ApplicationEntity e = applicationDbBean.update(entity);
-        return toDto(e);
-    }
-
-    public void delete(ApplicationDto dto) throws DbException {
-        ApplicationEntity fromDb = applicationDbBean.findById(dto.getId());
-        applicationDbBean.delete(fromDb);
     }
 
     private void copyInto(ApplicationDto dto, ApplicationEntity e) throws DbException {
@@ -75,14 +78,14 @@ public class ApplicationEjb {
                 if (appRoleDto.getRole() == null) {
                     throw new DbException("ERROR: there is ApplicationRoleDto.role = NULL");
                 } else {
-                    RoleEntity role = roleDbBean.findById(appRoleDto.getRole().getId());
+                    RoleEntity role = roleBean.findById(appRoleDto.getRole().getId());
                     appRole.setRole(role);
                     for (ApplicationRoleTechnologyDto arTechDto : appRoleDto.getTechnologies()) {
                         ApplicationRolesTechnologiesEntity arTechEntity = new ApplicationRolesTechnologiesEntity();
                         arTechEntity.setApplicationRole(appRole);
-                        TechnologyEntity techEntity = technologyDbBean.findById(arTechDto.getTechnology().getId());
+                        TechnologyEntity techEntity = technologyBean.findById(arTechDto.getTechnology().getId());
                         arTechEntity.setTechnology(techEntity);
-                        LevelEntity levelEntity = levelDbBean.findById(arTechDto.getMinLevel().getId());
+                        LevelEntity levelEntity = levelBean.findById(arTechDto.getMinLevel().getId());
                         arTechEntity.setLevelMin(levelEntity);
                         appRole.getTechnologies().add(fromDto(arTechDto));
                     }

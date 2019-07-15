@@ -4,7 +4,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
 /**
  *
@@ -37,8 +37,8 @@ public class ApplicationBean {
                 .createNamedQuery(findByIdNamedQuery())
                 .setParameter(ApplicationEntity.ID_PARAM, id)
                 .getSingleResult();
-        if(entity == null) {
-            throw new DbException("NOT FOUND ApplicationEntity "+id);
+        if (entity == null) {
+            throw new DbException("NOT FOUND ApplicationEntity " + id);
         }
         return entity;
     }
@@ -49,17 +49,21 @@ public class ApplicationBean {
         return entity;
     }
 
-    public ApplicationEntity update(ApplicationEntity entity) throws DbException {
-        checkExistance(entity);
-        return updateWithoutExistanceCheck(entity);
+    public void delete(int id) {
+        Query query = manager.createQuery("Delete FROM ApplicationEntity app WHERE app.id=:id ");
+        query.setParameter("id", id);
+        query.executeUpdate();
+        manager.flush();
     }
-    
-    public void delete(ApplicationEntity entity){
-       manager.remove(entity);
+
+    public ApplicationEntity update(ApplicationEntity entity) {
+        // TODO: to be implemented
+        return null;
     }
 
     private ApplicationEntity updateWithoutExistanceCheck(ApplicationEntity entity) {
         entity = manager.merge(entity);
+        manager.flush();
         return entity;
     }
 
