@@ -20,19 +20,19 @@ public class ApplicationRest extends RestClient {
         return ret;
     }
 
-    public ApplicationDto update(ApplicationDto entry) {
+    public ApplicationDto update(ApplicationDto entry) throws javax.ws.rs.ClientErrorException {
         Response resp = super.path(PATH_APPLICATION).request(MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(entry, MediaType.APPLICATION_JSON), Response.class);
         ApplicationDto ret = resp.readEntity(ApplicationDto.class);
         return ret;
     }
 
-    public ApplicationDto create(ApplicationDto entry) {
+    public ApplicationDto create(ApplicationDto entry) throws javax.ws.rs.ClientErrorException {
         Response resp = super.path(PATH_APPLICATION).request(MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(entry, MediaType.APPLICATION_JSON), Response.class);
         ApplicationDto ret = resp.readEntity(ApplicationDto.class);
         return ret;
     }
 
-    public Response delete(ApplicationDto entry) {
+    public Response delete(ApplicationDto entry) throws javax.ws.rs.ClientErrorException {
         Response resp = super.path(PATH_APPLICATION + "/" + entry.getId()).request(MediaType.APPLICATION_JSON).delete();
         return resp;
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nttdata.practicadevara.projapp.db;
 
 import java.util.List;
@@ -27,12 +22,29 @@ public class LevelBean {
         return manager.createNamedQuery(findAllNamedQuery()).getResultList();
     }
 
+    public LevelEntity create(LevelEntity lvl) {
+        manager.persist(lvl);
+        manager.flush();
+        return lvl;
+    }
+    
+
+    public LevelEntity findById(int id) throws DbException {
+        LevelEntity entity = (LevelEntity) manager
+                .createNamedQuery(findByIdNamedQuery(), LevelEntity.class)
+                .setParameter(ApplicationEntity.ID_PARAM, id)
+                .getSingleResult();
+        if (entity == null) {
+            throw new DbException("NOT FOUND RoleEntity " + id);
+        }
+        return entity;
+    }
+
     public String findAllNamedQuery() {
         return LevelEntity.FIND_ALL;
     }
-    
-    public LevelEntity create(LevelEntity lvl) {
-        manager.persist(lvl);
-        return lvl;
+
+    public String findByIdNamedQuery() {
+        return LevelEntity.FIND_BY_ID;
     }
 }

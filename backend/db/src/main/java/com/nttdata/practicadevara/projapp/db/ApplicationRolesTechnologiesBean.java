@@ -6,18 +6,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 
-public class ApplicationrolestechnologiesBean {
+public class ApplicationRolesTechnologiesBean {
     
     public static final String SCHEMA_NAME = "projappdb";
 
     @PersistenceContext(unitName = "projapp-persistenceunit") //see main/resources/META-INF/peristence.xml
     protected EntityManager manager;
 
-    public List<ApplicationrolestechnologiesEntity> findAll() {
+    public List<ApplicationRolesTechnologiesEntity> findAll() {
         return manager.createNamedQuery(findAllNamedQuery()).getResultList();
     }
 
     public String findAllNamedQuery() {
-        return ApplicationrolestechnologiesEntity.FIND_ALL;
+        return ApplicationRolesTechnologiesEntity.FIND_ALL;
     }
 }

@@ -8,70 +8,62 @@
         <title>Vacant Position Config</title>
     </h:head>
     <h:body>
-        <ui:include src="/header.xhtml"/>
         <h3>
-            Employee   <h:outputText value="edit" rendered="#{applicationMBean.isEdit}"/>
-            <h:outputText value="create" rendered="#{applicationMBean.isCreate}"/>
+            <h:outputText value="Editing application" rendered="#{applicationMBean.isEdit}"/>
+            <h:outputText value="Create new application" rendered="#{applicationMBean.isCreate}"/>
         </h3>
 
         <br/>
-
         <f:view>
             <h:form id="applicationRoleCreateOrEdit" class="appform">
-                Name:<h:inputText  value="#{applicationMBean.selected.name}" class="inputn"/>
-                <br/>
-                Description:<h:inputTextarea value="#{applicationMBean.selected.description}" rows="7" cols="60" 
-                                             class="inputd"/>
-                <br/>
-                <ui:repeat value="#{applicationMBean.selected.roles}" var="arole">
-                    <table style="border: 0">
-                        <tr><td class="noborder">
-                                Role: <h:inputText value="#{arole.role.name}"/>
-                            </td>
-                            <td class="noborder">
-                                Technologies/ Skills:
-                                <ui:repeat value="#{arole.technologies}"  var="atech">
-                                    <br/>
-                                    <h:selectOneMenu value="#{atech.technology.id}">
-                                        <f:selectItems value="#{technologyMBean.technologies}" var="tehchnologyDto" itemLabel="#{tehchnologyDto.name}" itemValue="#{tehchnologyDto.id}" />
-                                    </h:selectOneMenu>
-                                    
-                                    <!-- aici trebuie introdus selectOneMenu cu lista de nivele din viitorul levelMBean -->
-                                    : #{atech.minLevel.name}
-                                </ui:repeat>
-                            </td></tr></table>
-                </ui:repeat>
-                <br/>
-                Oracle:  <h:commandButton value="Delete"   action="#{applicationMBean.reload}" class="tbutton"/>
-                <h:selectOneMenu>
-                    <f:selectItem itemValue="1"/>
-                    <f:selectItem itemValue="2"/>
-                    <f:selectItem itemValue="3"/>
-                    <f:selectItem itemValue="4"/>
-                    <f:selectItem itemValue="5"/>
-                </h:selectOneMenu>
-                <br/>
-                HTML:  <h:commandButton value="Delete"   action="#{applicationMBean.reload}" class="tbutton"/>
-                <h:selectOneMenu>
-                    <f:selectItem itemValue="1"/>
-                    <f:selectItem itemValue="2"/>
-                    <f:selectItem itemValue="3"/>
-                    <f:selectItem itemValue="4"/>
-                    <f:selectItem itemValue="5"/>
-                </h:selectOneMenu>
+
+                <table>
+                    <tr>
+                        <td><label>Name:</label></td>
+                        <td><h:inputText  value="#{applicationMBean.selected.name}" class="inputn"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>Description:</label></td>
+                        <td><h:inputTextarea value="#{applicationMBean.selected.description}" rows="7" cols="60" class="inputd"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <ui:repeat value="#{applicationMBean.selected.roles}" var="arole">
+                                <table style="border: 0">
+                                    <tr><td class="noborder">
+                                            Role: <h:selectOneMenu value="#{arole.role.id}">
+                                                <f:selectItems value="#{roleMBean.roles}" var="roleDto" itemLabel="#{roleDto.name}" itemValue="#{roleDto.id}" />
+                                            </h:selectOneMenu>
+                                        </td>
+                                        <td class="noborder">
+                                            Technologies/ Skills:
+                                            <ui:repeat value="#{arole.technologies}"  var="atech">
+                                                <br/>
+                                                <h:selectOneMenu value="#{atech.technology.id}">
+                                                    <f:selectItems value="#{technologyMBean.technologies}" var="tehchnologyDto" itemLabel="#{tehchnologyDto.name}" itemValue="#{tehchnologyDto.id}" />
+                                                </h:selectOneMenu>
+
+                                                <!-- aici trebuie introdus selectOneMenu cu lista de nivele din viitorul levelMBean -->
+                                                : #{atech.minLevel.name}
+                                            </ui:repeat>
+                                        </td></tr></table>
+                            </ui:repeat>
+                            <h:commandButton value="New role"  action="#{applicationMBean.newRole}"  class="cbutton"/>
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" class="noborder">
+                            <div align="right">
+                                <h:commandButton value="Edit"   action="#{applicationMBean.edit}"   rendered="#{applicationMBean.isEdit}" class="cbutton"/>
+                                <h:commandButton value="Create" action="#{applicationMBean.create}" rendered="#{applicationMBean.isCreate}" class="cbutton"/>
+                                <h:commandButton value="Go Back" action="#{applicationMBean.startIndex}" type="submit"/>
+                                <div class="separator"> </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
 
                 <br/>
-                <h:commandButton value="Edit"   action="#{applicationMBean.edit}"   rendered="#{applicationMBean.isEdit}" class="cbutton"/>
-                <h:commandButton value="Create" action="#{applicationMBean.create}" rendered="#{applicationMBean.isCreate}" class="cbutton"/>
-                <f:view id="goBack">
-                    <h:form id="goBackForm">
-                        <h:commandButton value="Go Back" action="index" type="submit"/>
-                    </h:form>
-                    <div class="separator"> </div>
-                </f:view>
             </h:form>
         </f:view> 
-
-        <ui:include src="/goBack.xhtml"/>
     </h:body>
 </html>

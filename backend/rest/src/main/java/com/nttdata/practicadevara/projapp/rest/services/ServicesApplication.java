@@ -1,8 +1,12 @@
 package com.nttdata.practicadevara.projapp.rest.services;
 
+import com.nttdata.practicadevara.projapp.db.DbException;
 import com.nttdata.practicadevara.projapp.ejb.ApplicationEjb;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationDto;
+import com.nttdata.practicadevara.projapp.shared.dto.BackendException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -42,7 +46,6 @@ public class ServicesApplication {
         return Response.ok(apps).build();
     }
     
-    
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -54,14 +57,23 @@ public class ServicesApplication {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public ApplicationDto update(ApplicationDto app) {
-        return applicationEjb.update(app);
+    public ApplicationDto update(ApplicationDto app) throws BackendException {
+        try {
+            return applicationEjb.update(app);
+        } catch (DbException ex) {
+            Logger.getLogger(ServicesApplication.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BackendException(ex.getMessage());
+        }
     }
     
     @DELETE
-    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public ApplicationDto delete(ApplicationDto app) {
-        return applicationEjb.delete(app);
+    public void delete(ApplicationDto app) throws BackendException {
+        try {
+            applicationEjb.delete(app);
+        } catch (DbException ex) {
+            Logger.getLogger(ServicesApplication.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BackendException(ex.getMessage());
+        }
     }
 }

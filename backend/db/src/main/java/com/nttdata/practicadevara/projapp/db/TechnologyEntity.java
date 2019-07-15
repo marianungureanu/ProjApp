@@ -63,6 +63,6 @@ public class TechnologyEntity implements Serializable{
     @OneToMany
      private List<EmployeetechnologyEntity> employeeTechnologyObject;
    
-     private List<ApplicationrolestechnologiesEntity> appRolesTechnology;
+     private List<ApplicationRolesTechnologiesEntity> appRolesTechnology;
     
 }

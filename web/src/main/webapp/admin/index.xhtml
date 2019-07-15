@@ -11,10 +11,11 @@
         <title>ProjApp: A Project - Developer matching site</title>
     </h:head>
     <h:body>
-        <ui:include src="/header.xhtml"/>
+        <ui:include src="/admin/headeradmin.xhtml"/>
         <br/>
         <p:growl id="message"></p:growl>
         <p:tabView activeIndex="#{tabViewManagedBean.index}">
+            <p:ajax event="tabChange" partialSubmit="true" />
             <p:tab title="Levels" id="level_tab">
                 <p:outputLabel>
                     <ui:include src="levels/index.xhtml"/>
@@ -36,8 +37,11 @@
                 </p:outputLabel>
             </p:tab>
             <p:tab title="Vacant positions" id="app_tab">
-                <p:outputLabel>
+                <p:outputLabel rendered="#{applicationMBean.isIndex}">
                     <ui:include src="application/index.xhtml"/>
+                </p:outputLabel>
+                <p:outputLabel  rendered="#{applicationMBean.isCreate or applicationMBean.isEdit}">
+                    <ui:include src="application/createOrEditApplication.xhtml"/>
                 </p:outputLabel>
             </p:tab>
             <p:tab title="Subscriptions" id="sub_tab">

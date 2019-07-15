@@ -22,14 +22,12 @@ import javax.ejb.EJB;
 import java.util.List;
 import javax.ws.rs.core.Response;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-
 
 /**
  *
@@ -39,8 +37,8 @@ import javax.ejb.Stateless;
 @Stateless
 @LocalBean
 public class ServicesSubscription {
-    
-      @EJB
+
+    @EJB
     private SubscriptionEjb subscriptionEjb;
 
     @Context
@@ -56,10 +54,8 @@ public class ServicesSubscription {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response getSubscriptions(@PathParam("id")  int appRoleId, @QueryParam("employeeId") int employeeId) {
+    public Response getSubscriptions(@PathParam("id") int appRoleId, @QueryParam("employeeId") int employeeId) {
         List<SubscriptionDto> subscription = subscriptionEjb.list(appRoleId, employeeId);
         return Response.ok(subscription).build();
     }
-
- 
 }

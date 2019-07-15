@@ -22,9 +22,6 @@ public class ApplicationBean {
 
     public List<ApplicationEntity> findAll() {
         return manager.createNamedQuery(findAllNamedQuery()).getResultList();
-//        TypedQuery<ApplicationEntity> query = manager.createQuery("SELECT emp FROM EmployeetechnologyEntity emp", ApplicationEntity.class);
-//          List<ApplicationEntity> resultList = query.getResultList();
-//       return resultList;
     }
 
     public String findAllNamedQuery() {
@@ -35,11 +32,15 @@ public class ApplicationBean {
         return ApplicationEntity.FIND_BY_ID;
     }
 
-    public ApplicationEntity findById(int id) {
-        return (ApplicationEntity) manager
+    public ApplicationEntity findById(int id) throws DbException {
+        ApplicationEntity entity = (ApplicationEntity) manager
                 .createNamedQuery(findByIdNamedQuery())
                 .setParameter(ApplicationEntity.ID_PARAM, id)
                 .getSingleResult();
+        if(entity == null) {
+            throw new DbException("NOT FOUND ApplicationEntity "+id);
+        }
+        return entity;
     }
 
     public ApplicationEntity create(ApplicationEntity entity) {
@@ -48,13 +49,13 @@ public class ApplicationBean {
         return entity;
     }
 
-    public ApplicationEntity update(ApplicationEntity entity) {
+    public ApplicationEntity update(ApplicationEntity entity) throws DbException {
         checkExistance(entity);
         return updateWithoutExistanceCheck(entity);
     }
     
-    public ApplicationEntity delete(ApplicationEntity entity){
-       return entity;
+    public void delete(ApplicationEntity entity){
+       manager.remove(entity);
     }
 
     private ApplicationEntity updateWithoutExistanceCheck(ApplicationEntity entity) {
@@ -62,13 +63,10 @@ public class ApplicationBean {
         return entity;
     }
 
-    private ApplicationEntity checkExistance(ApplicationEntity entity) {
+    private ApplicationEntity checkExistance(ApplicationEntity entity) throws DbException {
         ApplicationEntity object = null;
         if (entity != null) {
             object = findById(entity.getId());
-            if (object == null) {
-                //throw new DBException("Entity not found");
-            }
         }
         return object;
     }

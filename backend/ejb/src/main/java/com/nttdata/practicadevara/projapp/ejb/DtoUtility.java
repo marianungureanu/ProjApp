@@ -2,7 +2,7 @@ package com.nttdata.practicadevara.projapp.ejb;
 
 import com.nttdata.practicadevara.projapp.db.ApplicationEntity;
 import com.nttdata.practicadevara.projapp.db.ApplicationRoleEntity;
-import com.nttdata.practicadevara.projapp.db.ApplicationrolestechnologiesEntity;
+import com.nttdata.practicadevara.projapp.db.ApplicationRolesTechnologiesEntity;
 import com.nttdata.practicadevara.projapp.db.EmployeeEntity;
 import com.nttdata.practicadevara.projapp.db.LevelEntity;
 import com.nttdata.practicadevara.projapp.db.RoleEntity;
@@ -48,7 +48,7 @@ public class DtoUtility {
         return new RoleDto(e.getId(), e.getName());
     }
 
-    static ApplicationRoleTechnologyDto toDto(ApplicationrolestechnologiesEntity e) {
+    static ApplicationRoleTechnologyDto toDto(ApplicationRolesTechnologiesEntity e) {
         return new ApplicationRoleTechnologyDto(e.getId(), toDto(e.getTechnology()), toDto(e.getLevelMin()));
     }
 
@@ -80,7 +80,7 @@ public class DtoUtility {
     static ApplicationRoleDto toDto(ApplicationRoleEntity appRole) {
         ApplicationRoleDto roleDto = new ApplicationRoleDto(appRole.getId(), toDto(appRole.getRole()));
         if (appRole.getTechnologies() != null) {
-            for (ApplicationrolestechnologiesEntity arTechEntity : appRole.getTechnologies()) {
+            for (ApplicationRolesTechnologiesEntity arTechEntity : appRole.getTechnologies()) {
                 roleDto.getTechnologies().add(toDto(arTechEntity));
             }
         }
@@ -117,8 +117,8 @@ public class DtoUtility {
         return ret;
     }
 
-    static ApplicationrolestechnologiesEntity fromDto(ApplicationRoleTechnologyDto dto) {
-        ApplicationrolestechnologiesEntity ret = new ApplicationrolestechnologiesEntity();
+    static ApplicationRolesTechnologiesEntity fromDto(ApplicationRoleTechnologyDto dto) {
+        ApplicationRolesTechnologiesEntity ret = new ApplicationRolesTechnologiesEntity();
         if (dto != null) {
             ret.setId(dto.getId());
             ret.setTechnology(fromDto(dto.getTechnology()));
@@ -167,6 +167,13 @@ public class DtoUtility {
     }
 
     static List<SubscriptionDto> toDtoSubscriptionList(List<SubscriptionEntity> list) {
+        if (list != null) {
+            return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
+        }
+        return Collections.EMPTY_LIST;
+    }
+    
+    static List<ApplicationRoleTechnologyDto> toDtoApplicationRolesTechnologiesList(List<ApplicationRolesTechnologiesEntity> list) {
         if (list != null) {
             return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
         }

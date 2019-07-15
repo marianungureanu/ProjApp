@@ -11,7 +11,6 @@ package com.nttdata.practicadevara.projapp.front.levels;
  */
 import com.nttdata.practicadevara.projapp.front.RestClient;
 import com.nttdata.practicadevara.projapp.shared.dto.LevelDto;
-import com.nttdata.practicadevara.projapp.shared.dto.TechnologyDto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;

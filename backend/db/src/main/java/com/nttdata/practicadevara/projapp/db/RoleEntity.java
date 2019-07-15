@@ -23,13 +23,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "role", schema = RoleEntity.SCHEMA_NAME)
 @NamedQueries({
-    @NamedQuery(name = RoleEntity.FIND_ALL, query = "SELECT l FROM RoleEntity l")
+    @NamedQuery(name = RoleEntity.FIND_ALL, query = "SELECT l FROM RoleEntity l"),
+    @NamedQuery(name = RoleEntity.FIND_BY_ID, query = "SELECT e FROM RoleEntity e where e.id = :id")
 })
 public class RoleEntity implements Serializable {
 
     //private static final long serialVersionUID = 117223295272084434L;
     public static final String SCHEMA_NAME = "projappdb";
     public static final String FIND_ALL = "role_findAllQuery";
+    public static final String FIND_BY_ID = "role_findByIdQuery";
+    
     @Id
     @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
