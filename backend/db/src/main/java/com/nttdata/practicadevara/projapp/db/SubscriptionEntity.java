@@ -25,13 +25,15 @@ import javax.persistence.Table;
 @Table(name = "subscription", schema = SubscriptionEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = SubscriptionEntity.FIND_ALL, query = "SELECT s FROM SubscriptionEntity s where s.idapprole.id = :id"),
-    @NamedQuery(name = SubscriptionEntity.FIND_ALL_BY_EMPLOYEE, query = "SELECT s FROM SubscriptionEntity s where s.idapprole.id = :idapprole and s.idemployee.id = :idemp")
+    @NamedQuery(name = SubscriptionEntity.FIND_ALL_BY_EMPLOYEE, query = "SELECT s FROM SubscriptionEntity s where s.idapprole.id = :idapprole and s.idemployee.id = :idemp"),
+    @NamedQuery(name = SubscriptionEntity.FIND_ALL_SUBSCRIPTIONS, query = "SELECT s FROM SubscriptionEntity s ")
 })
 public class SubscriptionEntity implements Serializable {
 
     public static final String SCHEMA_NAME = "projappdb";
     public static final String FIND_ALL = "subscription_findAllQuery";
     public static final String FIND_ALL_BY_EMPLOYEE = "subscription_findAllQuery_by_employee";
+    public static final String FIND_ALL_SUBSCRIPTIONS = "subscription_findAllQuery_subscriptions";
 
     //id, status, id Employee, id Application Role
     @Id

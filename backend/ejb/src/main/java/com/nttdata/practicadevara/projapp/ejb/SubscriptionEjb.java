@@ -26,6 +26,11 @@ public class SubscriptionEjb {
         List<SubscriptionEntity> entities = subscriptionDbBean.findAll(appRoleId, employeeId);
         return toDtoSubscriptionList(entities);
    }
+    
+    public List<SubscriptionDto> listAll() {
+        List<SubscriptionEntity> entities = subscriptionDbBean.findAllSubscriptions();
+        return toDtoSubscriptionList(entities);
+   }
 
 
 }

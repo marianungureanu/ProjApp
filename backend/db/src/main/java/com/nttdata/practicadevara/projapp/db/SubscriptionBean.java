@@ -36,6 +36,12 @@ public class SubscriptionBean {
                 .setParameter("idemp", empId)
                 .getResultList();
     }
+    
+    
+    public List<SubscriptionEntity> findAllSubscriptions() {
+        return manager.createNamedQuery(SubscriptionEntity.FIND_ALL_SUBSCRIPTIONS).getResultList();
+    }
+
 
     public String findAllNamedQuery() {
         return SubscriptionEntity.FIND_ALL;

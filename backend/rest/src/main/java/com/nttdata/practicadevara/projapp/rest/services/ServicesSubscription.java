@@ -58,4 +58,12 @@ public class ServicesSubscription {
         List<SubscriptionDto> subscription = subscriptionEjb.list(appRoleId, employeeId);
         return Response.ok(subscription).build();
     }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getAllSubscriptions() {
+        List<SubscriptionDto> subscription = subscriptionEjb.listAll();
+        return Response.ok(subscription).build();
+    }
 }
