@@ -12,6 +12,9 @@ public class EmployeeTechnologyDto {
      */
     private int id;
     
+
+    private EmployeeDto employeeDto;
+
     /**
      * The technology current skill refers to.
      */
@@ -26,8 +29,9 @@ public class EmployeeTechnologyDto {
     public EmployeeTechnologyDto(){
         
     }
-    public EmployeeTechnologyDto(int id, TechnologyDto technology, LevelDto level){
+    public EmployeeTechnologyDto(int id, EmployeeDto employeeDto, TechnologyDto technology, LevelDto level){
         this.id = id;
+        this.employeeDto = employeeDto;
         this.technology = technology;
         this.level = level;
     }
@@ -57,6 +61,14 @@ public class EmployeeTechnologyDto {
     public void setLevel(LevelDto level) {
         this.level = level;
     }
+    
+     public void setEmployee(EmployeeDto employeeDto) {
+        this.employeeDto = employeeDto;
+    }
+    
+    
+    public EmployeeDto getEmployee()
+    {  return employeeDto;   }
     
    
 }

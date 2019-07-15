@@ -5,7 +5,6 @@
  */
 package com.nttdata.practicadevara.projapp.rest.services;
 
-
 import com.nttdata.practicadevara.projapp.db.EmployeetechnologyEntity;
 import com.nttdata.practicadevara.projapp.ejb.EmployeeTechnologyEjb;
 import com.nttdata.practicadevara.projapp.shared.dto.EmployeeTechnologyDto;
@@ -21,18 +20,16 @@ import javax.ejb.EJB;
 import java.util.List;
 import javax.ws.rs.core.Response;
 
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
-
 
 /**
  *
  * @author sebastian.stoica
  */
-
 /**
  * REST Web Service for user
  */
@@ -40,9 +37,9 @@ import javax.ws.rs.PathParam;
 @Stateless
 @LocalBean
 public class ServicesEmpTech {
-    
+
     @EJB
-    private EmployeeTechnologyEjb EmployeeTechnologyEjb;
+    private EmployeeTechnologyEjb employeeTechnologyEjb;
 
     @Context
     private UriInfo context;
@@ -57,19 +54,25 @@ public class ServicesEmpTech {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getUserValues() {
-        List<EmployeeTechnologyDto> EmpTech = EmployeeTechnologyEjb.listRequest();
-        return Response.ok(EmpTech).build();
+        List<EmployeeTechnologyDto> empTech = employeeTechnologyEjb.listRequest();
+        return Response.ok(empTech).build();
     }
-    
+
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") int id,
-        @Context HttpServletRequest servletRequest) {
-        List<EmployeeTechnologyDto> employee = EmployeeTechnologyEjb.findById(id);
+            @Context HttpServletRequest servletRequest) {
+        List<EmployeeTechnologyDto> employee = employeeTechnologyEjb.findById(id);
         return Response.ok(employee).build();
     }
 
-  
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response newEmployeeTechnology(EmployeeTechnologyDto tehn) {
+        EmployeeTechnologyDto rez = employeeTechnologyEjb.create(tehn);
+        return Response.ok(rez).build();
+    }
 
 }

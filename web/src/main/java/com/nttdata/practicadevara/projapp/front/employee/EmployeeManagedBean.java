@@ -110,7 +110,7 @@ public class EmployeeManagedBean implements Serializable {
     }
 
     public String addTechnologyForSelected() {
-        EmployeeTechnologyDto newTechnology = new EmployeeTechnologyDto(0, new TechnologyDto(0, ""), new LevelDto(0, ""));
+        EmployeeTechnologyDto newTechnology = new EmployeeTechnologyDto(0, new EmployeeDto(0,""),new TechnologyDto(0, ""), new LevelDto(0, ""));
         selected.getSkills().add(newTechnology);
         return "";
     }

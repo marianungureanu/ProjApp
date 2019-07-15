@@ -5,6 +5,8 @@ import com.nttdata.practicadevara.projapp.db.ApplicationRoleEntity;
 import com.nttdata.practicadevara.projapp.db.ApplicationRolesTechnologiesEntity;
 import com.nttdata.practicadevara.projapp.db.EmployeeEntity;
 import com.nttdata.practicadevara.projapp.db.EmployeetechnologyEntity;
+import com.nttdata.practicadevara.projapp.db.EmployeeEntity;
+//import com.nttdata.practicadevara.projapp.db.EmployeetechnologyEntity;
 import com.nttdata.practicadevara.projapp.db.LevelEntity;
 import com.nttdata.practicadevara.projapp.db.RoleEntity;
 import com.nttdata.practicadevara.projapp.db.SubscriptionEntity;
@@ -59,7 +61,7 @@ public class DtoUtility {
     }
 
     static EmployeeTechnologyDto toDto(EmployeetechnologyEntity e) {
-        return new EmployeeTechnologyDto(e.getId(), toDto(e.getTechnology()), toDto(e.getLevel()));
+        return new EmployeeTechnologyDto(e.getId(), toDto(e.getEmployee()), toDto(e.getTechnology()), toDto(e.getLevel()));
     }
 
     static TechnologyDto toDto(TechnologyEntity t) {
@@ -153,6 +155,16 @@ public class DtoUtility {
         return ret;
     }
 
+    
+        static EmployeeEntity fromDto(EmployeeDto dto) {
+       EmployeeEntity ret = new EmployeeEntity();
+        if (dto != null) {
+            ret.setId(dto.getId());
+            ret.setName(dto.getName());
+        }
+        return ret;
+    }
+
     static LevelEntity fromDto(LevelDto dto) {
         LevelEntity ret = new LevelEntity();
         if (dto != null) {
@@ -161,7 +173,7 @@ public class DtoUtility {
         }
         return ret;
     }
-
+    
     static List<LevelDto> toDtoLevelList(List<LevelEntity> list) {
         if (list != null) {
             return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
