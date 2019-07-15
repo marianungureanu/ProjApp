@@ -48,15 +48,20 @@ public class ServicesApplication {
         return Response.ok(apps).build();
     }
 
-    @POST
+    @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(ApplicationDto app) {
-        ApplicationDto res = applicationEjb.create(app);
-        return Response.ok(res).build();
+    public Response create(ApplicationDto app) throws BackendException {
+        try{
+            ApplicationDto res = applicationEjb.create(app);
+            return Response.ok(res).build();
+        } catch (DbException ex) {
+            Logger.getLogger(ServicesApplication.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BackendException(ex.getMessage());
+        }
     }
 
-    @PUT
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public ApplicationDto update(ApplicationDto app) throws BackendException {

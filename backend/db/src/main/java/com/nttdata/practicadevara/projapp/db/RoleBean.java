@@ -19,12 +19,18 @@ public class RoleBean {
     }
 
     public RoleEntity findById(int id) throws DbException {
-        RoleEntity entity = (RoleEntity) manager
-                .createNamedQuery(findByIdNamedQuery())
-                .setParameter(ApplicationEntity.ID_PARAM, id)
-                .getSingleResult();
+        RoleEntity entity = null;
+        try {
+            entity = (RoleEntity) manager
+                    .createNamedQuery(findByIdNamedQuery())
+                    .setParameter(ApplicationEntity.ID_PARAM, id)
+                    .getSingleResult();
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+
         if (entity == null) {
-            System.out.println("Role "+id +" not found thrown ex");
+            //System.out.println("Role "+id +" not found thrown ex");
             throw new DbException("NOT FOUND RoleEntity " + id);
         }
         return entity;

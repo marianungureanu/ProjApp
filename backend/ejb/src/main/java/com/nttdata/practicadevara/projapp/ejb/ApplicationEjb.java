@@ -46,8 +46,8 @@ public class ApplicationEjb {
         return toDtoAppList(entities);
     }
 
-    public ApplicationDto create(ApplicationDto dto) {
-        ApplicationEntity e = fromDto(dto);
+    public ApplicationDto create(ApplicationDto dto) throws DbException {
+        ApplicationEntity e = new ApplicationEntity();
         copyInto(dto, e);
         ApplicationEntity entity = applicationDbBean.create(e);
         return toDto(entity);
@@ -77,6 +77,7 @@ public class ApplicationEjb {
                 } else {
                     RoleEntity role = roleDbBean.findById(appRoleDto.getRole().getId());
                     appRole.setRole(role);
+                    appRole.setApp(e);
                     for (ApplicationRoleTechnologyDto arTechDto : appRoleDto.getTechnologies()) {
                         ApplicationRolesTechnologiesEntity arTechEntity = new ApplicationRolesTechnologiesEntity();
                         arTechEntity.setApplicationRole(appRole);
@@ -84,7 +85,7 @@ public class ApplicationEjb {
                         arTechEntity.setTechnology(techEntity);
                         LevelEntity levelEntity = levelDbBean.findById(arTechDto.getMinLevel().getId());
                         arTechEntity.setLevelMin(levelEntity);
-                        appRole.getTechnologies().add(fromDto(arTechDto));
+                        appRole.getTechnologies().add(arTechEntity);
                     }
                     e.getAppRoles().add(appRole);
                 }
