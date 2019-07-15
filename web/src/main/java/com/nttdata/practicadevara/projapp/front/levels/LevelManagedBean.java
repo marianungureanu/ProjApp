@@ -22,81 +22,100 @@ public class LevelManagedBean implements Serializable {
 
     private static final long serialVersionUID = 10001;
 
-    private static final String LEVEL_XHTML = "/admin/levels/index";
-    private static final String CREATE_OR_EDIT_XHTML = "/admin/levels/createOrEditLevel";
-
     @EJB
     private LevelRest levelRest;
     private LevelDto selected;
     private List<LevelDto> levelList;
     private boolean isCreate;
     private boolean isEdit;
-
+    
     /**
      * Creates a new instance
      */
+  
     public LevelManagedBean() {
     }
-
+    
     public void init() {
         levelList = levelRest.listLevel();
     }
-
+    
     public List<LevelDto> getLevels() {
-        if (levelList == null) {
+                if (levelList == null) {
             init();
         }
         return levelList;
     }
-
-    public LevelDto getSelected() {
-        return selected;
+    
+    public boolean isIsIndex() {
+        return !isCreate && !isEdit;
     }
-
-    public void setSelected(LevelDto selectedLevel) {
+    
+    
+     public void setSelected(LevelDto selectedLevel) {
         this.selected = selectedLevel;
     }
-
+    
     public String startEdit() {
         isEdit = true;
         isCreate = false;
-        return CREATE_OR_EDIT_XHTML;
+        return "";
     }
-
-    public String startCreate() {
+    
+      public String startCreate() {
         isEdit = false;
         isCreate = true;
         selected = new LevelDto();
-        return CREATE_OR_EDIT_XHTML;
+        return "";
+    }
+      
+        public String startIndex() {
+        isEdit = false;
+        isCreate = false;
+        return "";
+    }
+        
+        public LevelDto getSelected() {
+        return selected;
     }
 
+   
+     public String edit() {
+        levelRest.update(selected);
+        selected = null;
+        reload();
+        isEdit = false;
+        return "";
+     }
+     
     public String create() {
         levelRest.create(selected);
         selected = null;
         reload();
         isCreate = false;
-        return LEVEL_XHTML;
+        return "";
     }
+    
     public String delete(){
         levelRest.delete(selected);
         selected=null;
         reload();
         isCreate=false;
-        return LEVEL_XHTML;
+        return "";
     }
-    public boolean isIsCreate() {
+       public boolean isIsCreate() {
         return isCreate;
     }
-
+    
     public boolean isIsEdit() {
         return isEdit;
     }
-
-    public void reload() {
+    
+      public void reload() {
         levelList = null;
     }
 
     public String toLevelIndex() {
-        return LEVEL_XHTML;
+        return "";
     }
 }

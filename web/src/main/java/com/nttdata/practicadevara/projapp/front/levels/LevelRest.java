@@ -16,6 +16,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,20 +25,10 @@ import javax.ws.rs.core.Response;
 @LocalBean
 public class LevelRest extends RestClient {
 
-    private int tempIndex = 0;         //to be delete when REST services are ready
-    private List<LevelDto> tempList;  //to be delete when REST services are ready
-
-    @PostConstruct
-    public void init() {
-        tempList = new ArrayList<>();
-        
-        Response resp = super.path("level").request(MediaType.APPLICATION_JSON).get(Response.class);
-        tempList.addAll(resp.readEntity(new GenericType<List<LevelDto>>(){}));
-        
-    }
-
     public List<LevelDto> listLevel() {
-        return tempList;
+        Response resp = super.path("level").request(MediaType.APPLICATION_JSON).get(Response.class);
+        return resp.readEntity(new GenericType<List<LevelDto>>() {
+        });
     }
 
     public LevelDto update(LevelDto entry) {
@@ -45,15 +36,14 @@ public class LevelRest extends RestClient {
     }
 
     public LevelDto create(LevelDto entry) {
-        entry.setId(tempIndex++);
-        tempList.add(entry);
-        return entry;
+        Entity<LevelDto> obj = Entity.entity(entry, MediaType.APPLICATION_JSON);
+        Response resp = super.path("level").request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).post(obj);
+        return resp.readEntity(new GenericType<LevelDto>() {
+        });
     }
-    
-    public LevelDto delete(LevelDto entry){
-        entry.setId(tempIndex++);
-        tempList.add(entry);
+
+    public LevelDto delete(LevelDto entry) {
         return entry;
-        
+
     }
 }

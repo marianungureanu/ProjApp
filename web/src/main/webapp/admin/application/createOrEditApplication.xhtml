@@ -42,9 +42,11 @@
                                                 <h:selectOneMenu value="#{atech.technology.id}">
                                                     <f:selectItems value="#{technologyMBean.technologies}" var="tehchnologyDto" itemLabel="#{tehchnologyDto.name}" itemValue="#{tehchnologyDto.id}" />
                                                 </h:selectOneMenu>
+                                                :
+                                                <h:selectOneMenu value="#{atech.minLevel.id}">
+                                                    <f:selectItems value="#{levelMBean.levels}" var="levelDto" itemLabel="#{levelDto.name}" itemValue="#{levelDto.id}" />
+                                                </h:selectOneMenu>
 
-                                                <!-- aici trebuie introdus selectOneMenu cu lista de nivele din viitorul levelMBean -->
-                                                : #{atech.minLevel.name}
                                             </ui:repeat>
                                         </td></tr></table>
                             </ui:repeat>

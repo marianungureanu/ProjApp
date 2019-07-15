@@ -17,8 +17,11 @@
         <p:tabView activeIndex="#{tabViewManagedBean.index}">
             <p:ajax event="tabChange" partialSubmit="true" />
             <p:tab title="Levels" id="level_tab">
-                <p:outputLabel>
+                <p:outputLabel rendered="#{levelMBean.isIndex}">
                     <ui:include src="levels/index.xhtml"/>
+                </p:outputLabel>
+                <p:outputLabel  rendered="#{levelMBean.isCreate or levelMBean.isEdit}">
+                    <ui:include src="levels/createOrEditLevel.xhtml"/>
                 </p:outputLabel>
             </p:tab>
             <p:tab title="Roles" id="roles_tab">

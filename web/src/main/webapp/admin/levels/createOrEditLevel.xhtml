@@ -15,21 +15,22 @@ and open the template in the editor.
     <h:body>
         <ui:include src="/header.xhtml"/>
         <h3>
-        Level   <h:outputText value="edit" rendered="#{levelMBean.isEdit}"/>
-                <h:outputText value="create" rendered="#{levelMBean.isCreate}"/>
+            Level   <h:outputText value="edit" rendered="#{levelMBean.isEdit}"/>
+            <h:outputText value="create" rendered="#{levelMBean.isCreate}"/>
         </h3>
-		
+
         <br/>
-		
+
         <f:view>
             <h:form id="levelCreateOrEditForm">
                 Name:<h:inputText  value="#{levelMBean.selected.name}"/>
                 <br/>
                 <h:commandButton value="Edit"   action="#{levelMBean.edit}"   rendered="#{levelMBean.isEdit}"/>
                 <h:commandButton value="Create" action="#{levelMBean.create}" rendered="#{levelMBean.isCreate}"/>
+                <h:commandButton value="Go Back" action="#{levelMBean.startIndex}" type="submit"/>
             </h:form>
         </f:view> 
-		
+
         <ui:include src="/goBack.xhtml"/>
     </h:body>
 </html>

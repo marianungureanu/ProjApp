@@ -38,15 +38,8 @@ public class ApplicationManagedBean implements Serializable {
 
     }
 
-    public void init() {
-        applicationList = restClient.listApplications();
-    }
-
     public List<ApplicationDto> getApplications() {
-        if (applicationList == null) {
-            init();
-        }
-        return applicationList;
+        return restClient.listApplications();
     }
 
     public boolean isIsCreate() {
@@ -114,12 +107,11 @@ public class ApplicationManagedBean implements Serializable {
     }
 
     public void delete(ApplicationDto entry) {
-        try {
-            applicationList.remove(entry);
-            init();
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot delete application "+e.getMessage()));
-        }
+//        try {
+//            applicationList.remove(entry);
+//        } catch (Exception e) {
+//            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot delete application "+e.getMessage()));
+//        }
 
     }
 
