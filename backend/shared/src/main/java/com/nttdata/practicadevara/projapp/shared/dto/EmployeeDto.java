@@ -8,9 +8,16 @@ public class EmployeeDto implements Serializable {
     
     private int id;
     private String name;
-      private List<EmployeeTechnologyDto> skills;
-    
+    private List<EmployeeTechnologyDto> skills;
+
     public EmployeeDto() {
+    }
+    
+     public EmployeeDto(int id, String name,List<EmployeeTechnologyDto> skills ) {
+        this.id = id;
+        this.name = name;
+        this.skills = skills;
+        
     }
 
     public EmployeeDto(int id, String name) {

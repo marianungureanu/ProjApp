@@ -21,12 +21,13 @@ public class EmployeeTechnologyDto {
      * The level the employee masters bound technology
      */
     private LevelDto level;
-    
+
+   
     public EmployeeTechnologyDto(){
         
     }
     public EmployeeTechnologyDto(int id, TechnologyDto technology, LevelDto level){
-        this.id=id;
+        this.id = id;
         this.technology = technology;
         this.level = level;
     }
@@ -38,6 +39,8 @@ public class EmployeeTechnologyDto {
     public void setId(int id){
         this.id=id;
     }
+    
+
 
     public TechnologyDto getTechnology() {
         return technology;

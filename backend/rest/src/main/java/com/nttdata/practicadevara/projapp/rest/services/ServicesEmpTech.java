@@ -8,6 +8,7 @@ package com.nttdata.practicadevara.projapp.rest.services;
 
 import com.nttdata.practicadevara.projapp.db.EmployeetechnologyEntity;
 import com.nttdata.practicadevara.projapp.ejb.EmployeeTechnologyEjb;
+import com.nttdata.practicadevara.projapp.shared.dto.EmployeeTechnologyDto;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -35,7 +36,7 @@ import javax.ws.rs.PathParam;
 /**
  * REST Web Service for user
  */
-@Path("/Employeetechnology")
+@Path("/employeetechnology")
 @Stateless
 @LocalBean
 public class ServicesEmpTech {
@@ -56,7 +57,7 @@ public class ServicesEmpTech {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getUserValues() {
-        List<EmployeetechnologyEntity> EmpTech = EmployeeTechnologyEjb.listRequest();
+        List<EmployeeTechnologyDto> EmpTech = EmployeeTechnologyEjb.listRequest();
         return Response.ok(EmpTech).build();
     }
     
@@ -65,7 +66,7 @@ public class ServicesEmpTech {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") int id,
         @Context HttpServletRequest servletRequest) {
-        List<EmployeetechnologyEntity> employee = EmployeeTechnologyEjb.findById(id);
+        List<EmployeeTechnologyDto> employee = EmployeeTechnologyEjb.findById(id);
         return Response.ok(employee).build();
     }
 

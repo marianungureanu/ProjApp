@@ -2,6 +2,9 @@ package com.nttdata.practicadevara.projapp.db;
 
 import java.io.Serializable;
 import java.util.List;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.REFRESH;
 import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -50,7 +53,15 @@ public class EmployeeEntity implements Serializable {
         this.name = name;
     }
 
-    @OneToMany
-    private List<EmployeetechnologyEntity> employeeTechnology;
+    public List<EmployeetechnologyEntity> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<EmployeetechnologyEntity> skills) {
+        this.skills = skills;
+    }    
+
+   @OneToMany(mappedBy = "employee", cascade = {PERSIST, MERGE, REFRESH})  
+    private List<EmployeetechnologyEntity> skills;
     private List<SubscriptionEntity> subscription;
 }

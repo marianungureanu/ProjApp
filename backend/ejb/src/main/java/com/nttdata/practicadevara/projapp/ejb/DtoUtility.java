@@ -4,11 +4,13 @@ import com.nttdata.practicadevara.projapp.db.ApplicationEntity;
 import com.nttdata.practicadevara.projapp.db.ApplicationRoleEntity;
 import com.nttdata.practicadevara.projapp.db.ApplicationRolesTechnologiesEntity;
 import com.nttdata.practicadevara.projapp.db.EmployeeEntity;
+import com.nttdata.practicadevara.projapp.db.EmployeetechnologyEntity;
 import com.nttdata.practicadevara.projapp.db.LevelEntity;
 import com.nttdata.practicadevara.projapp.db.RoleEntity;
 import com.nttdata.practicadevara.projapp.db.SubscriptionEntity;
 import com.nttdata.practicadevara.projapp.db.TechnologyEntity;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationDto;
+import com.nttdata.practicadevara.projapp.shared.dto.EmployeeTechnologyDto;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationRoleDto;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationRoleTechnologyDto;
 import com.nttdata.practicadevara.projapp.shared.dto.EmployeeDto;
@@ -48,8 +50,16 @@ public class DtoUtility {
         return new RoleDto(e.getId(), e.getName());
     }
 
+    static EmployeeDto toDto(EmployeeEntity e) {
+        return new EmployeeDto(e.getId(), e.getName());
+    }
+
     static ApplicationRoleTechnologyDto toDto(ApplicationRolesTechnologiesEntity e) {
         return new ApplicationRoleTechnologyDto(e.getId(), toDto(e.getTechnology()), toDto(e.getLevelMin()));
+    }
+
+    static EmployeeTechnologyDto toDto(EmployeetechnologyEntity e) {
+        return new EmployeeTechnologyDto(e.getId(), toDto(e.getTechnology()), toDto(e.getLevel()));
     }
 
     static TechnologyDto toDto(TechnologyEntity t) {
@@ -72,9 +82,6 @@ public class DtoUtility {
             dto = new SubscriptionDto(e.getId(), status, emp, ar);
         }
         return dto;
-    }
-    static EmployeeDto toDto(EmployeeEntity e) {
-        return new EmployeeDto(e.getId(), e.getName());
     }
 
     static ApplicationRoleDto toDto(ApplicationRoleEntity appRole) {
@@ -127,6 +134,16 @@ public class DtoUtility {
         return ret;
     }
 
+    static EmployeetechnologyEntity fromDto(EmployeeTechnologyDto dto) {
+        EmployeetechnologyEntity ret = new EmployeetechnologyEntity();
+        if (dto != null) {
+            ret.setId(dto.getId());
+            ret.setTechnology(fromDto(dto.getTechnology()));
+            ret.setLevel(fromDto(dto.getLevel()));
+        }
+        return ret;
+    }
+
     static TechnologyEntity fromDto(TechnologyDto dto) {
         TechnologyEntity ret = new TechnologyEntity();
         if (dto != null) {
@@ -172,8 +189,15 @@ public class DtoUtility {
         }
         return Collections.EMPTY_LIST;
     }
-    
+
     static List<ApplicationRoleTechnologyDto> toDtoApplicationRolesTechnologiesList(List<ApplicationRolesTechnologiesEntity> list) {
+        if (list != null) {
+            return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
+        }
+        return Collections.EMPTY_LIST;
+    }
+
+    static List<EmployeeTechnologyDto> toDtoEmployeeTechnologyList(List<EmployeetechnologyEntity> list) {
         if (list != null) {
             return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
         }

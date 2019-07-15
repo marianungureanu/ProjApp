@@ -7,10 +7,11 @@ import com.nttdata.practicadevara.projapp.db.EmployeeEntity;
 import com.nttdata.practicadevara.projapp.db.EmployeeBean;
 
 import com.nttdata.practicadevara.projapp.shared.dto.EmployeeDto;
-
+import static com.nttdata.practicadevara.projapp.ejb.DtoUtility.*;
 import java.util.Collections;
 import java.util.stream.Collectors;
 import javax.ejb.EJB;
+
 
 @Stateless
 @LocalBean
@@ -18,6 +19,7 @@ public class EmployeeEjb {
 
     @EJB
     private EmployeeBean employeeDbBean;
+    
 
     public List<EmployeeDto> list() {
         List<EmployeeEntity> entities = employeeDbBean.findAll();
@@ -28,7 +30,7 @@ public class EmployeeEjb {
         EmployeeEntity entity = employeeDbBean.findById(id);
         return toDto(entity);
     }
-
+    
     private List<EmployeeDto> toDto(List<EmployeeEntity> list) {
         if (list != null) {
             return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
@@ -39,7 +41,7 @@ public class EmployeeEjb {
     private EmployeeDto toDto(EmployeeEntity e) {
         EmployeeDto empDto = null;
         if (e != null) {
-            empDto = new EmployeeDto(e.getId(), e.getName());
+            empDto = new EmployeeDto(e.getId(), e.getName(),toDtoEmployeeTechnologyList(e.getSkills()));
         }
         return empDto;
     }

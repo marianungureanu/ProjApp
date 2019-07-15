@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -27,12 +28,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "employeetechnology")
 @XmlRootElement
 @NamedQueries({
-   @NamedQuery(name = EmployeetechnologyEntity.FIND_REQUEST , query = "SELECT emp FROM EmployeetechnologyEntity emp"),
+   @NamedQuery(name = EmployeetechnologyEntity.FIND_BY_ID, query = "SELECT emp FROM EmployeetechnologyEntity emp WHERE emp.employee.id = :id"),
+    @NamedQuery(name = EmployeetechnologyEntity.FIND_ALL , query = "SELECT emp FROM EmployeetechnologyEntity emp")
      })
 public class EmployeetechnologyEntity implements Serializable {
 
     public static final String SCHEMA_NAME = "projappdb";
-    public static final String FIND_REQUEST = "employee_technology_findRequestQuery";
+    public static final String FIND_ALL = "employee_technology_findAll";
+    public static final String FIND_BY_ID  = "employee_technology_findById";
     
     private static final long serialVersionUID = 1L;
 
@@ -43,7 +46,7 @@ public class EmployeetechnologyEntity implements Serializable {
     private Integer id;
 
     @JoinColumn(name = "idemployee", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private EmployeeEntity employee;
 
     @JoinColumn(name = "idlevel", referencedColumnName = "id")
@@ -69,6 +72,7 @@ public class EmployeetechnologyEntity implements Serializable {
         this.id = id;
     }
 
+     
     public EmployeeEntity getEmployee() {
         return employee;
     }
@@ -93,6 +97,8 @@ public class EmployeetechnologyEntity implements Serializable {
         this.technology = technology;
     }
 
+    
+        
     
 
     @Override

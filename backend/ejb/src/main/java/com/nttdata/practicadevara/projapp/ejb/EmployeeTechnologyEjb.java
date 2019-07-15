@@ -9,6 +9,8 @@ package com.nttdata.practicadevara.projapp.ejb;
 
 import com.nttdata.practicadevara.projapp.db.EmployeetechnologyBean;
 import com.nttdata.practicadevara.projapp.db.EmployeetechnologyEntity;
+import com.nttdata.practicadevara.projapp.shared.dto.EmployeeTechnologyDto;
+import static com.nttdata.practicadevara.projapp.ejb.DtoUtility.*;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -29,15 +31,15 @@ public class EmployeeTechnologyEjb {
     @EJB
     private EmployeetechnologyBean employeeTechnologyDbBean;
     
-    public List<EmployeetechnologyEntity> findById(int id) {
+    public List<EmployeeTechnologyDto> findById(int id) {
         List<EmployeetechnologyEntity> entity = employeeTechnologyDbBean.findById(id);
-        return entity;
+        return toDtoEmployeeTechnologyList(entity);
     }
 
  
-    public List<EmployeetechnologyEntity> listRequest(){
-        List<EmployeetechnologyEntity> reqEntities =  employeeTechnologyDbBean.EmpTechTable();
-       return reqEntities;
+    public List<EmployeeTechnologyDto> listRequest(){
+        List<EmployeetechnologyEntity> reqEntities =  employeeTechnologyDbBean.findAll();
+       return toDtoEmployeeTechnologyList(reqEntities);
     }
     
     
