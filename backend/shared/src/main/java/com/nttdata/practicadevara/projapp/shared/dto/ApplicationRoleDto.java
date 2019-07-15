@@ -12,7 +12,7 @@ public class ApplicationRoleDto {
     private int id;
     
     /**
-     * The role and level for current vacant position
+     * The role for current vacant position
      */
     private RoleDto role;
     

@@ -30,7 +30,6 @@ public class ApplicationDto implements Serializable{
      * The list of available positions (roles)
      */
     private List<ApplicationRoleDto> roles;
-    private List<LevelDto> minLevel;
 
     public ApplicationDto() {
     }
@@ -71,7 +70,7 @@ public class ApplicationDto implements Serializable{
         }
         return roles;
     }
-    
+
     public void setRoles(List<ApplicationRoleDto> roles) {
         this.roles = roles;
     }
