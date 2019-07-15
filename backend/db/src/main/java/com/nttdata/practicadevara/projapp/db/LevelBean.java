@@ -24,6 +24,7 @@ public class LevelBean {
 
     public LevelEntity create(LevelEntity lvl) {
         manager.persist(lvl);
+        manager.flush();
         return lvl;
     }
     

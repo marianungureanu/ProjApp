@@ -37,6 +37,7 @@ public class EmployeeBean {
 
     public EmployeeEntity create(EmployeeEntity emp) {
         manager.persist(emp);
+        manager.flush();
         return emp;
     }
 

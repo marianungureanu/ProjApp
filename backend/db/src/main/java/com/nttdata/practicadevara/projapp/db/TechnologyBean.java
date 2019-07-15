@@ -36,6 +36,7 @@ public class TechnologyBean {
      
     public TechnologyEntity create(TechnologyEntity entity) {
         manager.persist(entity);
+        manager.flush();
         return entity;
     }
      
