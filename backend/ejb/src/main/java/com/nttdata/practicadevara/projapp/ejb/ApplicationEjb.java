@@ -48,6 +48,7 @@ public class ApplicationEjb {
 
     public ApplicationDto create(ApplicationDto dto) {
         ApplicationEntity e = fromDto(dto);
+        copyInto(dto, e);
         ApplicationEntity entity = applicationDbBean.create(e);
         return toDto(entity);
     }
