@@ -40,5 +40,25 @@ public class EmployeeBean {
         manager.flush();
         return emp;
     }
+    
+ 
+    
+     public EmployeeEntity edit(EmployeeEntity entity) throws DbException {
+        checkExistance(entity);
+        return updateWithoutExistanceCheck(entity);
+    }
+     
+      private EmployeeEntity updateWithoutExistanceCheck(EmployeeEntity entity) {
+        manager.merge(entity);
+        return entity;
+    }
+
+    private EmployeeEntity checkExistance(EmployeeEntity entity) throws DbException {
+        EmployeeEntity object = null;
+        if (entity != null) {
+            object = findById(entity.getId());
+        }
+        return object;
+    }
 
 }

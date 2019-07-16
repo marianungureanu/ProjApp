@@ -215,4 +215,22 @@ public class DtoUtility {
         }
         return Collections.EMPTY_LIST;
     }
+    
+    static List<EmployeetechnologyEntity> fromDtoEmployeeTechnologyList(List<EmployeeTechnologyDto> list) {
+        if (list != null) {
+            return list.stream().map(e -> fromDto(e)).collect(Collectors.toList());
+        }
+        return Collections.EMPTY_LIST;
+    }
+    
+    
+    
+    
+    static List<EmployeeDto> toDtoEmployeeList(List<EmployeeEntity> list) {
+        if (list != null) {
+            return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
+        }
+        return Collections.EMPTY_LIST;
+    }
 }
+

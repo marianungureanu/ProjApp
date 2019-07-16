@@ -19,6 +19,7 @@ public class EmployeeDto implements Serializable {
         this.skills = skills;
         
     }
+   
 
     public EmployeeDto(int id, String name) {
         this.id = id;
@@ -48,4 +49,5 @@ public class EmployeeDto implements Serializable {
     public void setSkills(List<EmployeeTechnologyDto> skills) {
         this.skills = skills;
     }
+   
 }

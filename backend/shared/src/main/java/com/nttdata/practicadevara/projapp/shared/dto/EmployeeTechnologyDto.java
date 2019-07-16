@@ -25,6 +25,7 @@ public class EmployeeTechnologyDto {
      */
     private LevelDto level;
 
+
    
     public EmployeeTechnologyDto(){
         
@@ -44,8 +45,6 @@ public class EmployeeTechnologyDto {
         this.id=id;
     }
     
-
-
     public TechnologyDto getTechnology() {
         return technology;
     }
@@ -61,7 +60,6 @@ public class EmployeeTechnologyDto {
     public void setLevel(LevelDto level) {
         this.level = level;
     }
-    
      public void setEmployee(EmployeeDto employeeDto) {
         this.employeeDto = employeeDto;
     }

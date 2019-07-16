@@ -1,13 +1,16 @@
 package com.nttdata.practicadevara.projapp.ejb;
 
+import com.nttdata.practicadevara.projapp.db.DbException;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import java.util.List;
 import com.nttdata.practicadevara.projapp.db.EmployeeEntity;
+import com.nttdata.practicadevara.projapp.db.EmployeetechnologyEntity;
 import com.nttdata.practicadevara.projapp.db.EmployeeBean;
 
 import com.nttdata.practicadevara.projapp.shared.dto.EmployeeDto;
 import static com.nttdata.practicadevara.projapp.ejb.DtoUtility.*;
+import com.nttdata.practicadevara.projapp.shared.dto.EmployeeTechnologyDto;
 import java.util.Collections;
 import java.util.stream.Collectors;
 import javax.ejb.EJB;
@@ -45,11 +48,15 @@ public class EmployeeEjb {
         }
         return empDto;
     }
+    
+  
+
 
     private EmployeeEntity fromDto(EmployeeDto dto) {
         EmployeeEntity e = new EmployeeEntity();
         e.setId(dto.getId());
         e.setName(dto.getName());
+        e.setSkills(fromDtoEmployeeTechnologyList(dto.getSkills()));
         return e;
     }
 
@@ -58,4 +65,24 @@ public class EmployeeEjb {
         EmployeeEntity saved = employeeDbBean.create(emp);
         return toDto(saved);
     }
-}
+    
+   
+    
+     public EmployeeDto edit(EmployeeDto dto) throws DbException {
+        //EmployeeEntity entity = employeeDbBean.findById(dto.getId());
+        EmployeeEntity entity = new EmployeeEntity();
+        entity.setId(dto.getId());
+        entity.setName(dto.getName());
+        entity.setSkills(fromDtoEmployeeTechnologyList(dto.getSkills()));
+        entity.setEmployeeInSkills();
+   
+        EmployeeEntity e = employeeDbBean.edit(entity);
+        return toDto(e);
+    }
+     
+     
+  
+} 
+    
+     
+  

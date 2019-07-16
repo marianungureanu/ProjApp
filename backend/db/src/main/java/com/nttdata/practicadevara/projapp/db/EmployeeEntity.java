@@ -1,6 +1,8 @@
 package com.nttdata.practicadevara.projapp.db;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
@@ -59,9 +61,19 @@ public class EmployeeEntity implements Serializable {
 
     public void setSkills(List<EmployeetechnologyEntity> skills) {
         this.skills = skills;
-    }    
+    }   
+    
+    public void setEmployeeInSkills()
+    {
+        Iterator<EmployeetechnologyEntity> it = skills.iterator();
+        while(it.hasNext()) {
+            EmployeetechnologyEntity e = it.next();
+            e.setEmployee(this);
+        }
+    }
+    
 
    @OneToMany(mappedBy = "employee", cascade = {PERSIST, MERGE, REFRESH})  
     private List<EmployeetechnologyEntity> skills;
-    private List<SubscriptionEntity> subscription;
+    //private List<SubscriptionEntity> subscription;
 }
