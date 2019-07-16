@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import com.nttdata.practicadevara.projapp.shared.dto.RoleDto;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ws.rs.POST;
 
 
 /**
@@ -27,7 +28,7 @@ import javax.ejb.Stateless;
 public class ServicesRole {
 
     @EJB
-    private RoleEjb RoleEjb;
+    private RoleEjb roleEjb;
 
     @Context
     private UriInfo context;
@@ -42,8 +43,16 @@ public class ServicesRole {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getUserValues() {
-        List<RoleDto> roles = RoleEjb.list();
+        List<RoleDto> roles = roleEjb.list();
         return Response.ok(roles).build();
+    }
+    
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response newRole(RoleDto e) {
+        RoleDto res = roleEjb.create(e);
+        return Response.ok(res).build();
     }
     
 }

@@ -40,7 +40,13 @@ public class RoleBean {
         return RoleEntity.FIND_ALL;
     }
 
+
     public String findByIdNamedQuery() {
         return RoleEntity.FIND_BY_ID;
+    }
+	public RoleEntity create(RoleEntity rl) {
+        manager.persist(rl);
+        manager.flush();
+        return rl;
     }
 }

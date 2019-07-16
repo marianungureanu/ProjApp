@@ -24,4 +24,11 @@ public class RoleEjb {
         return toDtoRoleList(entities);
     }
     
+    public RoleDto create(RoleDto dto) {
+      RoleEntity rl = fromDto(dto);
+      RoleEntity saved=roleDbBean.create(rl);
+      
+       return toDto(saved);
+    }
+    
 }
