@@ -24,9 +24,13 @@
                     <ui:include src="levels/createOrEditLevel.xhtml"/>
                 </p:outputLabel>
             </p:tab>
+            <p:ajax event="tabChange" partialSubmit="true" />
             <p:tab title="Roles" id="roles_tab">
-                <p:outputLabel>
+                <p:outputLabel rendered="#{roleMBean.isIndex}">
                     <ui:include src="role/index.xhtml"/>
+                </p:outputLabel>
+                <p:outputLabel  rendered="#{roleMBean.isCreate or roleMBean.isEdit}">
+                    <ui:include src="role/createOrEditRole.xhtml"/>
                 </p:outputLabel>
             </p:tab>
             <p:tab title="Technologies" id="tech_id">

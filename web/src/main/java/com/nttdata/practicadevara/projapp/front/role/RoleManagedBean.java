@@ -14,9 +14,6 @@ public class RoleManagedBean implements Serializable {
 
     private static final long serialVersionUID = 10001;
 
-    private static final String ROLE_XHTML = "/admin/role/index";
-    private static final String CREATE_OR_EDIT_XHTML = "/admin/role/createOrEditRole";
-
     @EJB
     private RoleRest roleRest;
 
@@ -52,14 +49,24 @@ public class RoleManagedBean implements Serializable {
     public String startEdit() {
         isEdit = true;
         isCreate = false;
-        return CREATE_OR_EDIT_XHTML;
+        return "";
     }
 
     public String startCreate() {
         isEdit = false;
         isCreate = true;
         selected = new RoleDto();
-        return CREATE_OR_EDIT_XHTML;
+        return "";
+    }
+    
+    public String startIndex() {
+        isEdit = false;
+        isCreate = false;
+        return "";
+    }
+    
+    public boolean isIsIndex() {
+        return !isCreate && !isEdit;
     }
 
     public boolean isIsCreate() {
@@ -74,17 +81,17 @@ public class RoleManagedBean implements Serializable {
         roleRest.update(selected);
         selected = null;
         isEdit = false;
-        return ROLE_XHTML;
+        return "";
     }
 
     public String create() {
         roleRest.create(selected);
         selected = null;
         isCreate = false;
-        return ROLE_XHTML;
+        return "";
     }
 
     public String toRoleIndex() {
-        return ROLE_XHTML;
+        return "";
     }
 }
