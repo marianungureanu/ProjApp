@@ -88,7 +88,7 @@ public class ApplicationManagedBean implements Serializable {
             reload();
             isEdit = false;
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot update application: "+e.getMessage()));
+            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot update application: " + e.getMessage()));
         }
         return "";
     }
@@ -100,19 +100,22 @@ public class ApplicationManagedBean implements Serializable {
             reload();
             isCreate = false;
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot create application: "+e.getMessage()));
+            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot create application: " + e.getMessage()));
         }
 
         return "";
     }
 
-    public void delete(ApplicationDto entry) {
+    public String delete() {
 //        try {
 //            applicationList.remove(entry);
 //        } catch (Exception e) {
 //            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot delete application "+e.getMessage()));
 //        }
-
+        restClient.delete(selected);
+        selected = null;
+        reload();
+        return "";
     }
 
     public void newRole() {

@@ -6,12 +6,14 @@
     <h:head>
     </h:head>
     <h:body>
+        <h2 style="font-family: Montserrat;">Welcome to ProjApp - Application matching system</h2>
         <h:form>
-            <h:commandButton value="Admin" action="admin/index"/>
+            <h:commandButton value="Admin" action="admin/index" class="abutton"/>
             <br/><br/><br/>
-            <table>
+            <h3 class="emptable">Employee List</h3>
+            <table class="emptable">
                 <tr>
-                    <td colspan="2">
+                    <td colspan="2"> 
                         <h:dataTable value="#{employeeMBean.employees}" var="employee">
                             <h:column> #{employee.name} </h:column>
                             <h:column>
