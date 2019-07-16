@@ -3,18 +3,16 @@ package com.nttdata.practicadevara.projapp.db;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Basic;
-import static javax.persistence.CascadeType.MERGE;
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REFRESH;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -30,9 +28,8 @@ public class ApplicationRoleEntity implements Serializable {
     public static final String SCHEMA_NAME = "projappdb";
 
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @JoinColumn(name = "idapp", referencedColumnName = "id")
@@ -43,7 +40,7 @@ public class ApplicationRoleEntity implements Serializable {
     @ManyToOne(optional = false)
     private RoleEntity role;
     
-    @OneToMany(mappedBy = "applicationRole", cascade = {PERSIST, MERGE, REFRESH}) 
+    @OneToMany(mappedBy = "applicationRole",  cascade = ALL) 
     private List<ApplicationRolesTechnologiesEntity> technologies = new ArrayList<ApplicationRolesTechnologiesEntity>();
 
     public ApplicationRoleEntity() {

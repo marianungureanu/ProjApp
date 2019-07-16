@@ -3,10 +3,7 @@ package com.nttdata.practicadevara.projapp.db;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import static javax.persistence.CascadeType.MERGE;
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REFRESH;
-import static javax.persistence.CascadeType.REMOVE;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,7 +44,7 @@ public class ApplicationEntity implements Serializable {
     @Column(name = "descr")
     private String descr;
     
-    @OneToMany(mappedBy = "app", cascade = {PERSIST, MERGE, REFRESH, REMOVE}) 
+    @OneToMany(mappedBy = "app", cascade = ALL) 
     private List<ApplicationRoleEntity> appRoles = new ArrayList<ApplicationRoleEntity>();
     
     public int getId() {

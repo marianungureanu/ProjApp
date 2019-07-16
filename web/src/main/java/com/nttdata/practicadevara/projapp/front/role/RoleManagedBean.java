@@ -2,6 +2,7 @@ package com.nttdata.practicadevara.projapp.front.role;
 
 import com.nttdata.practicadevara.projapp.shared.dto.RoleDto;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -20,7 +21,6 @@ public class RoleManagedBean implements Serializable {
     private RoleRest roleRest;
 
     private RoleDto selected;
-    private List<RoleDto> roleList;
     private boolean isCreate;
     private boolean isEdit;
 
@@ -30,15 +30,15 @@ public class RoleManagedBean implements Serializable {
     public RoleManagedBean() {
     }
 
-    public void init() {
-        roleList = roleRest.listRoles();
+    public List<RoleDto> getRolesWithFirstEmpty() {
+        List<RoleDto> ret = new ArrayList<>();
+        ret.add(new RoleDto(0, ""));
+        ret.addAll(roleRest.listRoles());
+        return ret;
     }
 
     public List<RoleDto> getRoles() {
-        if (roleList == null) {
-            init();
-        }
-        return roleList;
+       return roleRest.listRoles();
     }
 
     public RoleDto getSelected() {
@@ -70,14 +70,9 @@ public class RoleManagedBean implements Serializable {
         return isEdit;
     }
 
-    public void reload() {
-        roleList = null;
-    }
-
     public String edit() {
         roleRest.update(selected);
         selected = null;
-        reload();
         isEdit = false;
         return ROLE_XHTML;
     }
@@ -85,7 +80,6 @@ public class RoleManagedBean implements Serializable {
     public String create() {
         roleRest.create(selected);
         selected = null;
-        reload();
         isCreate = false;
         return ROLE_XHTML;
     }

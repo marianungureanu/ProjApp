@@ -25,14 +25,9 @@ public class ApplicationManagedBean implements Serializable {
     private boolean isCreate;
     private boolean isEdit;
     private ApplicationDto selected;
-    private List<ApplicationDto> applicationList;
 
     @EJB
     private ApplicationRest restClient;
-
-    public void reload() {
-        applicationList = null;
-    }
 
     public ApplicationManagedBean() {
 
@@ -85,7 +80,6 @@ public class ApplicationManagedBean implements Serializable {
         try {
             restClient.update(selected);
             selected = null;
-            reload();
             isEdit = false;
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot update application: " + e.getMessage()));
@@ -97,7 +91,6 @@ public class ApplicationManagedBean implements Serializable {
         try {
             restClient.create(selected);
             selected = null;
-            reload();
             isCreate = false;
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot create application: " + e.getMessage()));
@@ -107,14 +100,8 @@ public class ApplicationManagedBean implements Serializable {
     }
 
     public String delete() {
-//        try {
-//            applicationList.remove(entry);
-//        } catch (Exception e) {
-//            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot delete application "+e.getMessage()));
-//        }
         restClient.delete(selected);
         selected = null;
-        reload();
         return "";
     }
 

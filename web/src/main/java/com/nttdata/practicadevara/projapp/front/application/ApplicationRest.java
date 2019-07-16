@@ -14,26 +14,10 @@ import javax.ws.rs.core.Response;
 public class ApplicationRest extends RestClient {
 
     private static final String PATH_APPLICATION = "application";
-    private List<ApplicationDto> tempList;
-//    public List<ApplicationDto> listApplications() throws javax.ws.rs.ClientErrorException {
-//        Response resp = super.path(PATH_APPLICATION).request(MediaType.APPLICATION_JSON).get(Response.class);
-////        List<ApplicationDto> ret = resp.readEntity(new GenericType<List<ApplicationDto>>() {
-////        });
-//            tempList.addAll(resp.readEntity(new GenericType<List<ApplicationDto>>(){}));
-//        return ret;
-//    }
-
-    @PostConstruct
-    public void init() {
-        tempList = new ArrayList<>();
-
-        Response resp = super.path(PATH_APPLICATION).request(MediaType.APPLICATION_JSON).get(Response.class);
-        tempList.addAll(resp.readEntity(new GenericType<List<ApplicationDto>>() {
-        }));
-    }
 
     public List<ApplicationDto> listApplications() {
-        return tempList;
+        Response resp = super.path(PATH_APPLICATION).request(MediaType.APPLICATION_JSON).get(Response.class);
+        return resp.readEntity(new GenericType<List<ApplicationDto>>() {});
     }
 
     public ApplicationDto update(ApplicationDto entry) throws javax.ws.rs.ClientErrorException {
@@ -52,6 +36,5 @@ public class ApplicationRest extends RestClient {
 //        throws javax.ws.rs.ClientErrorException
 //        Response resp = super.path(PATH_APPLICATION + "/" + entry.getId()).request(MediaType.APPLICATION_JSON).delete();
 //        return resp;
-        tempList.remove(entry);
     }
 }

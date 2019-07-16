@@ -4,8 +4,10 @@ import static com.nttdata.practicadevara.projapp.ejb.DtoUtility.*;
 
 import com.nttdata.practicadevara.projapp.db.ApplicationBean;
 import com.nttdata.practicadevara.projapp.db.ApplicationEntity;
+import com.nttdata.practicadevara.projapp.db.ApplicationRoleBean;
 import com.nttdata.practicadevara.projapp.db.ApplicationRoleEntity;
 import com.nttdata.practicadevara.projapp.db.ApplicationRolesTechnologiesEntity;
+import com.nttdata.practicadevara.projapp.db.ApplicationRolesTechnologiesBean;
 import com.nttdata.practicadevara.projapp.db.DbException;
 import com.nttdata.practicadevara.projapp.db.LevelBean;
 import com.nttdata.practicadevara.projapp.db.LevelEntity;
@@ -16,6 +18,7 @@ import com.nttdata.practicadevara.projapp.db.TechnologyEntity;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationDto;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationRoleDto;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationRoleTechnologyDto;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -41,6 +44,12 @@ public class ApplicationEjb {
     @EJB
     private LevelBean levelDbBean;
 
+    @EJB
+    private ApplicationRoleBean appRoleDbBean;
+
+    @EJB
+    private ApplicationRolesTechnologiesBean appRoleTechDbBean;
+
     public List<ApplicationDto> list() {
         List<ApplicationEntity> entities = applicationDbBean.findAll();
         return toDtoAppList(entities);
@@ -65,9 +74,9 @@ public class ApplicationEjb {
     }
  
     private void copyInto(ApplicationDto dto, ApplicationEntity e) throws DbException {
+        cleanup(e);
         e.setName(dto.getName());
         e.setDescr(dto.getDescription());
-        e.getAppRoles().clear();
         List<ApplicationRoleDto> appRolesDto = dto.getRoles();
         if (appRolesDto != null) {
             for (ApplicationRoleDto appRoleDto : appRolesDto) {
@@ -91,5 +100,15 @@ public class ApplicationEjb {
                 }
             }
         }
+    }
+
+    private void cleanup(ApplicationEntity e) {
+        Iterator<ApplicationRoleEntity> itRole = e.getAppRoles().iterator();
+        while (itRole.hasNext()) {
+            ApplicationRoleEntity appRole = itRole.next();
+            itRole.remove();
+            appRoleDbBean.delete(appRole);
+        }
+        e.getAppRoles().clear();
     }
 }

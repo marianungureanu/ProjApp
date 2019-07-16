@@ -44,7 +44,14 @@ public class ApplicationBean {
     }
 
     public ApplicationEntity create(ApplicationEntity entity) {
-        manager.persist(entity);
+        try {
+            for(ApplicationRoleEntity ar:entity.getAppRoles()) {
+                manager.persist(ar);
+            }
+            manager.persist(entity);
+        } catch (javax.validation.ConstraintViolationException e) {
+            e.getConstraintViolations().forEach(err -> System.err.println(err.toString()));
+        }
         manager.flush();
         return entity;
     }
@@ -62,7 +69,12 @@ public class ApplicationBean {
     }
 
     private ApplicationEntity updateWithoutExistanceCheck(ApplicationEntity entity) {
-        entity = manager.merge(entity);
+        try {
+            entity = manager.merge(entity);
+        } catch (javax.validation.ConstraintViolationException e) {
+            e.getConstraintViolations().forEach(err -> System.err.println(err.toString()));
+        }
+
         return entity;
     }
 

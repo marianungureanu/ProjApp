@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nttdata.practicadevara.projapp.front.technology;
+
 import com.nttdata.practicadevara.projapp.shared.dto.TechnologyDto;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -34,15 +31,15 @@ public class TechnologyManagedBean implements Serializable {
     public TechnologyManagedBean() {
     }
 
-    public void init() {
-        technologyList = technologyRest.listTechnologies();
-    }
-
     public List<TechnologyDto> getTechnologies() {
-        if (technologyList == null) {
-            init();
-        }
-        return technologyList;
+        return technologyRest.listTechnologies();
+    }
+    
+    public List<TechnologyDto> getTechnologiesWithFirstEmpty() {
+        List<TechnologyDto> ret = new ArrayList<>();
+        ret.add(new TechnologyDto(0, ""));
+        ret.addAll(technologyRest.listTechnologies());
+        return ret;
     }
 
     public TechnologyDto getSelected() {

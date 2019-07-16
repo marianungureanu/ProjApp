@@ -32,7 +32,7 @@
                                 <table style="border: 0">
                                     <tr><td class="noborder">
                                             Role: <h:selectOneMenu value="#{arole.role.id}">
-                                                <f:selectItems value="#{roleMBean.roles}" var="roleDto" itemLabel="#{roleDto.name}" itemValue="#{roleDto.id}" />
+                                                <f:selectItems value="#{roleMBean.rolesWithFirstEmpty}" var="roleDto" itemLabel="#{roleDto.name}" itemValue="#{roleDto.id}" />
                                             </h:selectOneMenu>
                                         </td>
                                         <td class="noborder">
@@ -40,11 +40,11 @@
                                             <ui:repeat value="#{arole.technologies}"  var="atech">
                                                 <br/>
                                                 <h:selectOneMenu value="#{atech.technology.id}">
-                                                    <f:selectItems value="#{technologyMBean.technologies}" var="tehchnologyDto" itemLabel="#{tehchnologyDto.name}" itemValue="#{tehchnologyDto.id}" />
+                                                    <f:selectItems value="#{technologyMBean.technologiesWithFirstEmpty}" var="tehchnologyDto" itemLabel="#{tehchnologyDto.name}" itemValue="#{tehchnologyDto.id}" />
                                                 </h:selectOneMenu>
                                                 :
                                                 <h:selectOneMenu value="#{atech.minLevel.id}">
-                                                    <f:selectItems value="#{levelMBean.levels}" var="levelDto" itemLabel="#{levelDto.name}" itemValue="#{levelDto.id}" />
+                                                    <f:selectItems value="#{levelMBean.levelsWithFirstEmpty}" var="levelDto" itemLabel="#{levelDto.name}" itemValue="#{levelDto.id}" />
                                                 </h:selectOneMenu>
 
                                             </ui:repeat>

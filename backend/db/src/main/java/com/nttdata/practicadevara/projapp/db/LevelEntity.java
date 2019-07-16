@@ -34,7 +34,7 @@ public class LevelEntity implements Serializable {
 
     @Column(name = "name")
     private String name;
-
+    
     public int getId() {
         return id;
     }

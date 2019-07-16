@@ -1,4 +1,3 @@
-
 package com.nttdata.practicadevara.projapp.db;
 
 import java.util.List;
@@ -21,4 +20,9 @@ public class ApplicationRolesTechnologiesBean {
     public String findAllNamedQuery() {
         return ApplicationRolesTechnologiesEntity.FIND_ALL;
     }
+    
+    public void delete(ApplicationRolesTechnologiesEntity e) {
+        manager.remove(e);
+    }
+
 }

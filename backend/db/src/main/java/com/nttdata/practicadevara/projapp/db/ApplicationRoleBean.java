@@ -18,5 +18,8 @@ public class ApplicationRoleBean {
     public List<ApplicationRoleEntity> findAll() {
         return manager.createQuery("SELECT a.id, a.app, a.role FROM ApplicationRoleEntity a", ApplicationRoleEntity.class).getResultList();
     }
-
+    
+    public void delete(ApplicationRoleEntity e) {
+        manager.remove(e);
+    }
 }
