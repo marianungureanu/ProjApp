@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -36,14 +37,41 @@ public class SubscriptionBean {
                 .setParameter("idemp", empId)
                 .getResultList();
     }
-    
-    
+
     public List<SubscriptionEntity> findAllSubscriptions() {
         return manager.createNamedQuery(SubscriptionEntity.FIND_ALL_SUBSCRIPTIONS).getResultList();
     }
 
-
     public String findAllNamedQuery() {
         return SubscriptionEntity.FIND_ALL;
+    }
+
+    public SubscriptionEntity findById(int id) {
+        TypedQuery<SubscriptionEntity> q = manager.createNamedQuery(findByIdNamedQuery(), SubscriptionEntity.class);
+        q.setParameter("id", id);
+        SubscriptionEntity subscriptionEntity = q.getSingleResult();
+        return subscriptionEntity;
+    }
+
+    public String findByIdNamedQuery() {
+        return SubscriptionEntity.FIND_BY_ID;
+    }
+
+    public SubscriptionEntity update(SubscriptionEntity entity) throws DbException {
+        checkExistance(entity);
+        return updateWithoutExistanceCheck(entity);
+    }
+
+    private SubscriptionEntity updateWithoutExistanceCheck(SubscriptionEntity entity) {
+        entity = manager.merge(entity);
+        return entity;
+    }
+
+    private SubscriptionEntity checkExistance(SubscriptionEntity entity) throws DbException {
+        SubscriptionEntity object = null;
+        if (entity != null) {
+            object = findById(entity.getId());
+        }
+        return object;
     }
 }

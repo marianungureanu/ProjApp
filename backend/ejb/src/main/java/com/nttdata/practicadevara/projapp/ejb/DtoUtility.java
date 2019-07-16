@@ -155,9 +155,8 @@ public class DtoUtility {
         return ret;
     }
 
-    
-        static EmployeeEntity fromDto(EmployeeDto dto) {
-       EmployeeEntity ret = new EmployeeEntity();
+    static EmployeeEntity fromDto(EmployeeDto dto) {
+        EmployeeEntity ret = new EmployeeEntity();
         if (dto != null) {
             ret.setId(dto.getId());
             ret.setName(dto.getName());
@@ -173,7 +172,7 @@ public class DtoUtility {
         }
         return ret;
     }
-    
+
     static List<LevelDto> toDtoLevelList(List<LevelEntity> list) {
         if (list != null) {
             return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
@@ -215,17 +214,14 @@ public class DtoUtility {
         }
         return Collections.EMPTY_LIST;
     }
-    
+
     static List<EmployeetechnologyEntity> fromDtoEmployeeTechnologyList(List<EmployeeTechnologyDto> list) {
         if (list != null) {
             return list.stream().map(e -> fromDto(e)).collect(Collectors.toList());
         }
         return Collections.EMPTY_LIST;
     }
-    
-    
-    
-    
+
     static List<EmployeeDto> toDtoEmployeeList(List<EmployeeEntity> list) {
         if (list != null) {
             return list.stream().map(e -> toDto(e)).collect(Collectors.toList());
@@ -233,4 +229,3 @@ public class DtoUtility {
         return Collections.EMPTY_LIST;
     }
 }
-

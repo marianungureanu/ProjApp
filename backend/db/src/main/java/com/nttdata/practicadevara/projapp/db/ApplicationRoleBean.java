@@ -4,6 +4,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 @Stateless
 public class ApplicationRoleBean {
@@ -19,6 +20,12 @@ public class ApplicationRoleBean {
         return manager.createQuery("SELECT a.id, a.app, a.role FROM ApplicationRoleEntity a", ApplicationRoleEntity.class).getResultList();
     }
     
+    public ApplicationRoleEntity findById(int id) {
+        TypedQuery<ApplicationRoleEntity> query = manager.createQuery("SELECT a FROM ApplicationRoleEntity a where a.id = :id", ApplicationRoleEntity.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
+    }
+
     public void delete(ApplicationRoleEntity e) {
         manager.remove(e);
     }

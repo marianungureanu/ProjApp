@@ -5,11 +5,11 @@
  */
 package com.nttdata.practicadevara.projapp.rest.services;
 
-import static com.nttdata.practicadevara.projapp.ejb.DtoUtility.*;
-
+import com.nttdata.practicadevara.projapp.db.DbException;
 import com.nttdata.practicadevara.projapp.ejb.SubscriptionEjb;
-import com.nttdata.practicadevara.projapp.db.SubscriptionEntity;
+import com.nttdata.practicadevara.projapp.shared.dto.BackendException;
 import com.nttdata.practicadevara.projapp.shared.dto.SubscriptionDto;
+import com.nttdata.practicadevara.projapp.shared.dto.SubscriptionStatusEnumDto;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -20,14 +20,17 @@ import javax.ws.rs.core.MediaType;
 
 import javax.ejb.EJB;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 
 /**
  *
@@ -58,12 +61,24 @@ public class ServicesSubscription {
         List<SubscriptionDto> subscription = subscriptionEjb.list(appRoleId, employeeId);
         return Response.ok(subscription).build();
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getAllSubscriptions() {
         List<SubscriptionDto> subscription = subscriptionEjb.listAll();
         return Response.ok(subscription).build();
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public SubscriptionDto update(SubscriptionDto subscriptionDto) throws BackendException {
+        try {
+            return subscriptionEjb.update(subscriptionDto);
+        } catch (DbException ex) {
+            Logger.getLogger(ServicesSubscription.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BackendException(ex.getMessage());
+        }
     }
 }
