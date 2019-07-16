@@ -127,5 +127,3 @@ INSERT IGNORE INTO `applicationrolestechnologies` (`id`, `idapplicationrole`, `i
 INSERT INTO `subscription` (`id`, `status`, `idemployee`, `idapprole`) VALUES ('4', 'new', '1', '1');
 INSERT INTO `subscription` (`id`, `status`, `idemployee`, `idapprole`) VALUES ('5', 'new', '2', '4');
 INSERT INTO `subscription` (`id`, `status`, `idemployee`, `idapprole`) VALUES ('6', 'new', '2', '1');
-
-

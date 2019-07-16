@@ -1,5 +1,6 @@
 package com.nttdata.practicadevara.projapp.ejb;
 
+import com.nttdata.practicadevara.projapp.db.DbException;
 import static com.nttdata.practicadevara.projapp.ejb.DtoUtility.*;
 
 import com.nttdata.practicadevara.projapp.db.TechnologyBean;
@@ -32,4 +33,9 @@ public class TechnologyEjb {
        technologyDbBean.create(entity);
        return toDto(entity);
     }
+
+    public void delete(int id){
+        technologyDbBean.delete(id);
+    }
+
 }

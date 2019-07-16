@@ -5,6 +5,7 @@
  */
 package com.nttdata.practicadevara.projapp.rest.services;
 
+import com.nttdata.practicadevara.projapp.db.DbException;
 import com.nttdata.practicadevara.projapp.ejb.TechnologyEjb;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -21,8 +22,11 @@ import javax.ws.rs.core.Response;
 import com.nttdata.practicadevara.projapp.shared.dto.TechnologyDto;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 
 /**
@@ -74,4 +78,13 @@ public class ServicesTechnology {
         TechnologyDto technology = technologyEjb.create(e);
         return Response.ok(technology).build();
     }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void deleteTechnology(@PathParam("id") int id) throws DbException {
+        technologyEjb.delete(id);
+        
+    }
+    
  }

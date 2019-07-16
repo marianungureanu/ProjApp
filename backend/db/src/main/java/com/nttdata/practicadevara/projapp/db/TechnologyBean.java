@@ -11,13 +11,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-
 /**
  *
  * @author ovidiu.hulea
  */
 @Stateless
 public class TechnologyBean {
+
     public static final String SCHEMA_NAME = "projappdb";
 
     @PersistenceContext(unitName = "projapp-persistenceunit") //see main/resources/META-INF/peristence.xml
@@ -26,25 +26,32 @@ public class TechnologyBean {
     public List<TechnologyEntity> findAll() {
         return manager.createNamedQuery(findAllNamedQuery()).getResultList();
     }
-    
-     public TechnologyEntity findById(int id){
+
+    public TechnologyEntity findById(int id) {
         TypedQuery<TechnologyEntity> q = manager.createNamedQuery(findOneNamedQuery(), TechnologyEntity.class);
         q.setParameter("id", id);
         TechnologyEntity techEntity = q.getSingleResult();
         return techEntity;
     }
-     
+
+    public String findAllNamedQuery() {
+        return TechnologyEntity.FIND_ALL;
+    }
+
+    public String findOneNamedQuery() {
+        return TechnologyEntity.FIND_ONE;
+    }
+
     public TechnologyEntity create(TechnologyEntity entity) {
         manager.persist(entity);
         manager.flush();
         return entity;
     }
-     
-    public String findAllNamedQuery() {
-        return TechnologyEntity.FIND_ALL;
-    }
-    
-     public String findOneNamedQuery(){
-        return TechnologyEntity.FIND_ONE;
+
+    public void delete(int id) {
+      TechnologyEntity tech = manager.find(TechnologyEntity.class, id);
+      manager.remove(tech);
+      manager.flush();
+      
     }
 }
