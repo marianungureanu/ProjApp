@@ -36,12 +36,16 @@ public class TechnologyRest extends RestClient {
     }
 
     public TechnologyDto create(TechnologyDto entry) {
-        entry.setId(tempIndex++);
-        tempList.add(entry);
-        return entry;
+     
+        Response resp = super.path("technology").request(MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(entry, MediaType.APPLICATION_JSON), Response.class);
+        TechnologyDto ret = resp.readEntity(TechnologyDto.class);
+        tempList.add(ret);
+        return ret; 
+        
     }
     
        public void delete(TechnologyDto entry) {
+        
         tempList.remove(entry);
     }
 }

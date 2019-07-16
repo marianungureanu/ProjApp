@@ -17,7 +17,7 @@ public class TechnologyManagedBean implements Serializable {
 
     private static final long serialVersionUID = 10001;
 
-    private static final String TECHNOLOGY_XHTML = "/admin/technology/index";
+    private static final String TECHNOLOGY_XHTML = "/admin/index";
     private static final String CREATE_OR_EDIT_XHTML = "/admin/technology/createOrEditTechnology";
 
     @EJB
@@ -59,7 +59,7 @@ public class TechnologyManagedBean implements Serializable {
         return CREATE_OR_EDIT_XHTML;
     }
 
-   
+  
 
     public boolean isIsCreate() {
         return isCreate;
@@ -97,7 +97,8 @@ public class TechnologyManagedBean implements Serializable {
         isEdit = false;
         isCreate = true;
         selected = new TechnologyDto();
-        return CREATE_OR_EDIT_XHTML;
+        return CREATE_OR_EDIT_XHTML; 
+        
     }
      
      public String delete() {
@@ -106,5 +107,7 @@ public class TechnologyManagedBean implements Serializable {
         reload();
         return TECHNOLOGY_XHTML;
     }
+     
+    
      
 }
