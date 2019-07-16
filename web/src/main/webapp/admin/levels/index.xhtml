@@ -32,17 +32,17 @@ and open the template in the editor.
 
                     <h:column>
                         <f:facet name="header">Action</f:facet>
-                        <h:commandButton value="Edit" action="#{levelMBean.startEdit}">
+                        <h:commandButton value="Edit" action="#{levelMBean.startEdit}" class="ebutton">
                             <f:setPropertyActionListener value="#{level}" target="#{levelMBean.selected}"/>
                         </h:commandButton>
-                        <h:commandButton value="Delete" action="#{levelMBean.startEdit()}">
+                        <h:commandButton value="Delete" action="#{levelMBean.startEdit()}" class="dbutton">
                             <f:setPropertyActionListener value="#{level}" target="#{levelMBean.selected}"/>
                         </h:commandButton>
                     </h:column>
 
                 </h:dataTable>
 
-                <h:commandButton value="Create new level" action="#{levelMBean.startCreate}"/>
+                <h:commandButton value="Create new level" action="#{levelMBean.startCreate}" class="ebutton"/>
 
             </h:form>
         </f:view> 

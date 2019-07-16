@@ -26,17 +26,17 @@
 
                     <h:column>
                         <f:facet name="header">Action</f:facet>
-                        <h:commandButton value="Edit" action="#{employeeMBean.startEdit}">
+                        <h:commandButton value="Edit" action="#{employeeMBean.startEdit}" class="ebutton">
                             <f:setPropertyActionListener value="#{employee}" target="#{employeeMBean.selected}"/>
                         </h:commandButton>
-                        <h:commandButton value="Delete" action="#{employeeMBean.startEdit()}">
+                        <h:commandButton value="Delete" action="#{employeeMBean.startEdit()}" class="dbutton">
                             <f:setPropertyActionListener value="#{employee}" target="#{employeeMBean.selected}"/>
                         </h:commandButton>
                     </h:column>
 
                 </h:dataTable>
 
-                <h:commandButton value="Create new employee" action="#{employeeMBean.startCreate}"/>
+                <h:commandButton value="Create new employee" action="#{employeeMBean.startCreate}" class="ebutton"/>
 
             </h:form>
         </f:view> 

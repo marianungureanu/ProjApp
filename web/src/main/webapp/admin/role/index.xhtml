@@ -26,14 +26,14 @@
                     
                     <h:column>
                         <f:facet name="header">Action</f:facet>
-                        <h:commandButton value="Edit" action="#{roleMBean.startEdit}">
+                        <h:commandButton value="Edit" action="#{roleMBean.startEdit}" class="ebutton">
                             <f:setPropertyActionListener value="#{role}" target="#{roleMBean.selected}"/>
                         </h:commandButton>
                     </h:column>
                     
                </h:dataTable>
              
-             <h:commandButton value="Create new role" action="#{roleMBean.startCreate}"/>
+                <h:commandButton value="Create new role" action="#{roleMBean.startCreate}" class="ebutton"/>
               
           </h:form>
         </f:view> 

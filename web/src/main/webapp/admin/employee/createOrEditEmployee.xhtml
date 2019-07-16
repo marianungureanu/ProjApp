@@ -20,8 +20,8 @@
             <h:form id="employeeCreateOrEditForm">
                 Name:<h:inputText  value="#{employeeMBean.selected.name}"/>
                 <br/>
-                <h:commandButton value="Edit"   action="#{employeeMBean.edit}"   rendered="#{employeeMBean.isEdit}"/>
-                <h:commandButton value="Create" action="#{employeeMBean.create}" rendered="#{employeeMBean.isCreate}"/>
+                <h:commandButton value="Edit"   action="#{employeeMBean.edit}"   rendered="#{employeeMBean.isEdit}" class="ebutton"/>
+                <h:commandButton value="Create" action="#{employeeMBean.create}" rendered="#{employeeMBean.isCreate}"class="cbutton"/>
             </h:form>
         </f:view> 
 		

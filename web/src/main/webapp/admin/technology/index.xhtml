@@ -26,18 +26,18 @@
                     
                     <h:column>
                         <f:facet name="header">Action</f:facet>
-                        <h:commandButton value="Edit" action="#{technologyMBean.startEdit}">
+                        <h:commandButton value="Edit" action="#{technologyMBean.startEdit}" class="ebutton">
                             <f:setPropertyActionListener value="#{technology}" target="#{technologyMBean.selected}"/>
                         </h:commandButton>
                       <!--stergere tehnologie-->
-                        <h:commandButton value="Delete" action="#{technologyMBean.delete}">
+                      <h:commandButton value="Delete" action="#{technologyMBean.delete}" class="dbutton">
                             <f:setPropertyActionListener value="#{technology}" target="#{technologyMBean.selected}"/>
                         </h:commandButton>
                     </h:column>
                     
                </h:dataTable>
              
-               <h:commandButton value="Create new technology" action="#{technologyMBean.startCreate}"/>
+                <h:commandButton value="Create new technology" action="#{technologyMBean.startCreate}" class="ebutton"/>
               
           </h:form>
         </f:view> 

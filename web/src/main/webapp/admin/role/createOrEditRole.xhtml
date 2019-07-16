@@ -25,8 +25,8 @@ and open the template in the editor.
             <h:form id="roleCreateOrEdit">
                 Name:<h:inputText  value="#{roleMBean.selected.name}"/>
                 <br/>
-                <h:commandButton value="Edit"   action="#{roleMBean.edit}"   rendered="#{roleMBean.isEdit}"/>
-                <h:commandButton value="Create" action="#{roleMBean.create}" rendered="#{roleMBean.isCreate}"/>
+                <h:commandButton value="Edit"   action="#{roleMBean.edit}"   rendered="#{roleMBean.isEdit}" class="ebutton"/>
+                <h:commandButton value="Create" action="#{roleMBean.create}" rendered="#{roleMBean.isCreate}" class="cbutton"/>
             </h:form>
         </f:view> 
 		

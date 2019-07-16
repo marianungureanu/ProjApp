@@ -60,6 +60,7 @@
             }
 
             .hbutton {
+                float: left;
                 font-size: 20px;
                 background-color: #ff9999;
                 color: black;
@@ -67,6 +68,7 @@
                 text-transform: uppercase;
                 font-family: Montserrat;
                 border: 10px solid #ff9999;
+                height: 30px;
             }
 
             .hbutton:hover {
@@ -102,12 +104,17 @@
             .ebutton:hover {
                 background-color: lightgreen;
             }
+            
+            .rbutton:hover {
+                background-color: lightskyblue;
+            }
 
         </style>
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'/>
     </h:head>
     <f:view id="header">
-        <div style="float: right"><img src="/images/logo1.png"/> </div>
+        <div style="float: right"><img src="/images/logo1.png"/></div>
+                    <a href="/index.xhtml" class="hbutton">Home</a>
         <div style="line-height: 90px">
             <center>
                 <h2 style="font-family: Montserrat;">ProjApp: A Project - Developer matching site</h2>

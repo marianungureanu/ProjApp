@@ -36,15 +36,15 @@
                     <h:column>
                         <f:facet name="header">Action</f:facet>
                         
-                        <h:commandButton value="Accept" action="#{subscriptionMBean.accept}">
+                        <h:commandButton value="Accept" action="#{subscriptionMBean.accept}" class="ebutton">
                             <f:setPropertyActionListener value="#{subscription}" target="#{subscriptionMBean.selected}"/>
                         </h:commandButton>
 
-                        <h:commandButton value="Reject" action="#{subscriptionMBean.reject}">
+                        <h:commandButton value="Reject" action="#{subscriptionMBean.reject}" class="rbutton">
                             <f:setPropertyActionListener value="#{subscription}" target="#{subscriptionMBean.selected}"/>
                         </h:commandButton>
 
-                        <h:commandButton value="Delete" action="#{subscriptionMBean.delete}">
+                        <h:commandButton value="Delete" action="#{subscriptionMBean.delete}" class="dbutton">
                             <f:setPropertyActionListener value="#{subscription}" target="#{subscriptionMBean.selected}"/>
                         </h:commandButton>
                     </h:column>

@@ -20,12 +20,12 @@
             <h:form id="technologyCreateOrEditForm">
                 Name:<h:inputText  value="#{technologyMBean.selected.name}"/>
                 <br/>
-                <h:commandButton value="Edit"   action="#{technologyMBean.edit}"   rendered="#{technologyMBean.isEdit}"/>
-                <h:commandButton value="Create" action="#{technologyMBean.create}" rendered="#{technologyMBean.isCreate}"/>
+                <h:commandButton value="Edit"   action="#{technologyMBean.edit}"   rendered="#{technologyMBean.isEdit}" class="ebutton"/>
+                <h:commandButton value="Create" action="#{technologyMBean.create}" rendered="#{technologyMBean.isCreate}" class="ebutton"/>
                 
-                    <f:view id="goBack">
+                <f:view id="goBack">
                         <h:form id="goBackForm">
-                                <h:commandButton value="Go Back" action="index" type="submit"/>
+                                <h:commandButton value="Go Back" action="index" type="submit" class="rbutton"/>
                         </h:form>
                 <div class="separator"> </div>
                     </f:view> 
