@@ -15,7 +15,6 @@ import javax.ws.rs.core.Response;
 @Stateless
 @LocalBean
 public class TechnologyRest extends RestClient {
-
     private int tempIndex = 0;           //to be delete when REST services are ready
     private List<TechnologyDto> tempList;  //to be delete when REST services are ready
 
@@ -32,7 +31,9 @@ public class TechnologyRest extends RestClient {
     }
 
     public TechnologyDto update(TechnologyDto entry) {
-        return entry;
+        Response resp = super.path("technology").request(MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(entry, MediaType.APPLICATION_JSON), Response.class);
+        TechnologyDto ret = resp.readEntity(TechnologyDto.class);
+        return ret; 
     }
 
     public TechnologyDto create(TechnologyDto entry) {
