@@ -4,7 +4,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
@@ -45,9 +44,9 @@ public class ApplicationBean {
 
     public ApplicationEntity create(ApplicationEntity entity) {
         try {
-            for(ApplicationRoleEntity ar:entity.getAppRoles()) {
+            entity.getAppRoles().forEach((ar) -> {
                 manager.persist(ar);
-            }
+            });
             manager.persist(entity);
         } catch (javax.validation.ConstraintViolationException e) {
             e.getConstraintViolations().forEach(err -> System.err.println(err.toString()));
@@ -62,9 +61,15 @@ public class ApplicationBean {
     }
 
     public void delete(int id) {
-        Query query = manager.createQuery("Delete FROM ApplicationEntity app WHERE app.id=:id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        ApplicationEntity entity = manager.find(ApplicationEntity.class, id);
+        try {
+            entity.getAppRoles().forEach((appRole) -> {
+                manager.remove(appRole);
+            });
+            manager.remove(entity);
+        } catch (javax.validation.ConstraintViolationException e) {
+            e.getConstraintViolations().forEach(err -> System.err.println(err.toString()));
+        }
         manager.flush();
     }
 

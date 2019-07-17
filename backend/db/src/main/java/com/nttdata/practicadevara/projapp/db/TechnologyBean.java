@@ -51,7 +51,6 @@ public class TechnologyBean {
     public void delete(int id) {
       TechnologyEntity tech = manager.find(TechnologyEntity.class, id);
       manager.remove(tech);
-      manager.flush();
-      
+      manager.flush();      
     }
 }

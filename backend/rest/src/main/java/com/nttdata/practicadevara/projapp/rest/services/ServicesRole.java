@@ -54,5 +54,4 @@ public class ServicesRole {
         RoleDto res = roleEjb.create(e);
         return Response.ok(res).build();
     }
-    
 }
