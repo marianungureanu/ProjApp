@@ -32,7 +32,7 @@ public class EmployeeTechnologyDto {
     }
     public EmployeeTechnologyDto(int id, EmployeeDto employeeDto, TechnologyDto technology, LevelDto level){
         this.id = id;
-        this.employeeDto = employeeDto;
+        this.employeeDto = null;
         this.technology = technology;
         this.level = level;
     }

@@ -20,7 +20,8 @@ import javax.persistence.Table;
 @Table(name = "employee", schema = EmployeeEntity.SCHEMA_NAME)
 @NamedQueries({
     @NamedQuery(name = EmployeeEntity.FIND_ALL, query = "SELECT e FROM EmployeeEntity e"),
-    @NamedQuery(name = EmployeeEntity.FIND_ONE, query = "SELECT e FROM EmployeeEntity e WHERE e.id = :id")
+    @NamedQuery(name = EmployeeEntity.FIND_ONE, query = "SELECT e FROM EmployeeEntity e WHERE e.id = :id"),
+    @NamedQuery(name = EmployeeEntity.DELETE_ONE, query = "DELETE FROM EmployeeEntity e WHERE e.id = :id")
 })
 public class EmployeeEntity implements Serializable {
 
@@ -29,6 +30,7 @@ public class EmployeeEntity implements Serializable {
     public static final String SCHEMA_NAME = "projappdb";
     public static final String FIND_ALL = "employee_findAllQuery";
     public static final String FIND_ONE = "employee_findOneQuery";
+    public static final String DELETE_ONE = "employee_deleteOneQuery";
 
     @Id
     @Column(name = "id", unique = true)

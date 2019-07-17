@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 @LocalBean
 public class EmployeeRest extends RestClient {
 
+      private static final String PATH_APPLICATION = "employee";
     private int tempIndex = 0;           //to be delete when REST services are ready
     private List<EmployeeDto> tempList;  //to be delete when REST services are ready
 
@@ -31,13 +32,16 @@ public class EmployeeRest extends RestClient {
         return tempList;
     }
 
-    public EmployeeDto update(EmployeeDto entry) {
-        return entry;
-    }
-
     public EmployeeDto create(EmployeeDto entry) {
         entry.setId(tempIndex++);
         tempList.add(entry);
         return entry;
     }
+    
+    public EmployeeDto update(EmployeeDto entry) throws javax.ws.rs.ClientErrorException {
+        Response resp = super.path(PATH_APPLICATION).request(MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(entry, MediaType.APPLICATION_JSON), Response.class);
+        EmployeeDto ret = resp.readEntity(EmployeeDto.class);
+        return ret;
+    }
+    
 }

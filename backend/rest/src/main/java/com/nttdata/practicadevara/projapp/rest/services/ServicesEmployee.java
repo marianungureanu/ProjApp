@@ -22,6 +22,7 @@ import com.nttdata.practicadevara.projapp.shared.dto.EmployeeDto;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -82,6 +83,17 @@ public class ServicesEmployee {
             throw new BackendException(ex.getMessage());
         }
     }
+    
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void delete(@PathParam("id") int id,
+            @Context HttpServletRequest servletRequest) {
+        employeeEjb.deleteById(id);
+    }
+    
+
     
     
     
