@@ -27,7 +27,6 @@ public class LevelBean {
         manager.flush();
         return lvl;
     }
-    
 
     public LevelEntity findById(int id) throws DbException {
         LevelEntity entity = (LevelEntity) manager
@@ -46,5 +45,11 @@ public class LevelBean {
 
     public String findByIdNamedQuery() {
         return LevelEntity.FIND_BY_ID;
+    }
+
+    public void delete(int id) {
+        LevelEntity lvl = manager.find(LevelEntity.class, id);
+        manager.remove(lvl);
+        manager.flush();
     }
 }
