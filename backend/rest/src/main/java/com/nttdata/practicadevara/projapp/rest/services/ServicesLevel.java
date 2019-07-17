@@ -5,8 +5,9 @@
  */
 package com.nttdata.practicadevara.projapp.rest.services;
 
+import com.nttdata.practicadevara.projapp.shared.dto.BackendException;
+import com.nttdata.practicadevara.projapp.db.DbException;
 import com.nttdata.practicadevara.projapp.ejb.LevelEjb;
-import com.nttdata.practicadevara.projapp.shared.dto.EmployeeDto;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -21,6 +22,8 @@ import java.util.List;
 import javax.ws.rs.core.Response;
 
 import com.nttdata.practicadevara.projapp.shared.dto.LevelDto;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
@@ -75,12 +78,18 @@ public class ServicesLevel {
 ;
     }
 
-        /*
-     @PUT
+
+    @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public LevelDto update(LevelDto lvl) {
-        return levelEjb.update(lvl);
-    }
-         */
+    public LevelDto update(LevelDto app) throws BackendException {
+        try {
+            return levelEjb.update(app);
+        } catch (DbException ex) {
+            Logger.getLogger(ServicesLevel.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BackendException(ex.getMessage());
+        }
+    }//
+    
+    
     }

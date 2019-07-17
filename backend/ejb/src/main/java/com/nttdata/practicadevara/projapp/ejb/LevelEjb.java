@@ -1,5 +1,6 @@
 package com.nttdata.practicadevara.projapp.ejb;
 
+import com.nttdata.practicadevara.projapp.db.DbException;
 import static com.nttdata.practicadevara.projapp.ejb.DtoUtility.*;
 
 import com.nttdata.practicadevara.projapp.db.LevelBean;
@@ -36,10 +37,16 @@ public class LevelEjb {
         levelDbBean.delete(id);
     }
 
-
-    /*public LevelDto update(LevelDto dto) {
-        LevelEntity l = fromDto(dto);
-        LevelEntity lvl = levelDbBean.update(l);
-        return toDto(lvl);
-    }*/
+  
+      public LevelDto update(LevelDto dto) throws DbException {
+        LevelEntity entity = levelDbBean.findById(dto.getId());
+        entity.setName(dto.getName());
+        LevelEntity e = levelDbBean.update(entity);
+        return toDto(e);
+    }
+     
+   
+     
+    
+     
 }
