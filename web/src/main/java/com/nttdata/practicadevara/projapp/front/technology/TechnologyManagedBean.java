@@ -59,10 +59,12 @@ public class TechnologyManagedBean implements Serializable {
     public String startEdit() {
         isEdit = true;
         isCreate = false;
-        return CREATE_OR_EDIT_XHTML;
+        return "";
     }
 
-  
+     public boolean isIsIndex() {
+        return !isCreate && !isEdit;
+    }
 
     public boolean isIsCreate() {
         return isCreate;

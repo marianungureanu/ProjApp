@@ -33,9 +33,13 @@
                     <ui:include src="role/createOrEditRole.xhtml"/>
                 </p:outputLabel>
             </p:tab>
+            <p:ajax event="tabChange" partialSubmit="true" />
             <p:tab title="Technologies" id="tech_id">
-                <p:outputLabel>
+                <p:outputLabel rendered="#{technologyMBean.isIndex}">
                     <ui:include src="technology/index.xhtml"/>
+                </p:outputLabel>
+                <p:outputLabel  rendered="#{technologyMBean.isCreate or technologyMBean.isEdit}">
+                    <ui:include src="technology/createOrEditTechnology.xhtml"/>
                 </p:outputLabel>
             </p:tab>
             <p:tab title="Employees" id="emp_id">
