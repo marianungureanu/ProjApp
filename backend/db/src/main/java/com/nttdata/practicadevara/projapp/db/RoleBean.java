@@ -1,6 +1,8 @@
 package com.nttdata.practicadevara.projapp.db;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -57,5 +59,18 @@ public class RoleBean {
         }
         return object;
     }
+
+	public void delete(int id) throws DbException  {
+        RoleEntity entity = manager.find(RoleEntity.class, id);
+        try {
+            entity.getAppRoles().forEach((appRole) -> {
+                manager.remove(appRole);
+            });
+            manager.remove(entity);
+        } catch (javax.validation.ConstraintViolationException e) {
+            e.getConstraintViolations().forEach(err -> System.err.println(err.toString()));
+        }
+        manager.flush();
+    }  
 
 }

@@ -24,9 +24,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "subscription", schema = SubscriptionEntity.SCHEMA_NAME)
 @NamedQueries({
-    @NamedQuery(name = SubscriptionEntity.FIND_ALL, query = "SELECT s FROM SubscriptionEntity s where s.idapprole.id = :id"),
-    @NamedQuery(name = SubscriptionEntity.FIND_ALL_BY_EMPLOYEE, query = "SELECT s FROM SubscriptionEntity s where s.idapprole.id = :idapprole and s.idemployee.id = :idemp"),
-    @NamedQuery(name = SubscriptionEntity.FIND_ALL_SUBSCRIPTIONS, query = "SELECT s FROM SubscriptionEntity s "),
+    @NamedQuery(name = SubscriptionEntity.FIND_ALL, query = "SELECT s FROM SubscriptionEntity s where s.idapprole.id = :id")
+    ,
+    @NamedQuery(name = SubscriptionEntity.FIND_ALL_BY_EMPLOYEE, query = "SELECT s FROM SubscriptionEntity s where s.idapprole.id = :idapprole and s.idemployee.id = :idemp")
+    ,
+    @NamedQuery(name = SubscriptionEntity.FIND_ALL_SUBSCRIPTIONS, query = "SELECT s FROM SubscriptionEntity s ")
+    ,
     @NamedQuery(name = SubscriptionEntity.FIND_BY_ID, query = "SELECT s FROM SubscriptionEntity s where s.id = :id")
 })
 public class SubscriptionEntity implements Serializable {
@@ -35,7 +38,7 @@ public class SubscriptionEntity implements Serializable {
     public static final String FIND_ALL = "subscription_findAllQuery";
     public static final String FIND_ALL_BY_EMPLOYEE = "subscription_findAllQuery_by_employee";
     public static final String FIND_ALL_SUBSCRIPTIONS = "subscription_findAllQuery_subscriptions";
-    public static final String FIND_BY_ID="subscription_findById";
+    public static final String FIND_BY_ID = "subscription_findById";
 
     //id, status, id Employee, id Application Role
     @Id
@@ -46,15 +49,15 @@ public class SubscriptionEntity implements Serializable {
     @Column(name = "status")
     private String name;
 
-   @JoinColumn(name = "idemployee", referencedColumnName = "id")
+    @JoinColumn(name = "idemployee", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private EmployeeEntity idemployee;
-   
+
     @JoinColumn(name = "idapprole", referencedColumnName = "id")
     @ManyToOne(optional = false)
-     private ApplicationRoleEntity idapprole;
-    
-     public SubscriptionEntity() {
+    private ApplicationRoleEntity idapprole;
+
+    public SubscriptionEntity() {
     }
 
     public SubscriptionEntity(Integer id) {
@@ -68,24 +71,23 @@ public class SubscriptionEntity implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
 
-     public EmployeeEntity getIdemployee() {
+    public EmployeeEntity getIdemployee() {
         return idemployee;
     }
-    
-     public void setIdemplpoyee(EmployeeEntity idemployee) {
+
+    public void setIdemplpoyee(EmployeeEntity idemployee) {
         this.idemployee = idemployee;
     }
-     
-     
+
     public ApplicationRoleEntity getIdapprole() {
         return idapprole;
     }
@@ -93,8 +95,8 @@ public class SubscriptionEntity implements Serializable {
     public void setIdapprole(ApplicationRoleEntity idapprole) {
         this.idapprole = idapprole;
     }
-    
-     @Override
+
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
@@ -118,5 +120,5 @@ public class SubscriptionEntity implements Serializable {
     public String toString() {
         return "com.nttdata.practicadevara.projapp.db.SubcriptionEntity[ id=" + id + " ]";
     }
-    
+
 }

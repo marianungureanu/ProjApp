@@ -94,4 +94,11 @@ public class RoleManagedBean implements Serializable {
     public String toRoleIndex() {
         return "";
     }
+
+    public String delete() {
+        roleRest.delete(selected);
+        isCreate = false;
+        selected = null;
+        return "";
+    }
 }

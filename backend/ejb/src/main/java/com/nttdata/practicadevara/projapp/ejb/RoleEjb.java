@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import javax.persistence.CascadeType;
 
 @Stateless
 @LocalBean
@@ -41,4 +42,8 @@ public class RoleEjb {
         RoleEntity e = roleDbBean.update(entity);
         return toDto(e);
     }
+    
+    public void delete(int id)throws DbException {
+        roleDbBean.delete(id);
+    }    
 }

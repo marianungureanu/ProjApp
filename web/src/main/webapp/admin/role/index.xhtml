@@ -35,6 +35,9 @@ and open the template in the editor.
                         <h:commandButton value="Edit" action="#{roleMBean.startEdit}" class="ebutton">
                             <f:setPropertyActionListener value="#{role}" target="#{roleMBean.selected}"/>
                         </h:commandButton>
+                         <h:commandButton value="Delete" action="#{roleMBean.delete()}" class="dbutton">
+                            <f:setPropertyActionListener value="#{role}" target="#{roleMBean.selected}"/>
+                        </h:commandButton>                       
                     </h:column>
                     
                </h:dataTable>

@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -80,5 +81,13 @@ public class ServicesRole {
             Logger.getLogger(ServicesRole.class.getName()).log(Level.SEVERE, null, ex);
             throw new BackendException(ex.getMessage());
         }
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") int id) throws DbException {
+        roleEjb.delete(id);
+        return Response.ok().build();
     }
 }

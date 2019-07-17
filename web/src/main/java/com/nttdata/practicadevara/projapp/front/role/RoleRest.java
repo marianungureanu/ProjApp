@@ -35,6 +35,10 @@ public class RoleRest extends RestClient {
         return resp.readEntity(new GenericType<RoleDto>() {
         });
     }
+      
+    public void delete(RoleDto entry) {
+        super.path("role").path(Integer.toString(entry.getId())).request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).delete();
+    }
 
     List<RoleDto> listRoleDto() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
