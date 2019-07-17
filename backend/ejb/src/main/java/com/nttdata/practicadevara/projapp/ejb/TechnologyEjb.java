@@ -15,27 +15,32 @@ import javax.ejb.LocalBean;
 @LocalBean
 public class TechnologyEjb {
 
-@EJB
+    @EJB
     private TechnologyBean technologyDbBean;
-    
+
     public List<TechnologyDto> list() {
         List<TechnologyEntity> entities = technologyDbBean.findAll();
         return toDtoTechnologiesList(entities);
     }
-    
+
     public TechnologyDto findById(int id) {
         TechnologyEntity entity = technologyDbBean.findById(id);
-       return toDto(entity);
-    }
-    
-    public TechnologyDto create(TechnologyDto dto) {
-       TechnologyEntity entity = fromDto(dto);
-       technologyDbBean.create(entity);
-       return toDto(entity);
+        return toDto(entity);
     }
 
-    public void delete(int id){
+    public TechnologyDto create(TechnologyDto dto) {
+        TechnologyEntity entity = fromDto(dto);
+        technologyDbBean.create(entity);
+        return toDto(entity);
+    }
+
+    public void delete(int id) {
         technologyDbBean.delete(id);
     }
 
+    public TechnologyDto edit(TechnologyDto dto) {
+        TechnologyEntity entity = fromDto(dto);
+        technologyDbBean.edit(entity);
+        return toDto(entity);
+    }
 }

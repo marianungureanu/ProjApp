@@ -41,6 +41,12 @@ public class TechnologyManagedBean implements Serializable {
         ret.addAll(technologyRest.listTechnologies());
         return ret;
     }
+    
+    public String startIndex() {
+        isEdit = false;
+        isCreate = false;
+        return "";
+    }
 
     public TechnologyDto getSelected() {
         return selected;
@@ -75,7 +81,7 @@ public class TechnologyManagedBean implements Serializable {
         selected = null;
         reload();
         isEdit = false;
-        return TECHNOLOGY_XHTML;
+        return "";
     }
 
     public String create() {
@@ -83,7 +89,7 @@ public class TechnologyManagedBean implements Serializable {
         selected = null;
         reload();
         isCreate = false;
-        return TECHNOLOGY_XHTML;
+        return "";
     }
 
     public String toTechnologyIndex() {
@@ -102,7 +108,7 @@ public class TechnologyManagedBean implements Serializable {
         technologyRest.delete(selected);
         selected = null;
         reload();
-        return TECHNOLOGY_XHTML;
+        return "";
     }
      
     

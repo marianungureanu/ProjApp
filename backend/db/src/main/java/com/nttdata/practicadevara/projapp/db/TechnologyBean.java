@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -49,8 +50,15 @@ public class TechnologyBean {
     }
 
     public void delete(int id) {
-      TechnologyEntity tech = manager.find(TechnologyEntity.class, id);
-      manager.remove(tech);
-      manager.flush();      
+        TechnologyEntity tech = manager.find(TechnologyEntity.class, id);
+        manager.remove(tech);
+        manager.flush();
+
+    }
+
+    public TechnologyEntity edit(TechnologyEntity entity) {
+        manager.merge(entity);
+        manager.flush();
+        return entity;
     }
 }
