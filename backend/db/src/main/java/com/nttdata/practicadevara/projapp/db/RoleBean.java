@@ -4,6 +4,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 @Stateless
 public class RoleBean {
@@ -18,35 +19,43 @@ public class RoleBean {
         return manager.createNamedQuery(findAllNamedQuery()).getResultList();
     }
 
-    public RoleEntity findById(int id) throws DbException {
-        RoleEntity entity = null;
-        try {
-            entity = (RoleEntity) manager
-                    .createNamedQuery(findByIdNamedQuery())
-                    .setParameter(ApplicationEntity.ID_PARAM, id)
-                    .getSingleResult();
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-
-        if (entity == null) {
-            //System.out.println("Role "+id +" not found thrown ex");
-            throw new DbException("NOT FOUND RoleEntity " + id);
-        }
-        return entity;
+    public RoleEntity findById(int id) {
+        TypedQuery<RoleEntity> q = manager.createNamedQuery(findByIdNamedQuery(), RoleEntity.class);
+        q.setParameter("id", id);
+        RoleEntity roleEntity = q.getSingleResult();
+        return roleEntity;
     }
 
     public String findAllNamedQuery() {
         return RoleEntity.FIND_ALL;
     }
 
-
     public String findByIdNamedQuery() {
         return RoleEntity.FIND_BY_ID;
     }
-	public RoleEntity create(RoleEntity rl) {
+
+    public RoleEntity create(RoleEntity rl) {
         manager.persist(rl);
         manager.flush();
         return rl;
     }
+
+    public RoleEntity update(RoleEntity entity) throws DbException {
+        checkExistance(entity);
+        return updateWithoutExistanceCheck(entity);
+    }
+
+    private RoleEntity updateWithoutExistanceCheck(RoleEntity entity) {
+        entity = manager.merge(entity);
+        return entity;
+    }
+
+    private RoleEntity checkExistance(RoleEntity entity) throws DbException {
+        RoleEntity object = null;
+        if (entity != null) {
+            object = findById(entity.getId());
+        }
+        return object;
+    }
+
 }

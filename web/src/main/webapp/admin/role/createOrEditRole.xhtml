@@ -13,7 +13,7 @@ and open the template in the editor.
         <title>Roles Config</title>
     </h:head>
     <h:body>
-        <ui:include src="/header.xhtml"/>
+     
         <h3>
             Roles   <h:outputText value="edit" rendered="#{roleMBean.isEdit}"/>
                     <h:outputText value="create" rendered="#{roleMBean.isCreate}"/>
@@ -27,6 +27,7 @@ and open the template in the editor.
                 <br/>
                 <h:commandButton value="Edit"   action="#{roleMBean.edit}"   rendered="#{roleMBean.isEdit}" class="ebutton"/>
                 <h:commandButton value="Create" action="#{roleMBean.create}" rendered="#{roleMBean.isCreate}" class="cbutton"/>          
+                <h:commandButton value="Go Back" action="#{roleMBean.startIndex}" type="submit" class="rbutton"/>
                 <h:commandButton value="Go Back" action="#{roleMBean.startIndex}" type="submit" class="rbutton"/>
             </h:form>
         </f:view> 

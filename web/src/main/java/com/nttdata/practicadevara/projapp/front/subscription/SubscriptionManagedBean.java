@@ -14,7 +14,6 @@ import javax.inject.Named;
  */
 @SessionScoped
 @Named("subscriptionMBean")
-
 public class SubscriptionManagedBean implements Serializable {
 
     private static final long serialVersionUID = 10001;

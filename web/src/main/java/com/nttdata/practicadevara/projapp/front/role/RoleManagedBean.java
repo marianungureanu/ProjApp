@@ -35,7 +35,7 @@ public class RoleManagedBean implements Serializable {
     }
 
     public List<RoleDto> getRoles() {
-       return roleRest.listRoles();
+        return roleRest.listRoles();
     }
 
     public RoleDto getSelected() {
@@ -58,13 +58,13 @@ public class RoleManagedBean implements Serializable {
         selected = new RoleDto();
         return "";
     }
-    
+
     public String startIndex() {
         isEdit = false;
         isCreate = false;
         return "";
     }
-    
+
     public boolean isIsIndex() {
         return !isCreate && !isEdit;
     }

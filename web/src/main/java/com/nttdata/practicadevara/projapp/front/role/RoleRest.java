@@ -14,14 +14,18 @@ import javax.ws.rs.core.Response;
 @LocalBean
 public class RoleRest extends RestClient {
 
+    private static final String PATH_APPLICATION = "role";
+
     public List<RoleDto> listRoles() {
         Response resp = super.path("role").request(MediaType.APPLICATION_JSON).get(Response.class);
         return resp.readEntity(new GenericType<List<RoleDto>>() {
         });
     }
 
-    public RoleDto update(RoleDto entry) {
-        return entry;
+    public RoleDto update(RoleDto entry) throws javax.ws.rs.ClientErrorException {
+        Response resp = super.path(PATH_APPLICATION).request(MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(entry, MediaType.APPLICATION_JSON), Response.class);
+        RoleDto ret = resp.readEntity(RoleDto.class);
+        return ret;
     }
 
     public RoleDto create(RoleDto entry) {

@@ -1,5 +1,6 @@
 package com.nttdata.practicadevara.projapp.ejb;
 
+import com.nttdata.practicadevara.projapp.db.DbException;
 import static com.nttdata.practicadevara.projapp.ejb.DtoUtility.*;
 
 import com.nttdata.practicadevara.projapp.db.RoleBean;
@@ -10,25 +11,34 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 
-
-
 @Stateless
 @LocalBean
 public class RoleEjb {
 
     @EJB
     private RoleBean roleDbBean;
-    
+
     public List<RoleDto> list() {
         List<RoleEntity> entities = roleDbBean.findAll();
         return toDtoRoleList(entities);
     }
-    
+
     public RoleDto create(RoleDto dto) {
-      RoleEntity rl = fromDto(dto);
-      RoleEntity saved=roleDbBean.create(rl);
-      
-       return toDto(saved);
+        RoleEntity rl = fromDto(dto);
+        RoleEntity saved = roleDbBean.create(rl);
+
+        return toDto(saved);
     }
-    
+
+    public RoleDto findById(int id) {
+        RoleEntity entity = roleDbBean.findById(id);
+        return toDto(entity);
+    }
+
+    public RoleDto update(RoleDto dto) throws DbException {
+        RoleEntity entity = roleDbBean.findById(dto.getId());
+        entity.setName(dto.getName());
+        RoleEntity e = roleDbBean.update(entity);
+        return toDto(e);
+    }
 }
