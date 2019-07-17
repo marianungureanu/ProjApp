@@ -76,7 +76,7 @@ public class ServicesApplication {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response delete(@PathParam("id") int id) {
+    public Response delete(@PathParam("id") int id) throws DbException {
         applicationEjb.delete(id);
         return Response.ok().build();
     }

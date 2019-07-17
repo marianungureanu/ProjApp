@@ -60,7 +60,7 @@ public class ApplicationBean {
         return updateWithoutExistanceCheck(entity);
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws DbException  {
         ApplicationEntity entity = manager.find(ApplicationEntity.class, id);
         try {
             entity.getAppRoles().forEach((appRole) -> {

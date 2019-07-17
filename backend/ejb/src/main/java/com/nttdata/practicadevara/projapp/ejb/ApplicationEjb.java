@@ -69,7 +69,7 @@ public class ApplicationEjb {
         return toDto(e);
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws DbException {
         applicationDbBean.delete(id);
     }
  
