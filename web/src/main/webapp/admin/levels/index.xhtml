@@ -35,7 +35,7 @@ and open the template in the editor.
                         <h:commandButton value="Edit" action="#{levelMBean.startEdit}" class="ebutton">
                             <f:setPropertyActionListener value="#{level}" target="#{levelMBean.selected}"/>
                         </h:commandButton>
-                        <h:commandButton value="Delete" action="#{levelMBean.startEdit()}" class="dbutton">
+                        <h:commandButton value="Delete" action="#{levelMBean.delete()}" class="dbutton">
                             <f:setPropertyActionListener value="#{level}" target="#{levelMBean.selected}"/>
                         </h:commandButton>
                     </h:column>

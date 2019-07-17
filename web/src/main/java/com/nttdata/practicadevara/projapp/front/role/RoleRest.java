@@ -22,10 +22,11 @@ public class RoleRest extends RestClient {
         });
     }
 
-    public RoleDto update(RoleDto entry) throws javax.ws.rs.ClientErrorException {
-        Response resp = super.path(PATH_APPLICATION).request(MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(entry, MediaType.APPLICATION_JSON), Response.class);
-        RoleDto ret = resp.readEntity(RoleDto.class);
-        return ret;
+    public RoleDto update(RoleDto entry) {
+        Entity<RoleDto> obj = Entity.entity(entry, MediaType.APPLICATION_JSON);
+        Response resp = super.path("role").request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).put(obj);
+        return resp.readEntity(new GenericType<RoleDto>() {
+        });
     }
 
     public RoleDto create(RoleDto entry) {

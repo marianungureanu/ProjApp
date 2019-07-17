@@ -11,9 +11,9 @@ package com.nttdata.practicadevara.projapp.front.levels;
  */
 import com.nttdata.practicadevara.projapp.front.RestClient;
 import com.nttdata.practicadevara.projapp.shared.dto.LevelDto;
-import java.util.ArrayList;
+
 import java.util.List;
-import javax.annotation.PostConstruct;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ws.rs.client.Entity;
@@ -32,7 +32,10 @@ public class LevelRest extends RestClient {
     }
 
     public LevelDto update(LevelDto entry) {
-        return entry;
+        Entity<LevelDto> obj = Entity.entity(entry, MediaType.APPLICATION_JSON);
+        Response resp = super.path("level").request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).put(obj);
+        return resp.readEntity(new GenericType<LevelDto>() {
+        });
     }
 
     public LevelDto create(LevelDto entry) {
@@ -41,9 +44,8 @@ public class LevelRest extends RestClient {
         return resp.readEntity(new GenericType<LevelDto>() {
         });
     }
-
-    public LevelDto delete(LevelDto entry) {
-        return entry;
-
+    
+    public void delete(LevelDto entry) {
+        Response resp = super.path("level").path(Integer.toString(entry.getId())).request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).delete();
     }
 }
