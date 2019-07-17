@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title> Vacant Position </title>
+    </h:head>
+    <h:body>
+        <ui:include src="/header.xhtml"/>
+        <h3>Vacant Position list</h3>
+        <br/>
+        <f:view>
+            <h:form>
+                <ui:repeat value="#{applicationMBean.applications}" var="app">
+                    <table><tr><td> <h5>#{app.name}</h5> </td></tr>
+                        <tr><td>#{app.description}</td></tr>
+                        <tr><td>
+                                 <ui:repeat value="#{app.roles}"  var="arole">
+                            <table style="border: 0">
+                                <tr><td class="noborder">
+                                        <b><h:outputText value="#{arole.role.name}"/></b>
+                                    </td>
+                                    <td class="noborder">
+                                        <ui:repeat value="#{arole.technologies}"  var="atech">
+                                            #{atech.technology.name}: #{atech.minLevel.name};
+                                        </ui:repeat>
+                                   </td></tr></table>
+                        </ui:repeat>
+                                <h:commandButton value="Subscribe" action="#{appManagedBean.subscribe}" rendered="#{role.subscriptionStatus == null}"></h:commandButton>    
+                                <h:outputText value="#{role.subscriptionStatus}" rendered="#{role.subscriptionStatus != null}"/>
+                            </td></tr></table>
+                </ui:repeat>
+            </h:form>
+        </f:view> 
+    </h:body>
+</html>
