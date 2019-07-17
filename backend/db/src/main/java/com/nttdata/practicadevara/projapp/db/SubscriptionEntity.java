@@ -44,10 +44,10 @@ public class SubscriptionEntity implements Serializable {
     @Id
     @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Column(name = "status")
-    private String name;
+    private String status;
 
     @JoinColumn(name = "idemployee", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -60,24 +60,24 @@ public class SubscriptionEntity implements Serializable {
     public SubscriptionEntity() {
     }
 
-    public SubscriptionEntity(Integer id) {
+    public SubscriptionEntity(int id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getStatus() {
+        return status;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public EmployeeEntity getIdemployee() {
@@ -94,26 +94,6 @@ public class SubscriptionEntity implements Serializable {
 
     public void setIdapprole(ApplicationRoleEntity idapprole) {
         this.idapprole = idapprole;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SubscriptionEntity)) {
-            return false;
-        }
-        SubscriptionEntity other = (SubscriptionEntity) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
     }
 
     @Override

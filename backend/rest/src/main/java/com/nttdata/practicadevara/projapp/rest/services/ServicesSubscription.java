@@ -81,4 +81,12 @@ public class ServicesSubscription {
             throw new BackendException(ex.getMessage());
         }
     }
+    
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response newSubscription(SubscriptionDto subscription) {
+        SubscriptionDto res = subscriptionEjb.create(subscription);
+        return Response.ok(res).build();
+    }
 }

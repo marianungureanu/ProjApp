@@ -78,7 +78,7 @@ public class DtoUtility {
     static SubscriptionDto toDto(SubscriptionEntity e) {
         SubscriptionDto dto = null;
         if (e != null) {
-            SubscriptionStatusEnumDto status = SubscriptionStatusEnumDto.from(e.getName());
+            SubscriptionStatusEnumDto status = SubscriptionStatusEnumDto.from(e.getStatus());
             EmployeeDto emp = toDto(e.getIdemployee());
             ApplicationRoleDto ar = toDto(e.getIdapprole());
             dto = new SubscriptionDto(e.getId(), status, emp, ar);
@@ -160,6 +160,15 @@ public class DtoUtility {
         if (dto != null) {
             ret.setId(dto.getId());
             ret.setName(dto.getName());
+        }
+        return ret;
+    }
+    
+    static ApplicationRoleEntity fromDto(ApplicationRoleDto dto) {
+       ApplicationRoleEntity ret = new ApplicationRoleEntity();
+        if (dto != null) {
+            ret.setId(dto.getId());
+            ret.setRole(DtoUtility.fromDto(dto.getRole()));
         }
         return ret;
     }

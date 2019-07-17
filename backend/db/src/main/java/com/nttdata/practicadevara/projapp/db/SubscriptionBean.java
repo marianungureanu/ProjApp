@@ -66,6 +66,13 @@ public class SubscriptionBean {
         entity = manager.merge(entity);
         return entity;
     }
+    
+    public SubscriptionEntity create(SubscriptionEntity subs) {
+        manager.persist(subs);
+        manager.flush();
+        return subs;
+    }
+    
 
     private SubscriptionEntity checkExistance(SubscriptionEntity entity) throws DbException {
         SubscriptionEntity object = null;
