@@ -20,11 +20,11 @@ public class ApplicationManagedBean implements Serializable {
 
     private static final long serialVersionUID = 10001;
 
-    private static final String APPLICATIONROLE_XHTML = "/admin/application/index";
-    private static final String CREATE_OR_EDIT_XHTML = "/admin/application/createOrEditApplication";
     private boolean isCreate;
     private boolean isEdit;
     private ApplicationDto selected;
+    private ApplicationRoleDto selectedApplicationRole;
+    private ApplicationRoleTechnologyDto selectedApplicationRoleTechnology;
 
     @EJB
     private ApplicationRest restClient;
@@ -82,7 +82,11 @@ public class ApplicationManagedBean implements Serializable {
             selected = null;
             isEdit = false;
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot update application: " + e.getMessage()));
+            Throwable t = e;
+            while (t.getCause() != null && t != t.getCause()) {
+                t = t.getCause();
+            }
+            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot update application: " + t.getMessage()));
         }
         return "";
     }
@@ -93,14 +97,27 @@ public class ApplicationManagedBean implements Serializable {
             selected = null;
             isCreate = false;
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot create application: " + e.getMessage()));
+            Throwable t = e;
+            while (t.getCause() != null && t != t.getCause()) {
+                t = t.getCause();
+            }
+            FacesContext.getCurrentInstance().addMessage("createApplication", new FacesMessage("Error", "Cannot create application: " + t.getMessage()));
         }
 
         return "";
     }
 
     public String delete() {
-        restClient.delete(selected);
+        try {
+            restClient.delete(selected);
+        } catch (Exception e) {
+            Throwable t = e;
+            while (t.getCause() != null && t != t.getCause()) {
+                t = t.getCause();
+            }
+
+            FacesContext.getCurrentInstance().addMessage("delete application", new FacesMessage("Error", "Cannot delete application: " + t.getMessage()));
+        }
         selected = null;
         return "";
     }
@@ -115,7 +132,24 @@ public class ApplicationManagedBean implements Serializable {
         selected.getRoles().add(newRole);
     }
 
-    public String toApplicationRoleIndex() {
-        return APPLICATIONROLE_XHTML;
+    public void deleteRole() {
+        selected.getRoles().remove(selectedApplicationRole);
+    }
+
+    public void setSelectedApplicationRole(ApplicationRoleDto s) {
+        this.selectedApplicationRole = s;
+    }
+
+    public void setSelectedApplicationRoleTechnology(ApplicationRoleTechnologyDto s) {
+        this.selectedApplicationRoleTechnology = s;
+    }
+
+    public void addApplicationRoleTechnology() {
+        ApplicationRoleTechnologyDto skill = new ApplicationRoleTechnologyDto(0, new TechnologyDto(), new LevelDto());
+        this.selectedApplicationRole.getTechnologies().add(skill);
+    }
+
+    public void deleteSelectedApplicationRoleTechnology() {
+        this.selectedApplicationRole.getTechnologies().remove(this.selectedApplicationRoleTechnology);
     }
 }

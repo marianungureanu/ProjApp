@@ -36,7 +36,6 @@ public class EmployeeEjb {
     
     public void deleteById(int id) {
          employeeDbBean.deleteById(id);
-        //return toDto(entity);
     }
     
     private List<EmployeeDto> toDto(List<EmployeeEntity> list) {

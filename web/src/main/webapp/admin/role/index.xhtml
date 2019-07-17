@@ -15,36 +15,34 @@ and open the template in the editor.
     <h:body>
         <h3>Role list</h3>
         <br/>
-      
+
         <f:view>
             <h:messages style="color:red;margin:8px;" showDetail="true" />
 
-            <h:form id="roleForm">
-                <h:dataTable value="#{roleMBean.roles}"  var="role">
-                    <h:column>
-                        <f:facet name="header">Id</f:facet>
-                        <h:outputText value="#{role.id}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Name</f:facet>
-                        <h:outputText value="#{role.name}"/>
-                    </h:column>
-                    
-                    <h:column>
-                        <f:facet name="header">Action</f:facet>
-                        <h:commandButton value="Edit" action="#{roleMBean.startEdit}" class="ebutton">
-                            <f:setPropertyActionListener value="#{role}" target="#{roleMBean.selected}"/>
-                        </h:commandButton>
-                         <h:commandButton value="Delete" action="#{roleMBean.delete()}" class="dbutton">
-                            <f:setPropertyActionListener value="#{role}" target="#{roleMBean.selected}"/>
-                        </h:commandButton>                       
-                    </h:column>
-                    
-               </h:dataTable>
-             
-                <h:commandButton value="Create new role" action="#{roleMBean.startCreate}" class="ebutton"/>
-              
-          </h:form>
+            <h:dataTable value="#{roleMBean.roles}"  var="role">
+                <h:column>
+                    <f:facet name="header">Id</f:facet>
+                    <h:outputText value="#{role.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputText value="#{role.name}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                    <h:commandButton value="Edit" action="#{roleMBean.startEdit}" class="ebutton">
+                        <f:setPropertyActionListener value="#{role}" target="#{roleMBean.selected}"/>
+                    </h:commandButton>
+                    <h:commandButton value="Delete" action="#{roleMBean.delete()}" class="dbutton">
+                        <f:setPropertyActionListener value="#{role}" target="#{roleMBean.selected}"/>
+                    </h:commandButton>                       
+                </h:column>
+
+            </h:dataTable>
+
+            <h:commandButton value="Create new role" action="#{roleMBean.startCreate}" class="ebutton"/>
+
         </f:view> 
     </h:body>
 </html>

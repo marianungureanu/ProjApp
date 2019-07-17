@@ -76,8 +76,13 @@ public class ServicesApplication {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response delete(@PathParam("id") int id) throws DbException {
-        applicationEjb.delete(id);
-        return Response.ok().build();
+    public Response delete(@PathParam("id") int id) throws BackendException {
+        try {
+            applicationEjb.delete(id);
+            return Response.ok().build();
+        } catch (DbException ex) {
+            Logger.getLogger(ServicesApplication.class.getName()).log(Level.SEVERE, null, ex);
+            throw new BackendException(ex.getMessage());
+        }
     }
 }

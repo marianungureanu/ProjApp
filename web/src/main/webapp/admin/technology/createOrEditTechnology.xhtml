@@ -9,26 +9,22 @@
     </h:head>
     <h:body>
         <h3>
-        Technology   <h:outputText value="edit" rendered="#{technologyMBean.isEdit}"/>
-                    <h:outputText value="create" rendered="#{technologyMBean.isCreate}"/>
+            Technology   <h:outputText value="edit" rendered="#{technologyMBean.isEdit}"/>
+            <h:outputText value="create" rendered="#{technologyMBean.isCreate}"/>
         </h3>
-		
+
         <br/>
-		
+
         <f:view>
-            <h:form id="technologyCreateOrEditForm">
-                Name:<h:inputText  value="#{technologyMBean.selected.name}"/>
-                <br/>
-                <h:commandButton value="Edit"   action="#{technologyMBean.edit}"   rendered="#{technologyMBean.isEdit}" class="ebutton"/>
-                <h:commandButton value="Create" action="#{technologyMBean.create}" rendered="#{technologyMBean.isCreate}" class="ebutton"/>
-                
-                <f:view id="goBack">
-                        <h:form id="goBackForm">
-                              <h:commandButton value="Go Back" action="#{technologyMBean.startIndex}" type="submit" class="rbutton"/>
-                        </h:form>
-                <div class="separator"> </div>
-                    </f:view> 
+            Name:<h:inputText  value="#{technologyMBean.selected.name}"/>
+            <br/>
+            <h:commandButton value="Update"   action="#{technologyMBean.edit}"   rendered="#{technologyMBean.isEdit}" class="ebutton"/>
+            <h:commandButton value="Create" action="#{technologyMBean.create}" rendered="#{technologyMBean.isCreate}" class="ebutton"/>
+
+            <h:form id="goBackForm">
+                <h:commandButton value="Cancel" action="#{technologyMBean.startIndex}" type="submit" class="rbutton"/>
             </h:form>
+            <div class="separator"> </div>
         </f:view> 
 
     </h:body>

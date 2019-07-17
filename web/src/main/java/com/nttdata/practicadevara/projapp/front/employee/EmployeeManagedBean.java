@@ -16,15 +16,11 @@ public class EmployeeManagedBean implements Serializable {
 
     private static final long serialVersionUID = 10001;
 
-    private static final String EMPLOYEE_XHTML = "/admin/employee/index";
-    private static final String CREATE_OR_EDIT_XHTML = "/admin/employee/createOrEditEmployee";
-
     @EJB
     private EmployeeRest employeeRest;
 
     private EmployeeDto selected;
     private EmployeeTechnologyDto selectedTechnology;
-    private List<EmployeeDto> employeeList;
     private boolean isCreate;
     private boolean isEdit;
 
@@ -34,15 +30,8 @@ public class EmployeeManagedBean implements Serializable {
     public EmployeeManagedBean() {
     }
 
-    public void init() {
-        employeeList = employeeRest.listEmployees(); 
-    }
-
     public List<EmployeeDto> getEmployees() {
-        if (employeeList == null) {
-            init();
-        }
-        return employeeList;
+        return employeeRest.listEmployees();
     }
 
     public EmployeeDto getSelected() {
@@ -56,14 +45,21 @@ public class EmployeeManagedBean implements Serializable {
     public String startEdit() {
         isEdit = true;
         isCreate = false;
-        return CREATE_OR_EDIT_XHTML;
+        return "";
     }
 
     public String startCreate() {
         isEdit = false;
         isCreate = true;
         selected = new EmployeeDto();
-        return CREATE_OR_EDIT_XHTML;
+        return "";
+    }
+
+    public String startIndex() {
+        isEdit = false;
+        isCreate = false;
+        selected = null;
+        return "";
     }
 
     public boolean isIsCreate() {
@@ -74,28 +70,22 @@ public class EmployeeManagedBean implements Serializable {
         return isEdit;
     }
 
-    public void reload() {
-        employeeList = null;
+    public boolean isIsIndex() {
+        return !isCreate && !isEdit;
     }
 
     public String edit() {
         employeeRest.update(selected);
         selected = null;
-        reload();
         isEdit = false;
-        return EMPLOYEE_XHTML;
+        return "";
     }
 
     public String create() {
         employeeRest.create(selected);
         selected = null;
-        reload();
         isCreate = false;
-        return EMPLOYEE_XHTML;
-    }
-
-    public String toEmployeeIndex() {
-        return EMPLOYEE_XHTML;
+        return "";
     }
 
     public String deleteTechnologyForSelected() {
@@ -114,4 +104,33 @@ public class EmployeeManagedBean implements Serializable {
         selected.getSkills().add(newTechnology);
         return "";
     }
+    
+    public void delete() {
+        employeeRest.delete(selected);
+        selected = null;
+    }
+    
+    private EmployeeTechnologyDto selectedSkill;
+    public void setSelectedSkill(EmployeeTechnologyDto skill) {
+        selectedSkill = skill;
+    }
+    
+    public void deleteSelectedSkill(){
+        selected.getSkills().remove(selectedSkill);
+    }
+    
+    public void addSkill(){
+        selected.getSkills().add(new EmployeeTechnologyDto(0, null, new TechnologyDto(), new LevelDto()));
+    }
+    
+    public String update() {
+        employeeRest.update(selected);
+        return "/index.xhtml";
+    }
+    
+    public String cancel() {
+        return "/index.xhtml";
+    }
+    
+
 }

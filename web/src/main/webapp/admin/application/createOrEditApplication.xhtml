@@ -15,57 +15,65 @@
 
         <br/>
         <f:view>
-            <h:form id="applicationRoleCreateOrEdit" class="appform">
+            <table>
+                <tr>
+                    <td><label>Name:</label></td>
+                    <td><h:inputText  value="#{applicationMBean.selected.name}" class="inputn"/></td>
+                </tr>
+                <tr>
+                    <td><label>Description:</label></td>
+                    <td><h:inputTextarea value="#{applicationMBean.selected.description}" rows="7" cols="60" class="inputd"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <ui:repeat value="#{applicationMBean.selected.roles}" var="arole">
+                            <table style="border: 0">
+                                <tr><td class="noborder">
+                                        Role: 
+                                        <h:selectOneMenu value="#{arole.role.id}">
+                                            <f:selectItems value="#{roleMBean.rolesWithFirstEmpty}" var="roleDto" itemLabel="#{roleDto.name}" itemValue="#{roleDto.id}" />
+                                        </h:selectOneMenu>
+                                        <h:commandButton value="Delete"  action="#{applicationMBean.deleteRole}"  class="dbutton" style="font-size: 0.60em;" immediate="true">
+                                            <f:setPropertyActionListener target="#{applicationMBean.selectedApplicationRole}" value="#{arole}"/>
+                                        </h:commandButton>
 
-                <table>
-                    <tr>
-                        <td><label>Name:</label></td>
-                        <td><h:inputText  value="#{applicationMBean.selected.name}" class="inputn"/></td>
-                    </tr>
-                    <tr>
-                        <td><label>Description:</label></td>
-                        <td><h:inputTextarea value="#{applicationMBean.selected.description}" rows="7" cols="60" class="inputd"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <ui:repeat value="#{applicationMBean.selected.roles}" var="arole">
-                                <table style="border: 0">
-                                    <tr><td class="noborder">
-                                            Role: <h:selectOneMenu value="#{arole.role.id}">
-                                                <f:selectItems value="#{roleMBean.rolesWithFirstEmpty}" var="roleDto" itemLabel="#{roleDto.name}" itemValue="#{roleDto.id}" />
+                                    </td>
+                                    <td class="noborder">
+                                        Technologies/ Skills:
+                                        <ui:repeat value="#{arole.technologies}"  var="atech">
+                                            <br/>
+                                            <h:selectOneMenu value="#{atech.technology.id}">
+                                                <f:selectItems value="#{technologyMBean.technologiesWithFirstEmpty}" var="tehchnologyDto" itemLabel="#{tehchnologyDto.name}" itemValue="#{tehchnologyDto.id}" />
                                             </h:selectOneMenu>
-                                        </td>
-                                        <td class="noborder">
-                                            Technologies/ Skills:
-                                            <ui:repeat value="#{arole.technologies}"  var="atech">
-                                                <br/>
-                                                <h:selectOneMenu value="#{atech.technology.id}">
-                                                    <f:selectItems value="#{technologyMBean.technologiesWithFirstEmpty}" var="tehchnologyDto" itemLabel="#{tehchnologyDto.name}" itemValue="#{tehchnologyDto.id}" />
-                                                </h:selectOneMenu>
-                                                :
-                                                <h:selectOneMenu value="#{atech.minLevel.id}">
-                                                    <f:selectItems value="#{levelMBean.levelsWithFirstEmpty}" var="levelDto" itemLabel="#{levelDto.name}" itemValue="#{levelDto.id}" />
-                                                </h:selectOneMenu>
+                                            :
+                                            <h:selectOneMenu value="#{atech.minLevel.id}">
+                                                <f:selectItems value="#{levelMBean.levelsWithFirstEmpty}" var="levelDto" itemLabel="#{levelDto.name}" itemValue="#{levelDto.id}" />
+                                            </h:selectOneMenu>
+                                            <h:commandButton value="Delete skill"  action="#{applicationMBean.deleteSelectedApplicationRoleTechnology}"  class="dbutton" style="font-size: 0.70em;">
+                                                <f:setPropertyActionListener target="#{applicationMBean.selectedApplicationRole}" value="#{arole}"/>
+                                                <f:setPropertyActionListener target="#{applicationMBean.selectedApplicationRoleTechnology}" value="#{atech}"/>
+                                            </h:commandButton>
+                                        </ui:repeat>
+                                        <br/>
+                                        <h:commandButton value="Add skill"  action="#{applicationMBean.addApplicationRoleTechnology}"  class="cbutton" style="font-size: 0.70em;">
+                                            <f:setPropertyActionListener target="#{applicationMBean.selectedApplicationRole}" value="#{arole}"/>
+                                        </h:commandButton>
 
-                                            </ui:repeat>
-                                        </td></tr></table>
-                            </ui:repeat>
-                            <h:commandButton value="New role"  action="#{applicationMBean.newRole}"  class="cbutton"/>
-                        </td>
-                    </tr>
-                    <tr><td colspan="2" class="noborder">
-                            <div align="right">
-                                <h:commandButton value="Edit"   action="#{applicationMBean.edit}"   rendered="#{applicationMBean.isEdit}" class="ebutton"/>
-                                <h:commandButton value="Create" action="#{applicationMBean.create}" rendered="#{applicationMBean.isCreate}" class="cbutton"/>
-                                <h:commandButton value="Go Back" action="#{applicationMBean.startIndex}" type="submit" class="rbutton"/>
-                                <div class="separator"> </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-
-                <br/>
-            </h:form>
+                                    </td></tr></table>
+                        </ui:repeat>
+                        <h:commandButton value="New role"  action="#{applicationMBean.newRole}"  class="cbutton"/>
+                    </td>
+                </tr>
+                <tr><td colspan="2" class="noborder">
+                        <div align="right">
+                            <h:commandButton value="Update" action="#{applicationMBean.edit}"   rendered="#{applicationMBean.isEdit}" class="ebutton"/>
+                            <h:commandButton value="Create" action="#{applicationMBean.create}" rendered="#{applicationMBean.isCreate}" class="cbutton"/>
+                            <h:commandButton value="Cancel" action="#{applicationMBean.startIndex}" type="submit" class="rbutton"/>
+                            <div class="separator"> </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </f:view> 
     </h:body>
 </html>

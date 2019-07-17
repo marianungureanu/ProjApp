@@ -14,14 +14,10 @@ public class TechnologyManagedBean implements Serializable {
 
     private static final long serialVersionUID = 10001;
 
-    private static final String TECHNOLOGY_XHTML = "/admin/index";
-    private static final String CREATE_OR_EDIT_XHTML = "/admin/technology/createOrEditTechnology";
-
     @EJB
     private TechnologyRest technologyRest;
 
     private TechnologyDto selected;
-    private List<TechnologyDto> technologyList;
     private boolean isCreate;
     private boolean isEdit;
 
@@ -74,14 +70,9 @@ public class TechnologyManagedBean implements Serializable {
         return isEdit;
     }
 
-    public void reload() {
-        technologyList = null;
-    }
-
     public String edit() {
         technologyRest.update(selected);
         selected = null;
-        reload();
         isEdit = false;
         return "";
     }
@@ -89,27 +80,20 @@ public class TechnologyManagedBean implements Serializable {
     public String create() {
         technologyRest.create(selected);
         selected = null;
-        reload();
         isCreate = false;
         return "";
-    }
-
-    public String toTechnologyIndex() {
-        return TECHNOLOGY_XHTML;
     }
     
      public String startCreate() {
         isEdit = false;
         isCreate = true;
         selected = new TechnologyDto();
-        return CREATE_OR_EDIT_XHTML; 
-        
+        return ""; 
     }
      
      public String delete() {
         technologyRest.delete(selected);
         selected = null;
-        reload();
         return "";
     }
      

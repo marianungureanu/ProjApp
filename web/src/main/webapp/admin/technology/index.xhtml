@@ -9,37 +9,35 @@
     <h:body>
         <h3>Technology list</h3>
         <br/>
-      
-        <f:view>
+
+        <f:view id="techview">
             <h:messages style="color:red;margin:8px;" showDetail="true" />
 
-            <h:form id="technologyForm">
-                <h:dataTable value="#{technologyMBean.technologies}"  var="technology">
-                    <h:column>
-                        <f:facet name="header">Id</f:facet>
-                        <h:outputText value="#{technology.id}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Name</f:facet>
-                        <h:outputText value="#{technology.name}"/>
-                    </h:column>
-                    
-                    <h:column>
-                        <f:facet name="header">Action</f:facet>
-                        <h:commandButton value="Edit" action="#{technologyMBean.startEdit}" class="ebutton">
-                            <f:setPropertyActionListener value="#{technology}" target="#{technologyMBean.selected}"/>
-                        </h:commandButton>
-                      <!--stergere tehnologie-->
-                      <h:commandButton value="Delete" action="#{technologyMBean.delete}" class="dbutton">
-                            <f:setPropertyActionListener value="#{technology}" target="#{technologyMBean.selected}"/>
-                        </h:commandButton>
-                    </h:column>
-                    
-               </h:dataTable>
-             
-                <h:commandButton value="Create new technology" action="#{technologyMBean.startCreate}" class="ebutton"/>
-              
-          </h:form>
+            <h:dataTable value="#{technologyMBean.technologies}"  var="technology">
+                <h:column>
+                    <f:facet name="header">Id</f:facet>
+                    <h:outputText value="#{technology.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputText value="#{technology.name}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                    <h:commandButton value="Edit" action="#{technologyMBean.startEdit}" class="ebutton">
+                        <f:setPropertyActionListener value="#{technology}" target="#{technologyMBean.selected}"/>
+                    </h:commandButton>
+                    <!--stergere tehnologie-->
+                    <h:commandButton value="Delete" action="#{technologyMBean.delete}" class="dbutton">
+                        <f:setPropertyActionListener value="#{technology}" target="#{technologyMBean.selected}"/>
+                    </h:commandButton>
+                </h:column>
+
+            </h:dataTable>
+
+            <h:commandButton value="Create new technology" action="#{technologyMBean.startCreate}" class="ebutton"/>
+
         </f:view> 
     </h:body>
 </html>

@@ -18,33 +18,29 @@ and open the template in the editor.
 
         <f:view>
             <h:messages style="color:red;margin:8px;" showDetail="true" />
+            <h:dataTable value="#{levelMBean.levels}"  var="level">
+                <h:column>
+                    <f:facet name="header">Id</f:facet>
+                    <h:outputText value="#{level.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputText value="#{level.name}"/>
+                </h:column>
 
-            <h:form id="levelForm">
-                <h:dataTable value="#{levelMBean.levels}"  var="level">
-                    <h:column>
-                        <f:facet name="header">Id</f:facet>
-                        <h:outputText value="#{level.id}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Name</f:facet>
-                        <h:outputText value="#{level.name}"/>
-                    </h:column>
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                    <h:commandButton value="Edit" action="#{levelMBean.startEdit}" class="ebutton">
+                        <f:setPropertyActionListener value="#{level}" target="#{levelMBean.selected}"/>
+                    </h:commandButton>
+                    <h:commandButton value="Delete" action="#{levelMBean.delete()}" class="dbutton">
+                        <f:setPropertyActionListener value="#{level}" target="#{levelMBean.selected}"/>
+                    </h:commandButton>
+                </h:column>
 
-                    <h:column>
-                        <f:facet name="header">Action</f:facet>
-                        <h:commandButton value="Edit" action="#{levelMBean.startEdit}" class="ebutton">
-                            <f:setPropertyActionListener value="#{level}" target="#{levelMBean.selected}"/>
-                        </h:commandButton>
-                        <h:commandButton value="Delete" action="#{levelMBean.delete()}" class="dbutton">
-                            <f:setPropertyActionListener value="#{level}" target="#{levelMBean.selected}"/>
-                        </h:commandButton>
-                    </h:column>
+            </h:dataTable>
 
-                </h:dataTable>
-
-                <h:commandButton value="Create new level" action="#{levelMBean.startCreate}" class="ebutton"/>
-
-            </h:form>
+            <h:commandButton value="Create new level" action="#{levelMBean.startCreate}" class="ebutton"/>
         </f:view> 
     </h:body>
 </html>

@@ -13,18 +13,14 @@
         Employee   <h:outputText value="edit" rendered="#{employeeMBean.isEdit}"/>
                     <h:outputText value="create" rendered="#{employeeMBean.isCreate}"/>
         </h3>
-		
         <br/>
-		
         <f:view>
-            <h:form id="employeeCreateOrEditForm">
-                Name:<h:inputText  value="#{employeeMBean.selected.name}"/>
+                Name: <h:inputText  value="#{employeeMBean.selected.name}"/>
                 <br/>
-                <h:commandButton value="Edit"   action="#{employeeMBean.edit}"   rendered="#{employeeMBean.isEdit}" class="ebutton"/>
+                <h:commandButton value="Update"   action="#{employeeMBean.edit}"   rendered="#{employeeMBean.isEdit}" class="ebutton"/>
                 <h:commandButton value="Create" action="#{employeeMBean.create}" rendered="#{employeeMBean.isCreate}" class="cbutton"/>
-            </h:form>
+                <h:commandButton value="Cancel" action="#{employeeMBean.startIndex}" type="submit" class="rbutton"/>
         </f:view> 
-	 <h:commandButton value="Go Back" action="#{applicationMBean.startIndex}" type="submit" class="rbutton"/>
     </h:body>
 </html>
 

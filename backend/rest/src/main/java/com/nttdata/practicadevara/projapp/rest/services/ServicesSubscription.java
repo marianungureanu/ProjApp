@@ -29,6 +29,7 @@ import javax.ws.rs.QueryParam;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 
@@ -81,7 +82,7 @@ public class ServicesSubscription {
             throw new BackendException(ex.getMessage());
         }
     }
-    
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -89,4 +90,13 @@ public class ServicesSubscription {
         SubscriptionDto res = subscriptionEjb.create(subscription);
         return Response.ok(res).build();
     }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") int id) throws DbException {
+        subscriptionEjb.delete(id);
+        return Response.ok().build();
+    }
+
 }

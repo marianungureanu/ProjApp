@@ -13,7 +13,6 @@
         <f:view>
             <h:messages style="color:red;margin:8px;" showDetail="true" />
 
-            <h:form id="employeeForm">
                 <h:dataTable value="#{employeeMBean.employees}"  var="employee">
                     <h:column>
                         <f:facet name="header">Id</f:facet>
@@ -29,16 +28,12 @@
                         <h:commandButton value="Edit" action="#{employeeMBean.startEdit}" class="ebutton">
                             <f:setPropertyActionListener value="#{employee}" target="#{employeeMBean.selected}"/>
                         </h:commandButton>
-                        <h:commandButton value="Delete" action="#{employeeMBean.startEdit()}" class="dbutton">
+                        <h:commandButton value="Delete" action="#{employeeMBean.delete}" class="dbutton">
                             <f:setPropertyActionListener value="#{employee}" target="#{employeeMBean.selected}"/>
                         </h:commandButton>
                     </h:column>
-
                 </h:dataTable>
-
                 <h:commandButton value="Create new employee" action="#{employeeMBean.startCreate}" class="ebutton"/>
-
-            </h:form>
         </f:view> 
     </h:body>
 </html>

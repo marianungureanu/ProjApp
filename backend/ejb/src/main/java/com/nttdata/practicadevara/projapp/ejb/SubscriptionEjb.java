@@ -49,7 +49,7 @@ public class SubscriptionEjb {
         return e;
     }
     
-     public SubscriptionDto create(SubscriptionDto dto) {
+    public SubscriptionDto create(SubscriptionDto dto) {
         SubscriptionEntity subs = fromDto(dto);
         SubscriptionEntity saved = subscriptionDbBean.create(subs);
         return toDto(saved);
@@ -64,5 +64,9 @@ public class SubscriptionEjb {
         SubscriptionEntity updated = subscriptionDbBean.update(entity);
         return toDto(updated);
     }
-
+    
+    public void delete(int id) throws DbException {
+        SubscriptionEntity entity = subscriptionDbBean.findById(id);
+        subscriptionDbBean.delete(entity);
+    }
 }

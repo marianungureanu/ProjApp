@@ -18,17 +18,13 @@ and open the template in the editor.
             Roles   <h:outputText value="edit" rendered="#{roleMBean.isEdit}"/>
                     <h:outputText value="create" rendered="#{roleMBean.isCreate}"/>
         </h3>
-		
         <br/>
-		
         <f:view>
-            <h:form id="roleCreateOrEdit">
-                Name:<h:inputText  value="#{roleMBean.selected.name}"/>
-                <br/>
-                <h:commandButton value="Edit"   action="#{roleMBean.edit}"   rendered="#{roleMBean.isEdit}" class="ebutton"/>
-                <h:commandButton value="Create" action="#{roleMBean.create}" rendered="#{roleMBean.isCreate}" class="cbutton"/>          
-                <h:commandButton value="Go Back" action="#{roleMBean.startIndex}" type="submit" class="rbutton"/>
-            </h:form>
+            Name:<h:inputText  value="#{roleMBean.selected.name}"/>
+            <br/>
+            <h:commandButton value="Update"   action="#{roleMBean.edit}"   rendered="#{roleMBean.isEdit}" class="ebutton"/>
+            <h:commandButton value="Create" action="#{roleMBean.create}" rendered="#{roleMBean.isCreate}" class="cbutton"/>          
+            <h:commandButton value="Cancel" action="#{roleMBean.startIndex}" type="submit" class="rbutton"/>
         </f:view> 
     </h:body>
 </html>

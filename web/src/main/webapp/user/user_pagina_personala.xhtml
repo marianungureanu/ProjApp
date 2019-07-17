@@ -19,63 +19,42 @@
                 <table style="width:100%">
 
                     <tr>
-                        <th>My name</th>
-                        <td colspan="3" style="color:red;" >#{employeeMBean.selected.name}</td>
+                        <td style="width:20%">My name</td>
+                        <td style="color:red;" >#{employeeMBean.selected.name}</td>
                     </tr>
 
                     <tr>
-                        <th>Technologies</th>
-                        <td colspan="3">
-                            <h:dataTable value="#{employeeMBean.selected.skills}" var="t">
-                                <h:column>#{t.technology.name}</h:column>
-                                <h:column>#{t.level.name}</h:column>
-                                <h:column>
-                                    <h:commandButton value="Delete"   action="#{employeeMBean.deleteTechnologyForSelected}">
-                                        <f:setPropertyActionListener target="#{employeeMBean.selectedTechnology}" value="t" />
-                                    </h:commandButton>
-                                </h:column>
-                            </h:dataTable>
-                        </td>
+                        <td>Technologies</td>
+                        <td class="noborder">
+                            <ui:repeat value="#{employeeMBean.selected.skills}"  var="skill">
+                                <br/>
+                                <h:selectOneMenu value="#{skill.technology.id}">
+                                    <f:selectItems value="#{technologyMBean.technologiesWithFirstEmpty}" var="tehchnologyDto" itemLabel="#{tehchnologyDto.name}" itemValue="#{tehchnologyDto.id}" />
+                                </h:selectOneMenu>
+                                :
+                                <h:selectOneMenu value="#{skill.level.id}">
+                                    <f:selectItems value="#{levelMBean.levelsWithFirstEmpty}" var="levelDto" itemLabel="#{levelDto.name}" itemValue="#{levelDto.id}" />
+                                </h:selectOneMenu>
+                                <h:commandButton value="Delete skill"  action="#{employeeMBean.deleteSelectedSkill}"  class="dbutton" style="font-size: 0.70em;">
+                                    <f:setPropertyActionListener target="#{employeeMBean.selectedSkill}" value="#{skill}"/>
+                                </h:commandButton>
+                            </ui:repeat>
+                            <br/>
+                            <h:commandButton value="Add skill"  action="#{employeeMBean.addSkill}"  class="cbutton" style="font-size: 0.70em;">
+                                <f:setPropertyActionListener target="#{employeeMBean.selectedSkill}" value="#{skill}"/>
+                            </h:commandButton>
+                        </td>                        
                     </tr>
-
                     <tr>
-                        <td>
-                            <table style="border: 0">
-                                <tr>
-                                    <td class="noborder">
-             
-                                        <ui:repeat value="#{employeeMBean.selected.skills}"  var="atech">
-                                            <br/>
-                                            <h:inputText value="#{atech.technology.name}" />
-                                            <h:selectOneMenu value="#{atech.technology.id}">
-                                                <f:selectItems value="#{technologyMBean.technologies}" var="tehchnologyDto" itemLabel="#{tehchnologyDto.name}" itemValue="#{tehchnologyDto.id}" />
-                                            </h:selectOneMenu>
-
-                                            <!-- aici trebuie introdus selectOneMenu cu lista de nivele din viitorul levelMBean -->
-                                            : #{atech.level.name}
-                                        </ui:repeat>
-                                    </td></tr></table>
-                        </td>
-                        <td> <h:commandButton value="Add Technology"  action="#{employeeMBean.addTechnologyForSelected}"/>
-                        </td>
-                    </tr>
-
-                    <tr><td><br/></td></tr>
-
-                    <tr>
-                        <td> <button type="button"> Update my profile						
-                            </button>
+                        <td> <h:commandButton value="Update my profile"  action="#{employeeMBean.update}"  class="cbutton" />
+                             <h:commandButton value="Cancel"  action="#{employeeMBean.cancel}"  class="cbutton" />
                         </td>
                         <td> <h:commandButton value="Vacant Positions"  action="/user/vacant"/>						
                         </td> 
-                        <td> <button type="button"> Cancel						
-                            </button>
-                        </td>
                     </tr>
 
                 </table>
             </h:form>
         </f:view>
-        <ui:include src="/goBack.xhtml"/>
     </h:body>
 </html>

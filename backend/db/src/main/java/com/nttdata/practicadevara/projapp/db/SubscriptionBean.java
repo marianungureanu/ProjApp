@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nttdata.practicadevara.projapp.db;
 
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 /**
  *
@@ -47,10 +41,7 @@ public class SubscriptionBean {
     }
 
     public SubscriptionEntity findById(int id) {
-        TypedQuery<SubscriptionEntity> q = manager.createNamedQuery(findByIdNamedQuery(), SubscriptionEntity.class);
-        q.setParameter("id", id);
-        SubscriptionEntity subscriptionEntity = q.getSingleResult();
-        return subscriptionEntity;
+        return manager.find(SubscriptionEntity.class, id);
     }
 
     public String findByIdNamedQuery() {
@@ -73,6 +64,11 @@ public class SubscriptionBean {
         return subs;
     }
     
+    public void delete(SubscriptionEntity subs) throws DbException {
+        checkExistance(subs);
+        manager.remove(subs);
+        manager.flush();
+    }
 
     private SubscriptionEntity checkExistance(SubscriptionEntity entity) throws DbException {
         SubscriptionEntity object = null;

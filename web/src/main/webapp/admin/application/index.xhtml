@@ -14,7 +14,6 @@
         <f:view>
             <h:messages style="color:red;margin:8px;" showDetail="true" />
 
-            <h:form id="vacantForm">
                 <h:dataTable value="#{applicationMBean.applications}"  var="app" columnClasses="shortclass,middleclass,middleclass">
                     <h:column>
                         <f:facet name="header">Application</f:facet>
@@ -49,7 +48,6 @@
                     </h:column>
                 </h:dataTable>
                 <h:commandButton value="New Application" action="#{applicationMBean.startCreate}" class="ebutton"/>
-            </h:form>
         </f:view> 
     </h:body>
 </html>

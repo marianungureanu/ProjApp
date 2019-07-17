@@ -4,65 +4,45 @@ package com.nttdata.practicadevara.projapp.front.subscription;
  *
  * @author stefana.sireanu
  */
-
 import com.nttdata.practicadevara.projapp.front.RestClient;
 import com.nttdata.practicadevara.projapp.shared.dto.SubscriptionDto;
-import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Stateless
 @LocalBean
-public class SubscriptionRest extends RestClient{
-    
-    private int tempIndex = 0;           //to be delete when REST services are ready
-    private List<SubscriptionDto> tempList;  //to be delete when REST services are ready
-
-    @PostConstruct
-    public void init() {
-     
-        tempList = new ArrayList<>();
-        Response resp= super.path("subscription").request(MediaType.APPLICATION_JSON).get(Response.class);
-      tempList.addAll(resp.readEntity(new GenericType<List<SubscriptionDto>>(){}));
-      
-      
-    
-        
-       /*  int appRoleIdx = 1;
-        ApplicationRoleDto role1 = new ApplicationRoleDto(appRoleIdx++, new RoleDto(1, "Junior Dev") );
-        ApplicationRoleDto role2 = new ApplicationRoleDto(appRoleIdx++, new RoleDto(2, "Middle Dev") );
-        ApplicationRoleDto role3 = new ApplicationRoleDto(appRoleIdx++, new RoleDto(3, "Senior Dev") );
-        
-        tempList =  new ArrayList<>();
-        tempList.add(new SubscriptionDto(1, SubscriptionStatusEnumDto.NULL,     new EmployeeDto(1, "User A"), role1));
-        tempList.add(new SubscriptionDto(2, SubscriptionStatusEnumDto.NEW,      new EmployeeDto(1, "User A"), role1));
-        tempList.add(new SubscriptionDto(3, SubscriptionStatusEnumDto.REJECTED, new EmployeeDto(2, "User B"), role2));
-        tempList.add(new SubscriptionDto(4, SubscriptionStatusEnumDto.NEW,      new EmployeeDto(2, "User B"), role3));
-        tempList.add(new SubscriptionDto(5, SubscriptionStatusEnumDto.ACCEPTED, new EmployeeDto(3, "User C"), role3));
-        tempList.add(new SubscriptionDto(6, SubscriptionStatusEnumDto.REJECTED, new EmployeeDto(3, "User C"), role2));*/
-    }
+public class SubscriptionRest extends RestClient {
 
     public List<SubscriptionDto> listSubscriptions() {
-        return tempList;
+        Response resp = super.path("subscription").request(MediaType.APPLICATION_JSON).get(Response.class);
+        return resp.readEntity(new GenericType<List<SubscriptionDto>>() {
+        });
     }
 
     public SubscriptionDto update(SubscriptionDto entry) {
-        return entry;
-    }
-
-    public void delete(SubscriptionDto entry) {
-        tempList.remove(entry);
+        Entity<SubscriptionDto> obj = Entity.entity(entry, MediaType.APPLICATION_JSON);
+        Response resp = super.path("subscription").request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).put(obj);
+        return resp.readEntity(new GenericType<SubscriptionDto>() {
+        });
     }
 
     public SubscriptionDto create(SubscriptionDto entry) {
-        entry.setId(tempIndex++);
-        tempList.add(entry);
-        return entry;
+        Entity<SubscriptionDto> obj = Entity.entity(entry, MediaType.APPLICATION_JSON);
+        Response resp = super.path("subscription").request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).post(obj);
+        return resp.readEntity(new GenericType<SubscriptionDto>() {
+        });
     }
-    
+
+    public void delete(SubscriptionDto entry) throws ClientErrorException {
+        Response resp = super.path("subscription/"+entry.getId()).request(MediaType.APPLICATION_JSON).delete(Response.class);
+        if(resp.getStatus() >= 300) {
+            throw new ClientErrorException("Error deleting application "+entry.getId()+": "+resp.getStatusInfo(), resp);
+        }
+    }
 }

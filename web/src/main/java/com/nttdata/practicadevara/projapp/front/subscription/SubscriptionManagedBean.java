@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -18,13 +20,10 @@ public class SubscriptionManagedBean implements Serializable {
 
     private static final long serialVersionUID = 10001;
 
-    private static final String SUBSCRIPTION_XHTML = "/admin/subscription/index";
-
     @EJB
     private SubscriptionRest subscriptionRest;
 
     private SubscriptionDto selected;
-    private List<SubscriptionDto> subscriptionList;
 
     /**
      * Creates a new instance
@@ -32,15 +31,8 @@ public class SubscriptionManagedBean implements Serializable {
     public SubscriptionManagedBean() {
     }
 
-    public void init() {
-        subscriptionList = subscriptionRest.listSubscriptions();
-    }
-
     public List<SubscriptionDto> getSubscriptions() {
-        if (subscriptionList == null) {
-            init();
-        }
-        return subscriptionList;
+        return subscriptionRest.listSubscriptions();
     }
 
     public SubscriptionDto getSelected() {
@@ -51,35 +43,31 @@ public class SubscriptionManagedBean implements Serializable {
         this.selected = selectedSubscription;
     }
 
-    public void reload() {
-        subscriptionList = null;    
-    }
-
     public String accept() {
         selected.setStatus(SubscriptionStatusEnumDto.ACCEPTED);
         subscriptionRest.update(selected);
         selected = null;
-        reload();
-        return SUBSCRIPTION_XHTML;
+        return "";
     }
 
     public String reject() {
         selected.setStatus(SubscriptionStatusEnumDto.REJECTED);
         subscriptionRest.update(selected);
         selected = null;
-        reload();
-        return SUBSCRIPTION_XHTML;
+        return "";
     }
 
     public String delete() {
-        subscriptionRest.delete(selected);
+        try {
+            subscriptionRest.delete(selected);
+        } catch (Exception e) {
+            Throwable t = e;
+            while (t.getCause() != null && t != t.getCause()) {
+                t = t.getCause();
+            }
+            FacesContext.getCurrentInstance().addMessage("delete subscription", new FacesMessage("Error", "Cannot delete subscription: " + t.getMessage()));
+        }
         selected = null;
-        reload();
-        return SUBSCRIPTION_XHTML;
+        return "";
     }
-
-    public String toSubscriptionIndex() {
-        return SUBSCRIPTION_XHTML;
-    }
-
 }

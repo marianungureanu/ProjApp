@@ -2,9 +2,8 @@ package com.nttdata.practicadevara.projapp.front.application;
 
 import com.nttdata.practicadevara.projapp.front.RestClient;
 import com.nttdata.practicadevara.projapp.shared.dto.ApplicationDto;
-import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
+import javax.ws.rs.ClientErrorException;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
@@ -20,21 +19,22 @@ public class ApplicationRest extends RestClient {
         return resp.readEntity(new GenericType<List<ApplicationDto>>() {});
     }
 
-    public ApplicationDto update(ApplicationDto entry) throws javax.ws.rs.ClientErrorException {
+    public ApplicationDto update(ApplicationDto entry) throws ClientErrorException {
         Response resp = super.path(PATH_APPLICATION).request(MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(entry, MediaType.APPLICATION_JSON), Response.class);
         ApplicationDto ret = resp.readEntity(ApplicationDto.class);
         return ret;
     }
 
-    public ApplicationDto create(ApplicationDto entry) throws javax.ws.rs.ClientErrorException {
+    public ApplicationDto create(ApplicationDto entry) throws ClientErrorException {
         Response resp = super.path(PATH_APPLICATION).request(MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(entry, MediaType.APPLICATION_JSON), Response.class);
         ApplicationDto ret = resp.readEntity(ApplicationDto.class);
         return ret;
     }
 
-    public void delete(ApplicationDto entry) {
-//        throws javax.ws.rs.ClientErrorException
-//        Response resp = super.path(PATH_APPLICATION + "/" + entry.getId()).request(MediaType.APPLICATION_JSON).delete();
-//        return resp;
+    public void delete(ApplicationDto entry) throws ClientErrorException {
+        Response resp = super.path(PATH_APPLICATION + "/" + entry.getId()).request(MediaType.APPLICATION_JSON).delete();
+        if(resp.getStatus() >= 300) {
+            throw new ClientErrorException("Error deleting application "+entry.getId()+": "+resp.getStatus(), resp);
+        }
     }
 }
