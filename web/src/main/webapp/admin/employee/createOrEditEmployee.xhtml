@@ -21,11 +21,10 @@
                 Name:<h:inputText  value="#{employeeMBean.selected.name}"/>
                 <br/>
                 <h:commandButton value="Edit"   action="#{employeeMBean.edit}"   rendered="#{employeeMBean.isEdit}" class="ebutton"/>
-                <h:commandButton value="Create" action="#{employeeMBean.create}" rendered="#{employeeMBean.isCreate}"class="cbutton"/>
+                <h:commandButton value="Create" action="#{employeeMBean.create}" rendered="#{employeeMBean.isCreate}" class="cbutton"/>
             </h:form>
         </f:view> 
-		
-        <ui:include src="/goBack.xhtml"/>
+	 <h:commandButton value="Go Back" action="#{applicationMBean.startIndex}" type="submit" class="rbutton"/>
     </h:body>
 </html>
 

@@ -87,4 +87,11 @@ public class ServicesTechnology {
         
     }
     
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(TechnologyDto e) {
+        TechnologyDto technology = technologyEjb.edit(e);
+        return Response.ok(technology).build();
+    }
  }
