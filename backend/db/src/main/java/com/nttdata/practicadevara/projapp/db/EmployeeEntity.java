@@ -6,6 +6,7 @@ import java.util.List;
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REFRESH;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -40,7 +41,7 @@ public class EmployeeEntity implements Serializable {
     @Column(name = "name")
     private String name;
     
-    @OneToMany(mappedBy = "employee", cascade = {PERSIST, MERGE, REFRESH})  
+    @OneToMany(mappedBy = "employee", cascade = {PERSIST, MERGE, REFRESH, REMOVE})  
     private List<EmployeetechnologyEntity> skills;
 
     public int getId() {
