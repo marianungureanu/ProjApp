@@ -8,14 +8,40 @@
         <title>Employee Config</title>
     </h:head>
     <h:body>
-        <ui:include src="/header.xhtml"/>
         <h3>
         Employee   <h:outputText value="edit" rendered="#{employeeMBean.isEdit}"/>
                     <h:outputText value="create" rendered="#{employeeMBean.isCreate}"/>
         </h3>
         <br/>
         <f:view>
-                Name: <h:inputText  value="#{employeeMBean.selected.name}"/>
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:20%">User name</td>
+                        <td style="color:red;"><h:inputText value="#{employeeMBean.selected.name}" class="inputd"/> </td>
+                    </tr>
+                    <tr>
+                        <td>Technologies</td>
+                        <td class="noborder">
+                            <ui:repeat value="#{employeeMBean.selected.skills}"  var="skill">
+                                <br/>
+                                <h:selectOneMenu value="#{skill.technology.id}">
+                                    <f:selectItems value="#{technologyMBean.technologiesWithFirstEmpty}" var="tehchnologyDto" itemLabel="#{tehchnologyDto.name}" itemValue="#{tehchnologyDto.id}" />
+                                </h:selectOneMenu>
+                                :
+                                <h:selectOneMenu value="#{skill.level.id}">
+                                    <f:selectItems value="#{levelMBean.levelsWithFirstEmpty}" var="levelDto" itemLabel="#{levelDto.name}" itemValue="#{levelDto.id}" />
+                                </h:selectOneMenu>
+                                <h:commandButton value="Delete skill"  action="#{employeeMBean.deleteSelectedSkill}"  class="dbutton" style="font-size: 0.70em;">
+                                    <f:setPropertyActionListener target="#{employeeMBean.selectedSkill}" value="#{skill}"/>
+                                </h:commandButton>
+                            </ui:repeat>
+                            <br/>
+                            <h:commandButton value="Add skill"  action="#{employeeMBean.addSkill}"  class="cbutton" style="font-size: 0.70em;">
+                                <f:setPropertyActionListener target="#{employeeMBean.selectedSkill}" value="#{skill}"/>
+                            </h:commandButton>
+                        </td>                        
+                    </tr>
+                </table>                
                 <br/>
                 <h:commandButton value="Update"   action="#{employeeMBean.edit}"   rendered="#{employeeMBean.isEdit}" class="ebutton"/>
                 <h:commandButton value="Create" action="#{employeeMBean.create}" rendered="#{employeeMBean.isCreate}" class="cbutton"/>

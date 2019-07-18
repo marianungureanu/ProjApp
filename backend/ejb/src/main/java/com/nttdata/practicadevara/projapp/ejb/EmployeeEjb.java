@@ -66,6 +66,7 @@ public class EmployeeEjb {
 
     public EmployeeDto create(EmployeeDto dto) {
         EmployeeEntity emp = fromDto(dto);
+        emp.setEmployeeInSkills();
         EmployeeEntity saved = employeeDbBean.create(emp);
         return toDto(saved);
     }
